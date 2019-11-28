@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <NoStdLib>False</NoStdLib>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>
+    </SchemaVersion>
+    <ProjectGuid>{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>TAVIL2020</RootNamespace>
+    <AssemblyName>TAVIL2020</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{F184B08F-C81C-45F6-A57F-5ABD9991F28F}</ProjectTypeGuids>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>BIN\</OutputPath>
+    <DocumentationFile>TAVIL2020.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42020,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>BIN\</OutputPath>
+    <DocumentationFile>TAVIL2020.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42020,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--AutoCAD References-->
+    <Reference Include="AcCoreMgd">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcDbMgd">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcMgd">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AdWindows">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcWindows">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcTcMgd">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcDx">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop.Common">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Autodesk.AutoCAD.Interop">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="acdbmgdbrep">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="AcCui">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <!--Map 3D References-->
+    <!--Civil 3D Refernces-->
+    <!--ACA References Begin-->
+    <!--ACA Refences End-->
+    <!--AME Referebces Begin-->
+    <!--AME Reference End-->
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>4.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>4.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>4.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsBloquePataDatos.vb" />
+    <Compile Include="clsLAYOUTDBS4.vb" />
+    <Compile Include="clsProxyML.vb" />
+    <Compile Include="clsProxyMLCol.vb" />
+    <Compile Include="clsTransportador.vb" />
+    <Compile Include="CLASES-HOJAS\UNIONESExcelFilas.vb" />
+    <Compile Include="ClsUnion.vb" />
+    <Compile Include="EVENTOS\AXBlockTR.vb" />
+    <Compile Include="EVENTOS\AXEditor.vb" />
+    <Compile Include="EVENTOS\AXEventM.vb" />
+    <Compile Include="EVENTOS\COMApp.vb" />
+    <Compile Include="EVENTOS\AXApp.vb" />
+    <Compile Include="EVENTOS\_Base.vb" />
+    <Compile Include="EVENTOS\AXDb.vb" />
+    <Compile Include="EVENTOS\COMDoc.vb" />
+    <Compile Include="EVENTOS\AXDocM.vb" />
+    <Compile Include="EVENTOS\AXDoc.vb" />
+    <Compile Include="EVENTOS\COMObj.vb" />
+    <Compile Include="EVENTOS\AXObj.vb" />
+    <Compile Include="MODELOS\GRUPOS.vb" />
+    <Compile Include="MODELOS\PATAS.vb" />
+    <Compile Include="MODELOS\UNIONES.vb" />
+    <Compile Include="modTavil.vb" />
+    <Compile Include="clsPT.vb" />
+    <Compile Include="frmAgrupa.Designer.vb">
+      <DependentUpon>frmAgrupa.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAgrupa.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAutonumera.designer.vb">
+      <DependentUpon>frmAutonumera.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmAutonumera.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAutonumera_mod.vb" />
+    <Compile Include="frmBloques.Designer.vb">
+      <DependentUpon>frmBloques.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBloques.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBloquesEditar.Designer.vb">
+      <DependentUpon>frmBloquesEditar.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBloquesEditar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBomDatos.Designer.vb">
+      <DependentUpon>frmBomDatos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmBomDatos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfigura.Designer.vb">
+      <DependentUpon>frmConfigura.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConfigura.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPatas.Designer.vb">
+      <DependentUpon>frmPatas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmPatas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUniones.Designer.vb">
+      <DependentUpon>frmUniones.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUniones.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modClosedXMLTavil.vb" />
+    <Compile Include="movVar.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="myCommands.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>myCommands.resx</DependentUpon>
+    </Compile>
+    <Compile Include="myPlugin.vb" />
+    <Compile Include="myCommands.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="TRANSPORTADORESExcelFilas.vb" />
+    <Compile Include="Utilidades.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmAgrupa.resx">
+      <DependentUpon>frmAgrupa.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAutonumera.resx">
+      <DependentUpon>frmAutonumera.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBloques.resx">
+      <DependentUpon>frmBloques.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBloquesEditar.resx">
+      <DependentUpon>frmBloquesEditar.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBomDatos.resx">
+      <DependentUpon>frmBomDatos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfigura.resx">
+      <DependentUpon>frmConfigura.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPatas.resx">
+      <DependentUpon>frmPatas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUniones.resx">
+      <DependentUpon>frmUniones.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Resources\BloqueRecursos.dwg" />
+    <None Include="Resources\tavil2020.bak.cuix" />
+    <None Include="Resources\TAVIL2020.cuix" />
+    <None Include="Resources\tavil2020.mnr" />
+    <None Include="Resources\tavil2020_light.mnr" />
+    <None Include="TAVIL2020.ini" />
+    <None Include="_TAVIL2020.bundle.bat" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="myCommands.resx">
+      <DependentUpon>myCommands.vb</DependentUpon>
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>myCommands.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PackageContents.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ballon.png" />
+    <Resource Include="Resources\ballon16.png" />
+    <Resource Include="Resources\ballon32.png" />
+    <Resource Include="Resources\ballon_ico.ico" />
+    <Resource Include="Resources\CONF.ico" />
+    <Resource Include="Resources\CONF.png" />
+    <Resource Include="Resources\CONF16.png" />
+    <Resource Include="Resources\CONF32.png" />
+    <Resource Include="Resources\TAVIL.png" />
+    <Resource Include="Resources\TAVIL2020.ico" />
+    <Resource Include="Resources\TAVIL2020.png" />
+    <Resource Include="Resources\TAVIL_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\agrupar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agrupar16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agrupar32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patas16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patas32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Union.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Union16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Union32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Agrupar_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Patas_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Table_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Union_ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Recargar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\BLOQUES\CINTAS\" />
+    <Folder Include="bin\BLOQUES\PATAS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SinImagen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy32.png" />
+    <None Include="Resources\copy32red.png" />
+    <None Include="Resources\Transportador_300x206.png" />
+    <Content Include="DLLs\AutoCAD2acad.dll" />
+    <Content Include="DLLs\Linq2Acad.dll" />
+    <Content Include="DLLs\Linq2Acad.pdb" />
+    <Resource Include="DLLs\Linq2Acad.xml" />
+    <Content Include="DLLs\UtilesAlberto.dll" />
+    <Content Include="TAVIL2020_INSTALADOR_INNO\TAVIL2020_INNO.iss" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ClosedXML">
+      <Version>0.94.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoCAD2acad\AutoCAD2acad.vbproj">
+      <Project>{c45fea81-2a3c-47a8-baea-35ae18db94a2}</Project>
+      <Name>AutoCAD2acad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilesAlberto\UtilesAlberto.vbproj">
+      <Project>{7e7b7fd9-7145-4607-b2b8-bb292871b260}</Project>
+      <Name>UtilesAlberto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)PackageContents.xml" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(ProjectDir)Resources\$(ProjectName).cuix" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(ProjectDir)Resources\*.dwg" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(ProjectDir)$(ProjectName).ico" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(ProjectDir)$(ProjectName).ini" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(ProjectDir)..\..\TAVIL2020_DOCUMENTOS\LAYOUTDBS4.xlsx" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y
+
+xcopy "$(TargetDir)BLOQUES\*.*" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES\" /Y /E /R
+
+
+
+xcopy "$(TargetDir)*.*" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y /Exclude:$(ProjectDir)ExclusionList.txt
+
+rem xcopy "$(TargetPath)" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+
+rem xcopy "$(TargetDir)AutoCAD2acad.dll" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+
+rem xcopy "$(TargetPath).config" "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+
+</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>if exist "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle" RMDIR /Q /S "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle"
+
+
+
+mkdir "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle"
+
+mkdir "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES"
+
+mkdir "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES\PEUS"
+
+mkdir "%25programdata%25\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES\CINTES"
+</PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

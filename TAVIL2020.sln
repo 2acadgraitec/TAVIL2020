@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "TAVIL2020", "TAVIL2020\TAVIL2020.vbproj", "{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260} = {7E7B7FD9-7145-4607-B2B8-BB292871B260}
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AutoCAD2acad", "AutoCAD2acad\AutoCAD2acad.vbproj", "{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "UtilesAlberto", "UtilesAlberto\UtilesAlberto.vbproj", "{7E7B7FD9-7145-4607-B2B8-BB292871B260}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Debug|x64.Build.0 = Debug|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Release|x64.ActiveCfg = Release|Any CPU
+		{54DDBB45-3BAD-4A7D-AE33-90ADEA06EFA5}.Release|x64.Build.0 = Release|Any CPU
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Debug|x64.ActiveCfg = Debug|x64
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Debug|x64.Build.0 = Debug|x64
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Release|x64.ActiveCfg = Release|x64
+		{C45FEA81-2A3C-47A8-BAEA-35AE18DB94A2}.Release|x64.Build.0 = Release|x64
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Debug|x64.Build.0 = Debug|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|x64.ActiveCfg = Release|Any CPU
+		{7E7B7FD9-7145-4607-B2B8-BB292871B260}.Release|x64.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAEEA96F-BE0F-4550-9347-1C094D1E1B76}
+	EndGlobalSection
+EndGlobal

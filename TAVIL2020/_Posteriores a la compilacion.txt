@@ -1,0 +1,19 @@
+if exist "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle" RMDIR /Q /S "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle"
+
+mkdir "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle"
+mkdir "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES"
+mkdir "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES\PATAS"
+
+copy "$(ProjectDir)PackageContents.xml" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+copy "$(ProjectDir)Resources\$(TargetName).ico" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+copy "$(ProjectDir)Resources\$(TargetName).cuix" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+copy "$(ProjectDir)Resources\BloqueRecursos.dwg" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+
+copy "$(TargetPath)" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+copy "$(TargetDir)AutoCAD2acad.dll" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+copy "$(TargetPath).config" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\"
+
+XCOPY "$(TargetDir)BLOQUES\*.*" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\BLOQUES\" /Y /E /R
+
+
+XCOPY "$(TargetDir)*.dll" "%programdata%\Autodesk\ApplicationPlugins\$(TargetName).bundle\" /Y /E /R

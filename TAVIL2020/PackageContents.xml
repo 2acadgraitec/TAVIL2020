@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" AutodeskProduct="AutoCAD" ProductType="Application"
+	 Name="TAVIL2020"
+	 Description="TAVIL2020. Utilidades para gestión de Layouts"
+	 Author="2aCAD Global Group"
+	 Icon="TAVIL2020.ico"
+	 AppNameSpace="2acad.es"
+	 ProductCode="{19265DCC-C694-4B52-B713-1138EE0AF1F2}"
+	 UpgradeCode="{19265DCC-C694-4B52-B713-1138EE0AF1F2}"
+   AppVersion="1.0.0.0"
+	 SupportedLocales="Enu|Deu|Esp|Fra|Ita|Plk|Ptb|Chs|Cht|Csy|Hun|Jpn|Kor|Rus">
+  <!--OnlineDocumentation=""
+  HelpFile="./AppManagerHelp.htm"-->
+  <CompanyDetails Name="2aCAD Global Group" Phone="976 45 81 45" Url="http://www.2acad.es/" Email="comercial@2acad.com"/>
+	<Components>
+		<RuntimeRequirements
+      SupportPath="./"
+      ToolPalettePath="./"
+      OS="Win32|Win64"
+      Platform="AutoCAD|AutoCAD*"
+      SeriesMin="R23.1"
+      SeriesMax="R24.1"
+      />
+		<ComponentEntry
+			AppName="TAVIL2020"
+			Version="1.0.0.0"
+			ModuleName="TAVIL2020.dll"
+			AppDescription="TAVIL2020. Utilidades para gestión de Layouts"
+			LoadOnAutoCADStartup="True"
+			LoadOnCommandInvocation="True"
+			LoadOnRequest="True" />
+		<ComponentEntry
+      AppName="TAVIL2020"
+      Version="1.0.0.0"
+      ModuleName="TAVIL2020.cuix" />
+    <ComponentEntry
+      AppName="AutoCAD2acad"
+      Version="2019.0.0.1"
+      ModuleName="AutoCAD2acad.dll" />
+	</Components>
+</ApplicationPackage>

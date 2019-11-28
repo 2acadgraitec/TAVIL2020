@@ -1,0 +1,1322 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Linq2Acad</name>
+    </assembly>
+    <members>
+        <member name="T:Linq2Acad.EntityContainer">
+            <summary>
+            Represents a container that holds Entity objects.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction,Autodesk.AutoCAD.DatabaseServices.ObjectId)">
+            <summary>
+            Create a new instance of EntityContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+            <param name="containerID">The ObjectId of the container.</param>
+        </member>
+        <member name="P:Linq2Acad.EntityContainer.ObjectId">
+            <summary>
+            The ObjectId of the container.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.Add(Autodesk.AutoCAD.DatabaseServices.Entity)">
+            <summary>
+            Adds an Entity to the container.
+            </summary>
+            <param name="entity">The Entity to be added.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter  <i>entity</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the given Entity belongs to another block or an AutoCAD error occurs.</exception>
+            <returns>The ObjectId of the Entity that was added.</returns>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.Add(Autodesk.AutoCAD.DatabaseServices.Entity,System.Boolean)">
+            <summary>
+            Adds an Entity to the container.
+            </summary>
+            <param name="entity">The Entity to be added.</param>
+            <param name="setDatabaseDefaults">True, if the database defaults should be set.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter  <i>entity</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the given Entity belongs to another block or an AutoCAD error occurs.</exception>
+            <returns>The ObjectId of the Entity that was added.</returns>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.Add(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity})">
+            <summary>
+            Adds Entities to the container.
+            </summary>
+            <param name="entities">The Entities to be added.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter  <i>entities</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the an Entity belongs to another block or an AutoCAD error occurs.</exception>
+            <returns>The ObjectIds of the Entities that were added.</returns>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.Add(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity},System.Boolean)">
+            <summary>
+            Adds Entities to the container.
+            </summary>
+            <param name="entities">The Entities to be added.</param>
+            <param name="setDatabaseDefaults">True, if the database defaults should be set.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter  <i>entities</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the an Entity belongs to another block or an AutoCAD error occurs.</exception>
+            <returns>The ObjectIds of the Entities that were added.</returns>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.AddInternal(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity},System.Boolean)">
+            <summary>
+            Adds Entities to the container.
+            </summary>
+            <param name="items">The Entities to be added.</param>
+            <param name="setDatabaseDefaults">True, if the database defaults should be set.</param>
+            <returns>The ObjectIds of the Entities that were added.</returns>
+        </member>
+        <member name="M:Linq2Acad.EntityContainer.Clear">
+            <summary>
+            Removes all Entities from this container.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+        </member>
+        <member name="T:Linq2Acad.DbObjectExtensions">
+            <summary>
+            Extension methods for instances of DbObject.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.SaveData``1(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String,``0)">
+            <summary>
+            Save an object in the source object's extension dictionary.
+            </summary>
+            <typeparam name="T">The type of the object to store.</typeparam>
+            <param name="source">The source object to write the object to.</param>
+            <param name="key">A string that acts as the key in the extension dictionary.</param>
+            <param name="data">The object to store.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.GetData``1(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String)">
+            <summary>
+            Reads an object from the source object's extension dictionary.
+            </summary>
+            <typeparam name="T">The type of the object to read.</typeparam>
+            <param name="source">The source object to read the object from.</param>
+            <param name="key">A string that acts as the key in the extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>The object in the extension dictionary.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.GetData``1(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String,System.Boolean)">
+            <summary>
+            Reads an object from the source object's extension dictionary or from XData.
+            </summary>
+            <typeparam name="T">The type of the object to read.</typeparam>
+            <param name="source">The source object to read the object from.</param>
+            <param name="key">If parameter <paramref name="useXData"/> is true, this string is the name of the RegApp to read the data from. If parameter <paramref name="useXData"/> is false, this string acts as the key in the extension dictionary.</param>
+            <param name="useXData">True, if data should be read from the source object's XData. False, if data should be read from the source object's extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>The object in the extension dictionary.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.GetFromXExtensionDictionary``1(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String)">
+            <summary>
+            Reads an object from the source object's extension dictionary.
+            </summary>
+            <typeparam name="T">The type of the object to read.</typeparam>
+            <param name="source">The source object to read the object from.</param>
+            <param name="key">A string that acts as the key in the extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>The object in the extension dictionary.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.GetFromXData``1(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String)">
+            <summary>
+            Reads an object from the source object's XData.
+            </summary>
+            <typeparam name="T">The type of the object to read.</typeparam>
+            <param name="source">The source object to read the object from.</param>
+            <param name="regAppName">The name of the RegApp to read the data from.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>The object in the extension dictionary.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.CollectValues(System.Collections.Generic.IReadOnlyList{Autodesk.AutoCAD.DatabaseServices.TypedValue},System.Collections.IList,System.Type)">
+            <summary>
+            Converts a collection if XData values into a list of objects.
+            </summary>
+            <param name="input">The XData values to convert.</param>
+            <param name="output">The result of the conversion.</param>
+            <param name="targetType">The underlying data type of the resulting list.</param>
+            <returns>The number of values that have been converted.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.HasData(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String)">
+            <summary>
+            Returns true, if the source object has an entry with the given key in the extension dictionary.
+            </summary>
+            <param name="source">The source object to check.</param>
+            <param name="key">A string that acts as the key in the extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>True, if the extension dictionary contains an entry with the given key.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.HasData(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String,System.Boolean)">
+            <summary>
+            Returns true, if the source object has an entry with the given key in the extension dictionary.
+            </summary>
+            <param name="source">The source object to check.</param>
+            <param name="key">If parameter <paramref name="useXData"/> is true, this string is the name of the RegApp to read the data from. If parameter <paramref name="useXData"/> is false, this string acts as the key in the extension dictionary.</param>
+            <param name="useXData">True, if data should be read from the source object's XData. False, if data should be read from the source object's extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>True, if the extension dictionary contains an entry with the given key.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectExtensions.RemoveData(Autodesk.AutoCAD.DatabaseServices.DBObject,System.String)">
+            <summary>
+            Removes the entry with the given key from the extension dictionary.
+            </summary>
+            <param name="source">The source object to check.</param>
+            <param name="key">A string that acts as the key in the extension dictionary.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <exception cref="T:System.Collections.Generic.KeyNotFoundException">Thrown when the given key is not found.</exception>
+        </member>
+        <member name="T:Linq2Acad.EditorExtensions">
+            <summary>
+            Extension methods for the AutoCAD Editor.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.EditorExtensions.WriteLine(Autodesk.AutoCAD.EditorInput.Editor,System.String,System.Object[])">
+            <summary>
+            Displays a message on the AutoCAD text screen.
+            </summary>
+            <param name="editor">The editor instance.</param>
+            <param name="formatString">A format string to display.</param>
+            <param name="args">Arguments to the format string.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>formatString</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.EditorExtensions.GetString(Autodesk.AutoCAD.EditorInput.Editor,System.String,System.Func{System.String,System.Boolean})">
+            <summary>
+            Gets user input for a string.
+            </summary>
+            <remarks>After the user enters an input, the entered value is evaluated by the validation function. If the function evaluates to true, the Prompt result is returned.
+            If the function evaluated to false, the user is again asked for the input.</remarks>
+            <param name="editor">The editor instance.</param>
+            <param name="message">Input message to be displayed to the user during the prompt.</param>
+            <param name="validate">A function that validates the user input. If it evaluates to true, the PromptResult is returned. Else, the input message is repeatedly displayed.</param>
+            <returns>Returns the PromptResult.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>message</i> or <i>validate</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.EditorExtensions.GetString(Autodesk.AutoCAD.EditorInput.Editor,System.String,System.Func{System.String,System.Boolean},System.String)">
+            <summary>
+            Gets user input for a string.
+            </summary>
+            <remarks>After the user enters an input, the entered value is evaluated by the validation function. If the function evaluates to true, the Prompt result is returned.
+            If the function evaluated to false, the user is again asked for the input.</remarks>
+            <param name="editor">The editor instance.</param>
+            <param name="message">Input message to be displayed to the user during the prompt.</param>
+            <param name="validate">A function that validates the user input. If it evaluates to true, the PromptResult is returned. Else, the input message is repeatedly displayed.</param>
+            <param name="errorMessage">An error message that is displayed, if the validation function evaluates to false.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>message</i>, <i>validate</i> or <i>errorMessage</i> is null.</exception>
+            <returns>Returns the PromptResult.</returns>
+        </member>
+        <member name="M:Linq2Acad.EditorExtensions.GetStringInternal(Autodesk.AutoCAD.EditorInput.Editor,System.String,System.Func{System.String,System.Boolean},System.String)">
+            <summary>
+            Gets user input for a string.
+            </summary>
+            <remarks>After the user enters an input, the entered value is evaluated by the validation function. If the function evaluates to true, the Prompt result is returned.
+            If the function evaluated to false, the user is again asked for the input.</remarks>
+            <param name="editor">The editor instance.</param>
+            <param name="message">Input message to be displayed to the user during the prompt.</param>
+            <param name="validate">A function that validates the user input. If it evaluates to true, the PromptResult is returned. Else, the input message is repeatedly displayed.</param>
+            <param name="errorMessage">An error message that is displayed, if the validation function evaluates to false.</param>
+            <returns>Returns the PromptResult.</returns>
+        </member>
+        <member name="T:Linq2Acad.ImportResult`1">
+            <summary>
+            Represents the result if an import operation.
+            </summary>
+            <typeparam name="T">The type of the object that has been imported.</typeparam>
+        </member>
+        <member name="M:Linq2Acad.ImportResult`1.#ctor(`0,Autodesk.AutoCAD.DatabaseServices.IdMapping)">
+            <summary>
+            Creates a new instance of ImportResult.
+            </summary>
+            <param name="item">The item that has been imported.</param>
+            <param name="mapping">ID mapping from objects in the source database to objects in the target database.</param>
+        </member>
+        <member name="P:Linq2Acad.ImportResult`1.Item">
+            <summary>
+            The item that has been imported.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.ImportResult`1.Mapping">
+            <summary>
+            ID mapping from objects in the source database to objects in the target database.
+            </summary>
+        </member>
+        <member name="T:Linq2Acad.BlockContainer">
+            <summary>
+            A container class that provides access to the elements of the Block table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of BlockContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.Filter(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.ObjectId},Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Filters the initial set of ObjectIds. We ignore the model space, all paper space layouts and all XRefs.
+            </summary>
+            <param name="ids">The initial set of ObjectIds.</param>
+            <param name="transaction">The transaction to use.</param>
+            <returns>A filtered set of ObjectIds.</returns>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type BlockTableRecord.</returns>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.ElementAsEntityContainer(Autodesk.AutoCAD.DatabaseServices.ObjectId)">
+            <summary>
+            Converts the Block with the given ObjectId into an EntityContainer that allows querying for entities.
+            </summary>
+            <param name="id">The id of the object.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.AsEntityContainers">
+            <summary>
+            Converts each Block into an EntityContainer that allows querying for entities.
+            </summary>
+            <returns>The elements of the Block table as EntitiyContainers.</returns>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.Create(System.String,System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity})">
+            <summary>
+            Creates a new BlockTableRecord and adds the given Entites to it.
+            </summary>
+            <param name="name">The name of the new BlockTableRecord.</param>
+            <param name="entities">The Entities that should be added to the BlockTableRecord.</param>
+            <returns>A new instance of BlockTableRecord.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>name</i> or <i>entities</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.BlockContainer.Import(System.String,System.String)">
+            <summary>
+            Create a new block and imports all model space entities from the given drawing file to it.
+            </summary>
+            <param name="newBlockName">The name of the new BlockTableRecord.</param>
+            <param name="fileName">The name of the drawing file that should be imported.</param>
+            <returns>A new instance of BlockTableRecord.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>newBlockName</i> or <i>fileName</i> is null.</exception>
+        </member>
+        <member name="T:Linq2Acad.DimStyleContainer">
+            <summary>
+            A container class that provides access to the elements of the DimStyle table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.DimStyleContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of DimStyleContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.DimStyleContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type DimStypeTableRecord.</returns>
+        </member>
+        <member name="M:Linq2Acad.DimStyleContainer.SetName(Autodesk.AutoCAD.DatabaseServices.DimStyleTableRecord,System.String)">
+            <summary>
+            Sets the name of a newly created element.
+            </summary>
+            <param name="item">The newly created element.</param>
+            <param name="name">The name of the element.</param>
+        </member>
+        <member name="T:Linq2Acad.LayerContainer">
+            <summary>
+            A container class that provides access to the elements of the Layer table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.LayerContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of LayerContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.LayerContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type LayerTableRecord.</returns>
+        </member>
+        <member name="M:Linq2Acad.LayerContainer.Create(System.String,System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity})">
+            <summary>
+            Creates a new LayerTableRecord and adds the given Entites to it.
+            </summary>
+            <param name="name">The name of the new LayerTableRecord.</param>
+            <param name="entities">The Entities that should be added to the new LayerTableRecord.</param>
+            <returns>A new instance of LayerTableRecord.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>name</i> or <i>entities</i> is null.</exception>
+        </member>
+        <member name="T:Linq2Acad.LinetypeContainer">
+            <summary>
+            A container class that provides access to the elements of the Linetype table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.LinetypeContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of LinetypeContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.LinetypeContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type LinetypeTableRecord.</returns>
+        </member>
+        <member name="T:Linq2Acad.RegAppContainer">
+            <summary>
+            A container class that provides access to the elements of the RegApp table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.RegAppContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of RegAppContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.RegAppContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type RegAppTableRecord.</returns>
+        </member>
+        <member name="T:Linq2Acad.TextStyleContainer">
+            <summary>
+            A container class that provides access to the elements of the TextStyle table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.TextStyleContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of TextStyleContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.TextStyleContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type TextStyleTableRecord.</returns>
+        </member>
+        <member name="T:Linq2Acad.UcsContainer">
+            <summary>
+            A container class that provides access to the elements of the Ucs table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.UcsContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of UcsContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.UcsContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type UcsTableRecord.</returns>
+        </member>
+        <member name="T:Linq2Acad.ViewportContainer">
+            <summary>
+            A container class that provides access to the elements of the Viewport table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.ViewportContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of ViewportContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.ViewportContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type ViewportTableRecord.</returns>
+        </member>
+        <member name="P:Linq2Acad.ViewportContainer.Current">
+            <summary>
+            Returns the current Viewport or null, if there is no current Viewport.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+        </member>
+        <member name="T:Linq2Acad.ViewContainer">
+            <summary>
+            A container class that provides access to the elements of the View table.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.ViewContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of ViewContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.ViewContainer.CreateNew">
+            <summary>
+            Factory method that create a new element.
+            </summary>
+            <returns>A newly crated element of type ViewTableRecord.</returns>
+        </member>
+        <member name="T:Linq2Acad.XRefBlockContainer">
+            <summary>
+            A container class that provides access to the XRef elements.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.XRefBlockContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of XRefContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.XRefBlockContainer.Filter(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.ObjectId},Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Filters the initial set of ObjectIds. Here we only take XRefs.
+            </summary>
+            <param name="ids">The initial set of ObjectIds.</param>
+            <param name="transaction">The transaction to use.</param>
+            <returns>A filtered set of ObjectIds.</returns>
+        </member>
+        <member name="T:Linq2Acad.AcadDatabase">
+            <summary>
+            The main class that provides access to the drawing database.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,System.Boolean)">
+            <summary>
+            Creates a new instance of AcadDatabase.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="keepOpen">True, if the database should be kept open after it has been used. False, if the database should be closed.</param>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction,System.Boolean,System.Boolean)">
+            <summary>
+            Creates a new instance of AcadDatabase.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+            <param name="commitTransaction">True, if the transaction in use should be committed when this instance is disposed of.</param>
+            <param name="disposeTransaction">True, if the transaction in use should be disposed of when this instance is disposed of.</param>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Database">
+            <summary>
+            The darawing database in use.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.DiscardChanges">
+            <summary>
+            Immediately discards all changes and the underlying transaction.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Dispose(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <param name="force">True, if the drawing database and the transaction should be disposed of, even if <i>keepOpen</i> was set to true.</param>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.DisposeInternal(System.Boolean)">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <param name="force">True, if the drawing database and the transaction should be disposed of, even if keepOpen was used.</param>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.SaveAs(System.String)">
+            <summary>
+            Saves the drawing database to the file with the given name. The newest DWG version is used.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when saving the drawing database throws an exception.</exception>
+            <param name="fileName">The name of the file.</param>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.AddNewlyCreatedDBObject(Autodesk.AutoCAD.DatabaseServices.DBObject)">
+            <summary>
+            Adds the given object to the underlaying transaction. This is only needed for objects that are not stored in containers (e.g. AttributeReference).
+            </summary>
+            <param name="obj">The object to add to the transaction.</param>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.SummaryInfo">
+            <summary>
+            Accesses the database's summary info.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Element``1(Autodesk.AutoCAD.DatabaseServices.ObjectId)">
+            <summary>
+            Returns the database object with the given ObjectId. The object is readonly.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="id">The id of the object.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when an invalid ObjectId is passed.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when the object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when getting the element throws an exception.</exception>
+            <returns>The object with the given ObjectId.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Element``1(Autodesk.AutoCAD.DatabaseServices.ObjectId,System.Boolean)">
+            <summary>
+            Returns the database object with the given ObjectId.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="id">The id of the object.</param>
+            <param name="forWrite">True, if the object should be opened for-write.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when an invalid ObjectId is passed.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when the object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when getting the element throws an exception.</exception>
+            <returns>The object with the given ObjectId.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.ElementOrDefault``1(Autodesk.AutoCAD.DatabaseServices.ObjectId)">
+            <summary>
+            Returns the database object with the given ObjectId, or a default value if the element does not exist. The object is readonly.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="id">The id of the object.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when an invalid ObjectId is passed.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when the object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when getting the element throws an exception.</exception>
+            <returns>The object with the given ObjectId.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.ElementOrDefault``1(Autodesk.AutoCAD.DatabaseServices.ObjectId,System.Boolean)">
+            <summary>
+            Returns the database object with the given ObjectId, or a default value if the element does not exist.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="id">The id of the object.</param>
+            <param name="forWrite">True, if the object should be opened for-write.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when an invalid ObjectId is passed.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when the object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when getting the element throws an exception.</exception>
+            <returns>The object with the given ObjectId.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.ElementInternal``1(Autodesk.AutoCAD.DatabaseServices.ObjectId,System.Boolean)">
+            <summary>
+            Returns the database object with the given ObjectId.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="id">The id of the object.</param>
+            <param name="forWrite">True, if the object should be opened for-write.</param>
+            <returns>The object with the given ObjectId.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Elements``1(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.ObjectId})">
+            <summary>
+            Returns the database objects with the given ObjectIds. The objects are readonly.
+            </summary>
+            <typeparam name="T">The type of the objects.</typeparam>
+            <param name="ids">The ids of the objects.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>ids</i> is null.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when an object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when an ObjectId is invalid or getting an element throws an exception.</exception>
+            <returns>The objects with the given ObjectIds.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Elements``1(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.ObjectId},System.Boolean)">
+            <summary>
+            Returns the database objects with the given ObjectIds.
+            </summary>
+            <typeparam name="T">The type of the objects.</typeparam>
+            <param name="ids">The ids of the objects.</param>
+            <param name="forWrite">True, if the objects should be opened for-write.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>ids</i> is null.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when an object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when an ObjectId is invalid or getting an element throws an exception.</exception>
+            <returns>The objects with the given ObjectIds.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Elements``1(Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection)">
+            <summary>
+            Returns the database objects with the given ObjectIds. The objects are readonly.
+            </summary>
+            <typeparam name="T">The type of the objects.</typeparam>
+            <param name="ids">The ids of the objects.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>ids</i> is null.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when an object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when an ObjectId is invalid or getting an element throws an exception.</exception>
+            <returns>The objects with the given ObjectIds.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Elements``1(Autodesk.AutoCAD.DatabaseServices.ObjectIdCollection,System.Boolean)">
+            <summary>
+            Returns the database objects with the given ObjectIds.
+            </summary>
+            <typeparam name="T">The type of the objects.</typeparam>
+            <param name="ids">The ids of the objects.</param>
+            <param name="forWrite">True, if the objects should be opened for-write.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>ids</i> is null.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown when an object cannot be casted to the target type.</exception>
+            <exception cref="T:System.Exception">Thrown when an ObjectId is invalid or getting an element throws an exception.</exception>
+            <returns>The objects with the given ObjectIds.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.ElementsInternal``1(System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.ObjectId},System.Boolean)">
+            <summary>
+            Returns the database objects with the given ObjectIds.
+            </summary>
+            <typeparam name="T">The type of the objects.</typeparam>
+            <param name="ids">The ids of the objects.</param>
+            <param name="forWrite">True, if the objects should be opened for-write.</param>
+            <returns>The objects with the given ObjectIds.</returns>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Blocks">
+            <summary>
+            Provides access to the elements of the Block table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Layers">
+            <summary>
+            Provides access to the elements of the Layer table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.DimStyles">
+            <summary>
+            Provides access to the elements of the DimStyle table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Linetypes">
+            <summary>
+            Provides access to the elements of the Linetype table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.RegApps">
+            <summary>
+            Provides access to the elements of the RegApp table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.TextStyles">
+            <summary>
+            Provides access to the elements of the TextStyle table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Ucss">
+            <summary>
+            Provides access to the elements of the Ucs table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Viewports">
+            <summary>
+            Provides access to the elements of the Viewport table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Views">
+            <summary>
+            Provides access to the elements of the View table.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.XRefs">
+            <summary>
+            Provides access to the XRef elements.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Layouts">
+            <summary>
+            Provides access to the elements of the Layout dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Groups">
+            <summary>
+            Provides access to the elements of the Group dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.MLeaderStyles">
+            <summary>
+            Provides access to the elements of the MLeaderStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.MlineStyles">
+            <summary>
+            Provides access to the elements of the MlineStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.Materials">
+            <summary>
+            Provides access to the elements of the Material dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.DBVisualStyles">
+            <summary>
+            Provides access to the elements of the DBVisualStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.PlotSettings">
+            <summary>
+            Provides access to the elements of the PlotSetting dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.TableStyles">
+            <summary>
+            Provides access to the elements of the TableStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.SectionViewStyles">
+            <summary>
+            Provides access to the elements of the SectionViewStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.DetailViewStyles">
+            <summary>
+            Provides access to the elements of the DetailViewStyle dictionary.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.CurrentSpace">
+            <summary>
+            Provides access to the entities of the currently active space.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadDatabase.ModelSpace">
+            <summary>
+            Provides access to the model space entities.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.PaperSpace">
+            <summary>
+            Provides access to the entities of all layouts. Each element provides access to the entities of one layout.
+            The elements are in the order of the AutoCAD layout tabs.
+            </summary>
+            <returns>An IEnumerable&lt;EntityContainer&gt;. Each EntityContainer provides access to the entities of one layout.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.PaperSpace(System.Int32)">
+            <summary>
+            Provides access to the entities of the layout with the given tab index.
+            </summary>
+            <param name="index">The zero-based tab index of the layout.</param>
+            <returns>An EntityContainer to access the layout's entities.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.PaperSpace(System.String)">
+            <summary>
+            Provides access to the entities of the layout with the given name.
+            </summary>
+            <param name="name">The name of the layout.</param>
+            <returns>An EntityContainer to access the layout's entities.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Create">
+            <summary>
+            Provides access to a newly created drawing database.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when creating the drawing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Create(System.Boolean)">
+            <summary>
+            Provides access to a newly created drawing database.
+            </summary>
+            <param name="keepOpen">True, if the database should be kept open after it has been used. False, if the database should be closed.</param>
+            <exception cref="T:System.Exception">Thrown when creating the drawing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Active">
+            <summary>
+            Provides access to the drawing database of the active document.
+            </summary>
+            <exception cref="T:System.Exception">Thrown when no active document is available.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Active(Autodesk.AutoCAD.DatabaseServices.Transaction,System.Boolean,System.Boolean)">
+            <summary>
+            Provides access to the drawing database of the active document.
+            </summary>
+            <param name="transaction">The transaction to use.</param>
+            <param name="commitTransaction">True, if the transaction in use should be committed when this instance is disposed of.</param>
+            <param name="disposeTransaction">True, if the transaction in use should be disposed of when this instance is disposed of.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>transaction</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when no active document is available or the transaction is invalid.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Use(Autodesk.AutoCAD.DatabaseServices.Database)">
+            <summary>
+            Provides access to the given drawing database.
+            </summary>
+            <param name="database">The darwing database to use.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>database</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the database is invalid.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Use(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction,System.Boolean,System.Boolean)">
+            <summary>
+            Provides access to the given drawing database.
+            </summary>
+            <param name="database">The darwing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+            <param name="commitTransaction">True, if the transaction in use should be committed when this instance is disposed of.</param>
+            <param name="disposeTransaction">True, if the transaction in use should be disposed of when this instance is disposed of.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>database</i> or <i>transaction</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when the database or the transaction is invalid.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Open(System.String,Linq2Acad.DwgOpenMode)">
+            <summary>
+            Provides access to the drawing database in the given file.
+            </summary>
+            <param name="fileName">The name of the drawing database to open.</param>
+            <param name="openMode">The mode in which the drawing database should be opened.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when the file cannot be found.</exception>
+            <exception cref="T:System.Exception">Thrown when opening the darwing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Open(System.String,Linq2Acad.DwgOpenMode,System.Boolean)">
+            <summary>
+            Provides access to the drawing database in the given file.
+            </summary>
+            <param name="fileName">The name of the drawing database to open.</param>
+            <param name="openMode">The mode in which the drawing database should be opened.</param>
+            <param name="keepOpen">True, if the database should be kept open after it has been used. False, if the database should be closed.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when the file cannot be found.</exception>
+            <exception cref="T:System.Exception">Thrown when opening the darwing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Open(System.String,Linq2Acad.DwgOpenMode,System.String)">
+            <summary>
+            Provides access to the drawing database in the given file.
+            </summary>
+            <param name="fileName">The name of the drawing database to open.</param>
+            <param name="openMode">The mode in which the drawing database should be opened.</param>
+            <param name="password">The password for the darwing database.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when the file cannot be found.</exception>
+            <exception cref="T:System.Exception">Thrown when opening the darwing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.Open(System.String,Linq2Acad.DwgOpenMode,System.String,System.Boolean)">
+            <summary>
+            Provides access to the drawing database in the given file.
+            </summary>
+            <param name="fileName">The name of the drawing database to open.</param>
+            <param name="openMode">The mode in which the drawing database should be opened.</param>
+            <param name="password">The password for the darwing database.</param>
+            <param name="keepOpen">True, if the database should be kept open after it has been used. False, if the database should be closed.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+            <exception cref="T:System.IO.FileNotFoundException">Thrown when the file cannot be found.</exception>
+            <exception cref="T:System.Exception">Thrown when opening the darwing database throws an exception.</exception>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.AcadDatabase.OpenInternal(System.String,Linq2Acad.DwgOpenMode,System.String,System.Boolean)">
+            <summary>
+            Provides access to the drawing database in the given file.
+            </summary>
+            <param name="fileName">The name of the drawing database to open.</param>
+            <param name="openMode">The mode in which the drawing database should be opened.</param>
+            <param name="password">The password for the darwing database.</param>
+            <param name="keepOpen">True, if the database should be kept open after it has been used. False, if the database should be closed.</param>
+            <returns>The AcadDatabase instance.</returns>
+        </member>
+        <member name="M:Linq2Acad.SymbolTableEnumerable`1.SetName(`0,System.String)">
+            <summary>
+            Sets the name of a newly created element.
+            </summary>
+            <param name="item">The newly created element.</param>
+            <param name="name">The name of the element.</param>
+        </member>
+        <member name="T:Linq2Acad.DbObjectsExtensions">
+            <summary>
+            Extension methods for IEnumerable&lt;DBObject&gt;.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.DbObjectsExtensions.ForEach``1(System.Collections.Generic.IEnumerable{``0},System.Action{``0})">
+            <summary>
+            Performs the specified action on each elemenet of the System.Collections.Generic.IEnumerable&lt;DBObject&gt;.
+            </summary>
+            <typeparam name="T">The type of elements in this System.Collections.Generic.IEnumerable&lt;DBObject&gt;.</typeparam>
+            <param name="items">The System.Collections.Generic.IEnumerable&lt;DBObject&gt; instance.</param>
+            <param name="action">The action to execute.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter  <i>action</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.DbObjectsExtensions.UpgradeOpen``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Upgrades the objects to open OpenMode.ForWrite
+            </summary>
+            <typeparam name="T">The type of elements in this System.Collections.Generic.IEnumerable&lt;DBObject&gt;.</typeparam>
+            <param name="source">The System.Collections.Generic.IEnumerable&lt;DBObject&gt; instance.</param>
+            <exception cref="T:System.Exception">Thrown when an AutoCAD error occurs.</exception>
+            <returns>The given elements in OpenMode.ForWrite.</returns>
+        </member>
+        <member name="M:Linq2Acad.DbObjectsExtensions.DowngradeOpen``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Downgrades the objects from being open OpenMode.ForWrite, to being OpenMode.ForRead.
+            </summary>
+            <typeparam name="T">The type of elements in this System.Collections.Generic.IEnumerable&lt;DBObject&gt;.</typeparam>
+            <param name="source">The System.Collections.Generic.IEnumerable&lt;DBObject&gt; instance.</param>
+            <returns>The given elements in OpenMode.ForWrite.</returns>
+        </member>
+        <member name="T:Linq2Acad.Error">
+            <summary>
+            Helper class for throwing exceptions.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.Error.Generic(System.String)">
+            <summary>
+            Creates a generic exception of type System.Exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.Generic(System.String,System.Exception)">
+            <summary>
+            Creates a generic exception of type System.Exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The that is the cause of the current exception.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.ArgumentNull(System.String)">
+            <summary>
+            Creates an exception of type System.ArgumentNullException.
+            </summary>
+            <param name="paramName">The name of the parameter that caused the exception.</param>
+            <returns>A new instance of System.ArgumentNullException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.ElementNull(System.String)">
+            <summary>
+            Creates an exception of type System.Exception that indicates that an element of the given parameter is null.
+            </summary>
+            <param name="paramName">The name of the parameter that caused the exception.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.InvalidName(System.String)">
+            <summary>
+            Creates an exception of type System.Exception that indicates that the given name is valid.
+            </summary>
+            <param name="name">The name that is invalid.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.FileNotFound(System.String)">
+            <summary>
+            Creates an excpetion of type System.FileNotFoundException.
+            </summary>
+            <param name="fileName">The full file name of the file that was not found.</param>
+            <returns>A new instance of System.FileNotFoundException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.KeyNotFound(System.String)">
+            <summary>
+            Creates an exception of type System.KeyNotFoundException.
+            </summary>
+            <param name="key">The key that was not found.</param>
+            <returns>A new instance of System.KeyNotFoundException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.IO(System.String)">
+            <summary>
+            Creates an exception of type System.IOException.
+            </summary>
+            <param name="message">A message that describes the error.</param>
+            <returns>A new instance of System.IOException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.NoActiveDocument">
+            <summary>
+            Creates an exception of type System.Exception that indicates that no acctive document exists.
+            </summary>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.InvalidObject(System.String)">
+            <summary>
+            Creates an exception of type InvalidObjectException that indicates that the given object is invalid.
+            </summary>
+            <param name="objectTypeName">The type name of the given object.</param>
+            <returns>A new instance of InvalidObjectException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.AutoCadException(System.Exception)">
+            <summary>
+            Creates an exception of type System.Exception that indicates that an AutoCAD exception occured.
+            </summary>
+            <param name="innerException">The that is the cause of the current exception.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.AutoCadException(System.Exception,System.String)">
+            <summary>
+            Creates an exception of type System.Exception that indicates that an AutoCAD exception occured.
+            </summary>
+            <param name="innerException">The that is the cause of the current exception.</param>
+            <param name="message">The message that describes the error.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.IndexOutOfRange(System.String,System.Int32)">
+            <summary>
+            Creates an exception of type System.IndexOutOfRangeException that indicates that an index was out of bounds.
+            </summary>
+            <param name="paramName">The name of the parameter that is out of bounds.</param>
+            <param name="upperBound">The upper bound that has been exceeded.</param>
+            <returns>A new instance of System.IndexOutOfRangeException.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.EntityBelongsToBlock">
+            <summary>
+            Creates a new System.Excetion that indicates that an Entity belongs to another block.
+            </summary>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.EntityBelongsToBlock(Autodesk.AutoCAD.DatabaseServices.ObjectId)">
+            <summary>
+            Creates a new System.Exception that indicates that an Entity belongs to another block.
+            </summary>
+            <param name="objectId">The ObjectId of the Entity.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.ObjectExists``1(System.String)">
+            <summary>
+            Creates a new System.Exception that indicates that an object with a given name already exists.
+            </summary>
+            <typeparam name="T">The type of the object.</typeparam>
+            <param name="name">The name that is already taken.</param>
+            <returns>A new instance of System.Exception.</returns>
+        </member>
+        <member name="M:Linq2Acad.Error.InvalidConversion(Autodesk.AutoCAD.DatabaseServices.DxfCode,System.String)">
+            <summary>
+            Create a new System.Exception that indicates that the value with the given DXF type code cannot be converted to the given target type.
+            </summary>
+            <param name="typeCode">The DXF code.</param>
+            <param name="targetTypeName">The target type.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Linq2Acad.InvalidObjectException">
+            <summary>
+            An exception that indicates that an object is invalid.
+            </summary>
+        </member>
+        <member name="T:Linq2Acad.DwgOpenMode">
+            <summary>
+            The mode in which a drawing database should be opened from file.
+            </summary>
+        </member>
+        <member name="F:Linq2Acad.DwgOpenMode.ReadOnly">
+            <summary>
+            Opens the drawing database read-only.
+            </summary>
+            <remarks>The drawing database is opened in OpenForReadAndReadShare mode.</remarks>
+        </member>
+        <member name="F:Linq2Acad.DwgOpenMode.ReadWrite">
+            <summary>
+            Opens the drawing database with exclusive read and write access rights.
+            </summary>
+            <remarks>The drawing database is opened in OpenForReadAndWriteNoShare mode.</remarks>
+        </member>
+        <member name="T:Linq2Acad.Helpers">
+            <summary>
+            Container class for static helper methods.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.Helpers.WrapInTransaction(Autodesk.AutoCAD.DatabaseServices.DBObject,System.Action{Autodesk.AutoCAD.DatabaseServices.Transaction})">
+            <summary>
+            Uses the top transaction in the transaction manager and performs the given action using the transaction.
+            If now transaction is avialable, a new transaction is started.
+            </summary>
+            <param name="source">The source object that acts as the transcation manager provider.</param>
+            <param name="action">The action to execute.</param>
+        </member>
+        <member name="M:Linq2Acad.Helpers.WriteWrap``1(``0,System.Action,System.Boolean)">
+            <summary>
+            Performs a write operation on a given DBObject. If the object is not write enabled, UpgradeOpen is
+            called on the object and the action performed.
+            </summary>
+            <typeparam name="T">The actual type of the item.</typeparam>
+            <param name="item">The item to perform the action on.</param>
+            <param name="action">The action to perfrom.</param>
+            <param name="keepUpgraded">True, if the item should stay write enabled after the action has been performed.</param>
+        </member>
+        <member name="M:Linq2Acad.Helpers.WriteWrap``2(``0,System.Func{``1},System.Boolean)">
+            <summary>
+            Performs a write operation on a given DBObject. If the object is not write enabled, UpgradeOpen is
+            called on the object and the action performed.
+            </summary>
+            <typeparam name="T">The actual type of the item.</typeparam>
+            <typeparam name="TResult">The result type of the write operation.</typeparam>
+            <param name="item">The item to perform the action on.</param>
+            <param name="function">The function to call on the object.</param>
+            <param name="keepUpgraded">True, if the item should stay write enabled after the action has been performed.</param>
+            <returns>Returns the result of the write operation.</returns>
+        </member>
+        <member name="F:Linq2Acad.Helpers.ChunkSize">
+            <summary>
+            If an object is serialized into binaray, his the size for each binary chunk.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.Helpers.Serialize(System.Object)">
+            <summary>
+            Serializes an object into a into a byte array and cuts the byte array into chunks of a 127 byte.
+            </summary>
+            <param name="data">The object to serialize.</param>
+            <returns>The serialized object in chunks of 127 bytes each.</returns>
+        </member>
+        <member name="M:Linq2Acad.Helpers.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes an object from a byte array.
+            </summary>
+            <typeparam name="T">The type of the serialized object.</typeparam>
+            <param name="data">The serialized representation of the object.</param>
+            <returns>The deserialize object.</returns>
+        </member>
+        <member name="M:Linq2Acad.Helpers.IsNameValid(System.String)">
+            <summary>
+            Returns true, if the given name is a valid SymbolTable name.
+            </summary>
+            <param name="name">The name to check.</param>
+            <returns>True, if the given name is a valid SymbolTable name.</returns>
+        </member>
+        <member name="T:Linq2Acad.LayerTableRecordExtensions">
+            <summary>
+            Extension methods for instances of LayerTableRecord.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.LayerTableRecordExtensions.Add(Autodesk.AutoCAD.DatabaseServices.LayerTableRecord,Autodesk.AutoCAD.DatabaseServices.Entity)">
+            <summary>
+            Adds the given entity to this layer.
+            </summary>
+            <param name="layer">The layer instance.</param>
+            <param name="entity">The entity to add.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>entity</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when adding the entity throws an exception.</exception>
+        </member>
+        <member name="M:Linq2Acad.LayerTableRecordExtensions.AddRange(Autodesk.AutoCAD.DatabaseServices.LayerTableRecord,System.Collections.Generic.IEnumerable{Autodesk.AutoCAD.DatabaseServices.Entity})">
+            <summary>
+            Adds the given entities to this layer.
+            </summary>
+            <param name="layer">The layer instance.</param>
+            <param name="entities">The entities to add.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>entities</i> is null.</exception>
+            <exception cref="T:System.Exception">Thrown when adding an entity throws an exception.</exception>
+        </member>
+        <member name="M:Linq2Acad.LayerTableRecordExtensions.AddInternal(Autodesk.AutoCAD.DatabaseServices.LayerTableRecord,Autodesk.AutoCAD.DatabaseServices.Entity)">
+            <summary>
+            Adds the given entity to this layer.
+            </summary>
+            <param name="layer">The layer instance.</param>
+            <param name="entity">The entity to add.</param>
+        </member>
+        <member name="T:Linq2Acad.AcadSummaryInfo">
+            <summary>
+            This class encapsulates a set of strings that can be used to add additional information to a DWG file.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadSummaryInfo.#ctor(Autodesk.AutoCAD.DatabaseServices.Database)">
+            <summary>
+            Creates a new instance of AcadSummaryInfo.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Changed">
+            <summary>
+            True, if a property has changed. Else, false.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.AcadSummaryInfo.Commit">
+            <summary>
+            Commits the changes made to the summary info.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.CustomProperties">
+            <summary>
+            Accesses the custom properties property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Author">
+            <summary>
+            Accesses the author property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Comments">
+            <summary>
+            Accesses the comments property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.HyperlinkBase">
+            <summary>
+            Accesses the hyperlink base property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Keywords">
+            <summary>
+            Accesses the keywords property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.LastSavedBy">
+            <summary>
+            Accesses the last saved by property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.RevisionNumber">
+            <summary>
+            Accesses the revision number property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Subject">
+            <summary>
+            Accesses the subject property value.
+            </summary>
+        </member>
+        <member name="P:Linq2Acad.AcadSummaryInfo.Title">
+            <summary>
+            Accesses the title property value.
+            </summary>
+        </member>
+        <member name="T:Linq2Acad.XRefContainer">
+            <summary>
+            A container class that provides access to the XRef elements.
+            </summary>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.#ctor(Autodesk.AutoCAD.DatabaseServices.Database,Autodesk.AutoCAD.DatabaseServices.Transaction)">
+            <summary>
+            Creates a new instance of XRefContainer.
+            </summary>
+            <param name="database">The drawing database to use.</param>
+            <param name="transaction">The transaction to use.</param>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.Attach(System.String)">
+            <summary>
+            Attaches the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <returns>A new instance of XRef.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.Attach(System.String,System.String)">
+            <summary>
+            Attaches the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <param name="blockName">The XRef's block name.</param>
+            <returns>A new instance of XRef.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>file name</i> or <i>block name</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.AttachInternal(System.String,System.String)">
+            <summary>
+            Attaches the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <param name="blockName">The XRef's block name.</param>
+            <returns>A new instance of XRef.</returns>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.Overlay(System.String)">
+            <summary>
+            Overlays the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <returns>A new instance of XRef.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameter <i>fileName</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.Overlay(System.String,System.String)">
+            <summary>
+            Overlays the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <param name="blockName">The XRef's block name.</param>
+            <returns>A new instance of XRef.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown when parameters <i>file name</i> or <i>block name</i> is null.</exception>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.OverlayInternal(System.String,System.String)">
+            <summary>
+            Overlays the XRef at the given file location.
+            </summary>
+            <param name="fileName">The file name of the XRef.</param>
+            <param name="blockName">The XRef's block name.</param>
+            <returns>A new instance of XRef.</returns>
+        </member>
+        <member name="M:Linq2Acad.XRefContainer.GetBlockName(System.String)">
+            <summary>
+            Adds an index in case a block with <i>baseName</i> already exists.
+            </summary>
+            <param name="baseName">The base name.</param>
+        </member>
+    </members>
+</doc>
