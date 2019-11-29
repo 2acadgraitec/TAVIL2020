@@ -15,7 +15,6 @@ Public Module modTavil
         Dim lUni As New List(Of TreeNode)
         LClsUnion = New List(Of ClsUnion)
         '
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp(), cfg._appFullPath, regAPPCliente)
         Dim arrTodos As List(Of String) = clsA.SeleccionaDameHandle_PorNombreBloque(NombreBloqueUNION)
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
             Return lUni

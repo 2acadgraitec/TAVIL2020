@@ -70,14 +70,18 @@ Partial Public Class Eventos
         Subscribe_AXDocM()
     End Sub
     Public Shared Sub Eventos_Vacia()
-        lIds = Nothing
-        If AXDocM.Count > 0 Then
-            Unsubscribe_AXDoc()
-        End If
-        Unsubscribe_AXEventM()
-        Unsubscribe_AXApp()
-        Unsubscribe_COMApp()
-        Unsubscribe_AXDocM()
+        Try
+            lIds = Nothing
+            If AXDocM.Count > 0 Then
+                Unsubscribe_AXDoc()
+            End If
+            Unsubscribe_AXEventM()
+            Unsubscribe_AXApp()
+            Unsubscribe_COMApp()
+            Unsubscribe_AXDocM()
+        Catch ex As System.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
 
     Public Shared Sub PonLogEv(queTexto As String)
@@ -101,7 +105,6 @@ Partial Public Class Eventos
     'End Sub
 
     Public Shared Sub AcadBlockReference_PonEventosModified()
-        If clsA Is Nothing Then clsA = New a2.A2acad(COMApp, cfg._appFullPath, regAPPCliente)
         'Dim AcadBlockReference As ArrayList = clsA.SeleccionaDameBloquesTODOS(regAPPA)
         'For Each oBl As AcadBlockReference In AcadBlockReference
         '    Dim queTipo As String = clsA.XLeeDato(oBl, "tipo")

@@ -151,7 +151,6 @@ Public Class ClsUnion
     Public Sub New(handle As String)
         Me.HANDLE = handle
         'PonDatosX()
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         Try
             UnionBlock = Eventos.COMDoc().HandleToObject(Me.HANDLE)
         Catch ex As Exception
@@ -201,7 +200,6 @@ Public Class ClsUnion
                     Rotation As String)
         Me.HANDLE = handle
         'PonDatosX(Union, Units, T1Handle, T1Handle, T1Inclination, T2Handle, T2Outfeed, T2Inclination, Rotation)
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         Try
             UnionBlock = Eventos.COMDoc().HandleToObject(Me.HANDLE)
         Catch ex As Exception
@@ -235,7 +233,6 @@ Public Class ClsUnion
     '    Return Eventos.COMDoc().HandleToObject(Me.HANDLE)
     'End Function
     Public Sub PonAtributos()
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         If UnionBlock IsNot Nothing Then
             Try
                 Dim dicNomVal As New Dictionary(Of String, String)

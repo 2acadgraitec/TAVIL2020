@@ -2,10 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName GetStringFileInfo("{srcexe}\..\..\bin\TAVIL2020.dll", "ProductName")
-#define MyAppNameDir "TAVIL2020.bundle"
+#define MyAppNameDir GetStringFileInfo("{srcexe}\..\..\bin\TAVIL2020.dll", "ProductName") + ".bundle"
 ;#define MyAppVersion GetFileVersion("{srcexe}\..\..\bin\TAVIL2020.dll")
 #define MyAppVersion GetStringFileInfo("{srcexe}\..\..\bin\TAVIL2020.dll", "FileVersion")
-#define MyAppPublisher "Copyright © Jose Alberto Torres (2aCAD Global Group  2020)"
+#define MyAppPublisher "Copyright © Jose Alberto Torres (2aCAD Global Group 2020)"
 #define MyAppURL "http://www.2acad.es"
 #define MyWeb "2aCAD Global Group"
 #define MyOrigen "{srcexe}\..\..\"

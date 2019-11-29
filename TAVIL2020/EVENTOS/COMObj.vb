@@ -36,10 +36,10 @@ Partial Public Class Eventos
         End If
     End Sub
     Public Shared Sub Unsubscribre_COMObj(pObject As AcadObject)
-        'AXDoc.Editor.WriteMessage("COMDoc_Activate")
-        If logeventos Then PonLogEv("COMDoc_Activate")
-        If pObject Is Nothing Then Exit Sub
         Try
+            'AXDoc.Editor.WriteMessage("COMDoc_Activate")
+            If logeventos Then PonLogEv("COMDoc_Activate")
+            If pObject Is Nothing Then Exit Sub
             If lTypesCOMObj.Contains(pObject.ObjectName) = False Then Exit Sub
             '
             If TypeOf pObject Is AcadBlockReference Then
@@ -47,8 +47,8 @@ Partial Public Class Eventos
             ElseIf TypeOf pObject Is AcadCircle Then
                 RemoveHandler pObject.Modified, AddressOf AcadCircle_Modified
             End If
-        Catch ex As System.Exception
-
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
         End Try
     End Sub
     Public Shared Sub AcadCircle_Modified(pObject As AcadObject)

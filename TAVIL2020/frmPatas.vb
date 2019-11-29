@@ -18,7 +18,6 @@ Public Class frmPatas
     '
     Private Sub frmPatas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         If cPT Is Nothing Then cPT = New clsPT
         app_procesointerno = True
         oBlR = Nothing

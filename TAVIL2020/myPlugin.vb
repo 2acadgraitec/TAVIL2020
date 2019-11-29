@@ -43,12 +43,16 @@ Namespace TAVIL2020
             ' as well as some of the existing AutoCAD managed apps.
 
             ' Initialize your plug-in application hereTry
-            ' ***** Inicializar los eventos que necesitemos. Y los objetos principales de AutoCAD
-            Eventos.Eventos_Inicializa()
-            ' **************************
-            cfg = New UtilesAlberto.Conf(System.Reflection.Assembly.GetExecutingAssembly)
-            clsA = New AutoCAD2acad.A2acad.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
-
+            Try
+                ' ***** Inicializar los eventos que necesitemos. Y los objetos principales de AutoCAD
+                Eventos.Eventos_Inicializa()
+                ' **************************
+                cfg = New UtilesAlberto.Conf("aiiao2K19_2aCAD", System.Reflection.Assembly.GetExecutingAssembly)
+                clsA = New AutoCAD2acad.A2acad.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente, "aiiao2K19_2aCAD")
+            Catch ex As [System].Exception
+                MsgBox(ex.ToString)
+                Exit Sub
+            End Try
             '
             'If Autodesk.AutoCAD.Runtime.ExtensionLoader.IsLoaded(autocad2acad) = True Then
             '    'MsgBox("Cargado " & autocad2acad)
@@ -91,7 +95,11 @@ Namespace TAVIL2020
         End Sub
 
         Public Sub Terminate() Implements IExtensionApplication.Terminate
-            Eventos.Eventos_Vacia()
+            Try
+                Eventos.Eventos_Vacia()
+            Catch ex As System.Exception
+                Debug.Print(ex.tostring)
+            End Try
             ' Do plug-in application clean up here
             clsA = Nothing
             cfg = Nothing

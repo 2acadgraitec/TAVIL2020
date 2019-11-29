@@ -21,7 +21,14 @@ Namespace A2acad
         ''' <param name="queApp">AcadApplication que cargamos al inicio del desarrollo</param>
         ''' <param name="_appFullPathPadreDll">fullPath de la DLL que instancia esta clase (app_fullpath)</param>
         ''' <param name="queAppReg">regApp que creamos en variables [CLIENTE]2acad</param>
-        Public Sub New(queApp As Autodesk.AutoCAD.Interop.AcadApplication, _appFullPathPadreDll As String, queAppReg As String)
+        Public Sub New(queApp As Autodesk.AutoCAD.Interop.AcadApplication, _appFullPathPadreDll As String, queAppReg As String, key As String)
+            If key <> keyPre & "_" & keySuf Then
+                activado = False
+                Throw New System.Exception("Not allowed")
+                Return
+            Else
+                activado = True
+            End If
             Control.CheckForIllegalCrossThreadCalls = False
             oAppA = queApp
             Me.regAPPA = queAppReg
@@ -38,53 +45,58 @@ Namespace A2acad
         End Sub
 
         Public Sub ConectaAcad()
-            'oAppAT = oAppA.Caption
-            Me.oAppAintP = clsAPI.DameIntPtr(oAppA.Caption)
-            Dim PRs() As System.Diagnostics.Process = System.Diagnostics.Process.GetProcessesByName("acad", My.Computer.Name)
-            prApp = PRs(0)       ' El IntPtr del proceso. Para controlar SendMessage
-            '
-            If (OC Is Nothing) Then
-                Try
-                    If oAppA.Version.StartsWith("21") Then  '.Contains("2017") Or oAppA.Version.Contains("R21") Then
-                        OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.21"), AcadAcCmColor)
-                    ElseIf oAppA.Version.StartsWith("22") Then  '.Contains("2020") Or oAppA.Version.Contains("R22") Then
-                        OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.22"), AcadAcCmColor)
-                    ElseIf oAppA.Version.StartsWith("23") Then  '.Contains("2019") Or oAppA.Version.Contains("R23") Then
-                        OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.23"), AcadAcCmColor)
-                    End If
-                Catch ex As Exception
+            Try
+                'oAppAT = oAppA.Caption
+                Me.oAppAintP = clsAPI.DameIntPtr(oAppA.Caption)
+                Dim PRs() As System.Diagnostics.Process = System.Diagnostics.Process.GetProcessesByName("acad", My.Computer.Name)
+                prApp = PRs(0)       ' El IntPtr del proceso. Para controlar SendMessage
+                '
+                If (OC Is Nothing) Then
                     Try
-                        OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor"), AcadAcCmColor)
-                    Catch ex1 As Exception
-                        ''
+                        If oAppA.Version.StartsWith("21") Then  '.Contains("2017") Or oAppA.Version.Contains("R21") Then
+                            OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.21"), AcadAcCmColor)
+                        ElseIf oAppA.Version.StartsWith("22") Then  '.Contains("2020") Or oAppA.Version.Contains("R22") Then
+                            OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.22"), AcadAcCmColor)
+                        ElseIf oAppA.Version.StartsWith("23") Then  '.Contains("2019") Or oAppA.Version.Contains("R23") Then
+                            OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor.23"), AcadAcCmColor)
+                        End If
+                    Catch ex As Exception
+                        Try
+                            OC = CType(oAppA.GetInterfaceObject("AutoCAD.AcCmColor"), AcadAcCmColor)
+                        Catch ex1 As Exception
+                            ''
+                        End Try
                     End Try
-                End Try
-            End If
+                End If
 
-            If (oLsm Is Nothing) Then
-                Try
-                    If oAppA.Version.StartsWith("21") Then 'oAppA.Version.Contains("2017") Or oAppA.Version.Contains("R21") Then
-                        oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.21")
-                    ElseIf oAppA.Version.StartsWith("22") Then  'oAppA.Version.Contains("2020") Or oAppA.Version.Contains("R22") Then
-                        oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.22")
-                    ElseIf oAppA.Version.StartsWith("23") Then  'oAppA.Version.Contains("2019") Or oAppA.Version.Contains("R23") Then
-                        oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.23")
-                    End If
-                Catch ex As Exception
+                If (oLsm Is Nothing) Then
                     Try
-                        oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager")
-                    Catch ex1 As Exception
-                        ''
+                        If oAppA.Version.StartsWith("21") Then 'oAppA.Version.Contains("2017") Or oAppA.Version.Contains("R21") Then
+                            oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.21")
+                        ElseIf oAppA.Version.StartsWith("22") Then  'oAppA.Version.Contains("2020") Or oAppA.Version.Contains("R22") Then
+                            oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.22")
+                        ElseIf oAppA.Version.StartsWith("23") Then  'oAppA.Version.Contains("2019") Or oAppA.Version.Contains("R23") Then
+                            oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager.23")
+                        End If
+                    Catch ex As Exception
+                        Try
+                            oLsm = oAppA.GetInterfaceObject("AutoCAD.AcadLayerStateManager")
+                        Catch ex1 As Exception
+                            ''
+                        End Try
                     End Try
-                End Try
-            End If
-            '
-            'Me.LiberaApp()          'Liberamos AutoCAD si está ocupado en algo.
+                End If
+                '
+                'Me.LiberaApp()          'Liberamos AutoCAD si está ocupado en algo.
+            Catch ex As Exception
+
+            End Try
         End Sub
 
         Public Sub ConectaDibujo()
             'Exit Sub
             If Not (oAppA Is Nothing) Then
+                If oAppA.Documents.Count = 0 Then Exit Sub
                 Try
                     'System.Windows.Forms.SendKeys.Send(Chr(27))
                     If oDoc Is Nothing Then

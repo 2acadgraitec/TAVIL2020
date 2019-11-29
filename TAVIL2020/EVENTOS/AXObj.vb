@@ -42,20 +42,24 @@ Partial Public Class Eventos
         AddHandler AXObj.Unappended, AddressOf AXObj_Unappended
     End Sub
     Public Shared Sub Unsubscribe_AXObj(ByRef AXObj As DBObject)
-        If AXObj Is Nothing OrElse AXObj.IsDisposed = True Then Exit Sub
-        '
-        RemoveHandler AXObj.Cancelled, AddressOf AXObj_Cancelled
-        RemoveHandler AXObj.Copied, AddressOf AXObj_Copied
-        RemoveHandler AXObj.Erased, AddressOf AXObj_Erased
-        RemoveHandler AXObj.Goodbye, AddressOf AXObj_Goodbye
-        RemoveHandler AXObj.Modified, AddressOf AXObj_Modified
-        RemoveHandler AXObj.ModifiedXData, AddressOf AXObj_ModifiedXData
-        RemoveHandler AXObj.ModifyUndone, AddressOf AXObj_ModifyUndone
-        RemoveHandler AXObj.ObjectClosed, AddressOf AXObj_ObjectClosed
-        RemoveHandler AXObj.OpenedForModify, AddressOf AXObj_OpenedForModify
-        RemoveHandler AXObj.Reappended, AddressOf AXObj_Reappended
-        RemoveHandler AXObj.SubObjectModified, AddressOf AXObj_SubObjectModified
-        RemoveHandler AXObj.Unappended, AddressOf AXObj_Unappended
+        Try
+            If AXObj Is Nothing OrElse AXObj.IsDisposed = True Then Exit Sub
+            '
+            RemoveHandler AXObj.Cancelled, AddressOf AXObj_Cancelled
+            RemoveHandler AXObj.Copied, AddressOf AXObj_Copied
+            RemoveHandler AXObj.Erased, AddressOf AXObj_Erased
+            RemoveHandler AXObj.Goodbye, AddressOf AXObj_Goodbye
+            RemoveHandler AXObj.Modified, AddressOf AXObj_Modified
+            RemoveHandler AXObj.ModifiedXData, AddressOf AXObj_ModifiedXData
+            RemoveHandler AXObj.ModifyUndone, AddressOf AXObj_ModifyUndone
+            RemoveHandler AXObj.ObjectClosed, AddressOf AXObj_ObjectClosed
+            RemoveHandler AXObj.OpenedForModify, AddressOf AXObj_OpenedForModify
+            RemoveHandler AXObj.Reappended, AddressOf AXObj_Reappended
+            RemoveHandler AXObj.SubObjectModified, AddressOf AXObj_SubObjectModified
+            RemoveHandler AXObj.Unappended, AddressOf AXObj_Unappended
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub AXObj_Cancelled(sender As Object, e As EventArgs)
         'AXDoc.Editor.WriteMessage("AXObj_Cancelled")

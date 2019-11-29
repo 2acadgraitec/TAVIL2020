@@ -60,36 +60,40 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_COMDoc()
-        If COMDoc() Is Nothing Then Exit Sub
-        RemoveHandler COMDoc.Activate, AddressOf COMDoc_Activate
-        RemoveHandler COMDoc.BeginClose, AddressOf COMDoc_BeginClose
-        RemoveHandler COMDoc.BeginDocClose, AddressOf COMDoc_BeginDocClose
-        RemoveHandler COMDoc.BeginCommand, AddressOf COMDoc_BeginCommand
-        RemoveHandler COMDoc.BeginDoubleClick, AddressOf COMDoc_BeginDoubleClick
-        RemoveHandler COMDoc.BeginCommand, AddressOf COMDoc_BeginCommand
-        RemoveHandler COMDoc.BeginLisp, AddressOf COMDoc_BeginLisp
-        RemoveHandler COMDoc.BeginPlot, AddressOf COMDoc_BeginPlot
-        RemoveHandler COMDoc.BeginRightClick, AddressOf COMDoc_BeginRightClick
-        RemoveHandler COMDoc.BeginSave, AddressOf COMDoc_BeginSave
-        RemoveHandler COMDoc.BeginShortcutMenuCommand, AddressOf COMDoc_BeginShortcutMenuCommand
-        RemoveHandler COMDoc.BeginShortcutMenuDefault, AddressOf COMDoc_BeginShortcutMenuDefault
-        RemoveHandler COMDoc.BeginShortcutMenuEdit, AddressOf COMDoc_BeginShortcutMenuEdit
-        RemoveHandler COMDoc.BeginShortcutMenuGrip, AddressOf COMDoc_BeginShortcutMenuGrip
-        RemoveHandler COMDoc.BeginShortcutMenuOsnap, AddressOf COMDoc_BeginShortcutMenuOsnap
-        RemoveHandler COMDoc.Deactivate, AddressOf COMDoc_Deactivate
-        RemoveHandler COMDoc.EndCommand, AddressOf COMDoc_EndCommand
-        RemoveHandler COMDoc.EndLisp, AddressOf COMDoc_EndLisp
-        RemoveHandler COMDoc.EndPlot, AddressOf COMDoc_EndPlot
-        RemoveHandler COMDoc.EndSave, AddressOf COMDoc_EndSave
-        RemoveHandler COMDoc.EndShortcutMenu, AddressOf COMDoc_EndShortcutMenu
-        RemoveHandler COMDoc.LayoutSwitched, AddressOf COMDoc_LayoutSwitched
-        RemoveHandler COMDoc.LispCancelled, AddressOf COMDoc_LispCancelled
-        RemoveHandler COMDoc.ObjectAdded, AddressOf COMDoc_ObjectAdded
-        RemoveHandler COMDoc.ObjectErased, AddressOf COMDoc_ObjectErased
-        RemoveHandler COMDoc.ObjectModified, AddressOf COMDoc_ObjectModified
-        RemoveHandler COMDoc.SelectionChanged, AddressOf COMDoc_SelectionChanged
-        RemoveHandler COMDoc.WindowChanged, AddressOf COMDoc_WindowChanged
-        RemoveHandler COMDoc.WindowMovedOrResized, AddressOf COMDoc_WindowMovedOrResized
+        Try
+            If COMDoc() Is Nothing Then Exit Sub
+            RemoveHandler COMDoc.Activate, AddressOf COMDoc_Activate
+            RemoveHandler COMDoc.BeginClose, AddressOf COMDoc_BeginClose
+            RemoveHandler COMDoc.BeginDocClose, AddressOf COMDoc_BeginDocClose
+            RemoveHandler COMDoc.BeginCommand, AddressOf COMDoc_BeginCommand
+            RemoveHandler COMDoc.BeginDoubleClick, AddressOf COMDoc_BeginDoubleClick
+            RemoveHandler COMDoc.BeginCommand, AddressOf COMDoc_BeginCommand
+            RemoveHandler COMDoc.BeginLisp, AddressOf COMDoc_BeginLisp
+            RemoveHandler COMDoc.BeginPlot, AddressOf COMDoc_BeginPlot
+            RemoveHandler COMDoc.BeginRightClick, AddressOf COMDoc_BeginRightClick
+            RemoveHandler COMDoc.BeginSave, AddressOf COMDoc_BeginSave
+            RemoveHandler COMDoc.BeginShortcutMenuCommand, AddressOf COMDoc_BeginShortcutMenuCommand
+            RemoveHandler COMDoc.BeginShortcutMenuDefault, AddressOf COMDoc_BeginShortcutMenuDefault
+            RemoveHandler COMDoc.BeginShortcutMenuEdit, AddressOf COMDoc_BeginShortcutMenuEdit
+            RemoveHandler COMDoc.BeginShortcutMenuGrip, AddressOf COMDoc_BeginShortcutMenuGrip
+            RemoveHandler COMDoc.BeginShortcutMenuOsnap, AddressOf COMDoc_BeginShortcutMenuOsnap
+            RemoveHandler COMDoc.Deactivate, AddressOf COMDoc_Deactivate
+            RemoveHandler COMDoc.EndCommand, AddressOf COMDoc_EndCommand
+            RemoveHandler COMDoc.EndLisp, AddressOf COMDoc_EndLisp
+            RemoveHandler COMDoc.EndPlot, AddressOf COMDoc_EndPlot
+            RemoveHandler COMDoc.EndSave, AddressOf COMDoc_EndSave
+            RemoveHandler COMDoc.EndShortcutMenu, AddressOf COMDoc_EndShortcutMenu
+            RemoveHandler COMDoc.LayoutSwitched, AddressOf COMDoc_LayoutSwitched
+            RemoveHandler COMDoc.LispCancelled, AddressOf COMDoc_LispCancelled
+            RemoveHandler COMDoc.ObjectAdded, AddressOf COMDoc_ObjectAdded
+            RemoveHandler COMDoc.ObjectErased, AddressOf COMDoc_ObjectErased
+            RemoveHandler COMDoc.ObjectModified, AddressOf COMDoc_ObjectModified
+            RemoveHandler COMDoc.SelectionChanged, AddressOf COMDoc_SelectionChanged
+            RemoveHandler COMDoc.WindowChanged, AddressOf COMDoc_WindowChanged
+            RemoveHandler COMDoc.WindowMovedOrResized, AddressOf COMDoc_WindowMovedOrResized
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub COMDoc_Activate()
         'AXDoc.Editor.WriteMessage("COMDoc_Activate")

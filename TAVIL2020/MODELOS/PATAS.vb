@@ -20,7 +20,6 @@ Public Class PATA
     Public Property KEY As String
     '
     Public Sub New(h As String) 'Handle
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp(), cfg._appFullPath, regAPPCliente)
         Dim acadObj As AcadObject = Eventos.COMDoc.HandleToObject(h)
         If acadObj IsNot Nothing AndAlso TypeOf acadObj Is AcadBlockReference Then
             Dim oBl As AcadBlockReference = CType(acadObj, AcadBlockReference)

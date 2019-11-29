@@ -44,22 +44,26 @@ Partial Public Class Eventos
         AddHandler Autodesk.AutoCAD.ApplicationServices.Application.SystemVariableChanging, AddressOf AXApp_SystemVariableChanging
     End Sub
     Public Shared Sub Unsubscribe_AXApp()
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginCloseAll, AddressOf AXApp_BeginCloseAll
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginCustomizationMode, AddressOf AXApp_BeginCustomizationMode
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginDoubleClick, AddressOf AXApp_BeginDoubleClick
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginQuit, AddressOf AXApp_BeginQuit
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingCustomizeDialog, AddressOf AXApp_DisplayingCustomizeDialog
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingDraftingSettingsDialog, AddressOf AXApp_DisplayingDraftingSettingsDialog
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingOptionDialog, AddressOf AXApp_DisplayingOptionDialog
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.EndCustomizationMode, AddressOf AXApp_EndCustomizationMode
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.EnterModal, AddressOf AXApp_EnterModal
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.Idle, AddressOf AXApp_Idle
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.LeaveModal, AddressOf AXApp_LeaveModal
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.PreTranslateMessage, AddressOf AXApp_PreTranslateMessage
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.QuitAborted, AddressOf AXApp_QuitAborted
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.QuitWillStart, AddressOf AXApp_QuitWillStart
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.SystemVariableChanged, AddressOf AXApp_SystemVariableChanged
-        RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.SystemVariableChanging, AddressOf AXApp_SystemVariableChanging
+        Try
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginCloseAll, AddressOf AXApp_BeginCloseAll
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginCustomizationMode, AddressOf AXApp_BeginCustomizationMode
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginDoubleClick, AddressOf AXApp_BeginDoubleClick
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.BeginQuit, AddressOf AXApp_BeginQuit
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingCustomizeDialog, AddressOf AXApp_DisplayingCustomizeDialog
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingDraftingSettingsDialog, AddressOf AXApp_DisplayingDraftingSettingsDialog
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.DisplayingOptionDialog, AddressOf AXApp_DisplayingOptionDialog
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.EndCustomizationMode, AddressOf AXApp_EndCustomizationMode
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.EnterModal, AddressOf AXApp_EnterModal
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.Idle, AddressOf AXApp_Idle
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.LeaveModal, AddressOf AXApp_LeaveModal
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.PreTranslateMessage, AddressOf AXApp_PreTranslateMessage
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.QuitAborted, AddressOf AXApp_QuitAborted
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.QuitWillStart, AddressOf AXApp_QuitWillStart
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.SystemVariableChanged, AddressOf AXApp_SystemVariableChanged
+            RemoveHandler Autodesk.AutoCAD.ApplicationServices.Application.SystemVariableChanging, AddressOf AXApp_SystemVariableChanging
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub AXApp_BeginCloseAll(sender As Object, e As BeginCloseAllEventArgs) ' As BeginCloseAllEventArgs)
         'AXDoc.Editor.WriteMessage("AXApp_BeginCloseAll")

@@ -11,7 +11,6 @@ Public Class frmAgrupa
     Private Sub frmAgrupa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
         Me.Text = "AGRUPAR ELEMENTOS LINEA - v" & cfg._appversion
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp(), cfg._appFullPath, regAPPCliente)
         app_procesointerno = True
         gbAdministrar.Enabled = False
         btnGrupoBorrar.Enabled = False
@@ -148,7 +147,6 @@ REPITE:
     Public Sub tvGrupos_LlenaXDATA()
         ' Rellenar tvGrupos con los grupos que haya ([nombre grupo]) Sacado de XData elementos (regAPPCliente, XData = "GRUPO")
         tvGrupos.Nodes.Clear()
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         Dim arrTodos As List(Of Long) = clsA.SeleccionaTodosObjetos_IDs(,, True)
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
             Exit Sub

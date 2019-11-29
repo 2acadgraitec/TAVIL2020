@@ -50,28 +50,32 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_AXDoc()
-        RemoveHandler AXDoc.BeginDocumentClose, AddressOf AXDoc_BeginDocumentClose
-        RemoveHandler AXDoc.BeginDwgOpen, AddressOf AXDoc_BeginDwgOpen
-        RemoveHandler AXDoc.CloseAborted, AddressOf AXDoc_CloseAborted
-        RemoveHandler AXDoc.CloseWillStart, AddressOf AXDoc_CloseWillStart
-        RemoveHandler AXDoc.CommandCancelled, AddressOf AXDoc_CommandCancelled
-        RemoveHandler AXDoc.CommandEnded, AddressOf AXDoc_CommandEnded
-        RemoveHandler AXDoc.CommandFailed, AddressOf AXDoc_CommandFailed
-        RemoveHandler AXDoc.CommandWillStart, AddressOf AXDoc_CommandWillStart
-        RemoveHandler AXDoc.EndDwgOpen, AddressOf AXDoc_EndDwgOpen
-        RemoveHandler AXDoc.ImpliedSelectionChanged, AddressOf AXDoc_ImpliedSelectionChanged
-        RemoveHandler AXDoc.LayoutSwitched, AddressOf AXDoc_LayoutSwitched
-        RemoveHandler AXDoc.LayoutSwitching, AddressOf AXDoc_LayoutSwitching
-        RemoveHandler AXDoc.LispCancelled, AddressOf AXDoc_LispCancelled
-        RemoveHandler AXDoc.LispEnded, AddressOf AXDoc_LispEnded
-        RemoveHandler AXDoc.LispWillStart, AddressOf AXDoc_LispWillStart
-        RemoveHandler AXDoc.UnknownCommand, AddressOf AXDoc_UnknownCommand
-        RemoveHandler AXDoc.ViewChanged, AddressOf AXDoc_ViewChanged
-        '
-        Unsubscribe_AXDB()
-        Unsubscribe_COMDoc()
-        Unsubscribe_AXBlockTR()
-        Unsubscribe_AXEditor()
+        Try
+            RemoveHandler AXDoc.BeginDocumentClose, AddressOf AXDoc_BeginDocumentClose
+            RemoveHandler AXDoc.BeginDwgOpen, AddressOf AXDoc_BeginDwgOpen
+            RemoveHandler AXDoc.CloseAborted, AddressOf AXDoc_CloseAborted
+            RemoveHandler AXDoc.CloseWillStart, AddressOf AXDoc_CloseWillStart
+            RemoveHandler AXDoc.CommandCancelled, AddressOf AXDoc_CommandCancelled
+            RemoveHandler AXDoc.CommandEnded, AddressOf AXDoc_CommandEnded
+            RemoveHandler AXDoc.CommandFailed, AddressOf AXDoc_CommandFailed
+            RemoveHandler AXDoc.CommandWillStart, AddressOf AXDoc_CommandWillStart
+            RemoveHandler AXDoc.EndDwgOpen, AddressOf AXDoc_EndDwgOpen
+            RemoveHandler AXDoc.ImpliedSelectionChanged, AddressOf AXDoc_ImpliedSelectionChanged
+            RemoveHandler AXDoc.LayoutSwitched, AddressOf AXDoc_LayoutSwitched
+            RemoveHandler AXDoc.LayoutSwitching, AddressOf AXDoc_LayoutSwitching
+            RemoveHandler AXDoc.LispCancelled, AddressOf AXDoc_LispCancelled
+            RemoveHandler AXDoc.LispEnded, AddressOf AXDoc_LispEnded
+            RemoveHandler AXDoc.LispWillStart, AddressOf AXDoc_LispWillStart
+            RemoveHandler AXDoc.UnknownCommand, AddressOf AXDoc_UnknownCommand
+            RemoveHandler AXDoc.ViewChanged, AddressOf AXDoc_ViewChanged
+            '
+            Unsubscribe_AXDB()
+            Unsubscribe_COMDoc()
+            Unsubscribe_AXBlockTR()
+            Unsubscribe_AXEditor()
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub AXDoc_BeginDocumentClose(sender As Object, e As DocumentBeginCloseEventArgs)
         'AXDoc.Editor.WriteMessage("AXDoc_BeginDocumentClose")

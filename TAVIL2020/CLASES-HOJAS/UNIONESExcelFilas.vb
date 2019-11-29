@@ -7,7 +7,6 @@ Public Class UNIONESExcelFilas
     Public Campos As List(Of String)
     Public filas As List(Of UNIONESExcelFila)        ' Key = ITEM_NUMBER, Value = clsPTItem
     Public Sub New()
-        If cfg Is Nothing Then cfg = New UtilesAlberto.Conf(System.Reflection.Assembly.GetExecutingAssembly)
         'If cXML Is Nothing Then cXML = New ClosedXML2acad.ClosedXML2acad
         Campos = New List(Of String)
         filas = New List(Of UNIONESExcelFila)

@@ -23,7 +23,6 @@ Public Class frmUniones
     Private Sub frmUniones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
         Me.Text = HojaUniones & " - v" & cfg._appversion
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         ' Cargar recursos
         Using oLock As DocumentLock = Eventos.AXDoc.LockDocument
             'clsA.ClonaTODODesdeDWG(BloqueRecursos, True, True)

@@ -56,8 +56,7 @@ Partial Public Class Utiles
             Next
         Next
     End Sub
-    Public Shared Function ConfigLee(nombrePro As String, Optional FullPathConfig As String = "", Optional cfg As Conf = Nothing) As Object
-        If cfg Is Nothing Then cfg = New Conf(System.Reflection.Assembly.GetExecutingAssembly)
+    Public Shared Function ConfigLee(cfg As Conf, nombrePro As String, Optional FullPathConfig As String = "") As Object
         If FullPathConfig = "" Or IO.File.Exists(FullPathConfig) = False Then
             FullPathConfig = cfg._appconfig
         End If
@@ -104,8 +103,7 @@ REPITE:
         End If
     End Function
     ''
-    Public Shared Sub ConfigEscribe(nombrePro As String, valorPro As Object, Optional FullPathConfig As String = "", Optional cfg As Conf = Nothing)
-        If cfg Is Nothing Then cfg = New Conf(System.Reflection.Assembly.GetExecutingAssembly)
+    Public Shared Sub ConfigEscribe(cfg As Conf, nombrePro As String, valorPro As Object, Optional FullPathConfig As String = "")
         If FullPathConfig = "" OrElse IO.File.Exists(FullPathConfig) = False Then
             FullPathConfig = cfg._appconfig
         End If
@@ -148,8 +146,7 @@ REPITE:
     End Sub
     '
     ' ConexionString
-    Public Shared Function ConfigLee_connectionStrings(nombrePro As String, Optional FullPathConfig As String = "", Optional cfg As Conf = Nothing) As Object
-        If cfg Is Nothing Then cfg = New Conf(System.Reflection.Assembly.GetExecutingAssembly)
+    Public Shared Function ConfigLee_connectionStrings(cfg As Conf, nombrePro As String, Optional FullPathConfig As String = "") As Object
         If FullPathConfig = "" Or IO.File.Exists(FullPathConfig) = False Then
             FullPathConfig = cfg._appconfig
         End If
@@ -179,8 +176,7 @@ REPITE:
         Return resultado.ToString
     End Function
     ''
-    Public Shared Sub ConfigEscribe_connectionStrings(nombrePro As String, valorPro As Object, Optional FullPathConfig As String = "", Optional cfg As Conf = Nothing)
-        If cfg Is Nothing Then cfg = New Conf(System.Reflection.Assembly.GetExecutingAssembly)
+    Public Shared Sub ConfigEscribe_connectionStrings(cfg As Conf, nombrePro As String, valorPro As Object, Optional FullPathConfig As String = "")
         If FullPathConfig = "" OrElse IO.File.Exists(FullPathConfig) = False Then
             FullPathConfig = cfg._appconfig
         End If

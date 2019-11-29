@@ -35,6 +35,7 @@
     <OutputPath>bin\</OutputPath>
     <DocumentationFile>AutoCAD2acad.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42020,42019,42032,42036,42020,42021,42022</NoWarn>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -119,10 +120,12 @@
     <Reference Include="AcWindows, Version=22.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Autodesk\AutoCAD 2020\AcWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AdWindows, Version=2016.11.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files\Autodesk\AutoCAD 2020\AdWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop">
       <HintPath>..\..\..\..\..\..\..\..\..\ObjectARX 2020\inc-x64\Autodesk.AutoCAD.Interop.dll</HintPath>

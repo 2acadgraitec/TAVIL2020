@@ -12,7 +12,6 @@ Public Class frmBomDatos
     Private Sub frmBomDatos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
         Me.Text = "BILL OF MATERIAL - v" & cfg._appversion
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp(), cfg._appFullPath, regAPPCliente)
         app_procesointerno = True
         Global.TAVIL2020.GRUPOS.LGrupos = New List(Of GRUPO)
         Global.TAVIL2020.GRUPOS.DGrupos = New Dictionary(Of String, GRUPO)

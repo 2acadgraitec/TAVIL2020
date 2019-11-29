@@ -19,7 +19,6 @@ Public Class frmBloquesEditar
         Eventos.SYSMONVAR(True)
         app_procesointerno = True
         Me.Text = "BLOCK EDITOR - v" & cfg._appversion
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         Bloque_PonDatos()
     End Sub
 

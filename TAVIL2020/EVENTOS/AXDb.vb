@@ -81,60 +81,64 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_AXDB()
-        If AXDb() Is Nothing Then Exit Sub
-        RemoveHandler AXDb.AbortDxfIn, AddressOf AXDB_AbortDxfIn
-        RemoveHandler AXDb.AbortDxfOut, AddressOf AXDB_AbortDxfOut
-        RemoveHandler AXDb.AbortSave, AddressOf AXDB_AbortSave
-        RemoveHandler AXDb.BeginDeepClone, AddressOf AXDB_BeginDeepClone
-        RemoveHandler AXDb.BeginDeepCloneTranslation, AddressOf AXDB_BeginDeepCloneTranslation
-        RemoveHandler AXDb.BeginDxfIn, AddressOf AXDB_BeginDxfIn
-        RemoveHandler AXDb.BeginDxfOut, AddressOf AXDB_BeginDxfOut
-        RemoveHandler AXDb.BeginInsert, AddressOf AXDB_BeginInsert
-        RemoveHandler AXDb.BeginSave, AddressOf AXDB_BeginSave
-        RemoveHandler AXDb.BeginWblockBlock, AddressOf AXDB_BeginWblockBlock
-        RemoveHandler AXDb.BeginWblockEntireDatabase, AddressOf AXDB_BeginWblockEntireDatabase
-        RemoveHandler AXDb.BeginWblockObjects, AddressOf AXDB_BeginWblockObjects
-        RemoveHandler AXDb.BeginWblockSelectedObjects, AddressOf AXDB_BeginWblockSelectedObjects
-        RemoveHandler Autodesk.AutoCAD.DatabaseServices.Database.DatabaseConstructed, AddressOf AXDB_DatabaseConstructed
-        RemoveHandler AXDb.DatabaseToBeDestroyed, AddressOf AXDB_DatabaseToBeDestroyed
-        RemoveHandler AXDb.DeepCloneAborted, AddressOf AXDB_DeepCloneAborted
-        RemoveHandler AXDb.DeepCloneEnded, AddressOf AXDB_DeepCloneEnded
-        RemoveHandler AXDb.Disposed, AddressOf AXDB_Disposed
-        RemoveHandler AXDb.DwgFileOpened, AddressOf AXDB_DwgFileOpened
-        RemoveHandler AXDb.DxfInComplete, AddressOf AXDB_DxfInComplete
-        RemoveHandler AXDb.DxfOutComplete, AddressOf AXDB_DxfOutComplete
-        RemoveHandler AXDb.InitialDwgFileOpenComplete, AddressOf AXDB_InitialDwgFileOpenComplete
-        RemoveHandler AXDb.InsertAborted, AddressOf AXDB_InsertAborted
-        RemoveHandler AXDb.InsertEnded, AddressOf AXDB_InsertEnded
-        RemoveHandler AXDb.InsertMappingAvailable, AddressOf AXDB_InsertMappingAvailable
-        RemoveHandler AXDb.ObjectAppended, AddressOf AXDB_ObjectAppended
-        RemoveHandler AXDb.ObjectErased, AddressOf AXDB_ObjectErased
-        RemoveHandler AXDb.ObjectModified, AddressOf AXDB_ObjectModified
-        RemoveHandler AXDb.ObjectOpenedForModify, AddressOf AXDB_ObjectOpenedForModify
-        RemoveHandler AXDb.ObjectReappended, AddressOf AXDB_ObjectReappended
-        RemoveHandler AXDb.ObjectUnappended, AddressOf AXDB_ObjectUnappended
-        RemoveHandler AXDb.PartialOpenNotice, AddressOf AXDB_PartialOpenNotice
-        RemoveHandler AXDb.ProxyResurrectionCompleted, AddressOf AXDB_ProxyResurrectionCompleted
-        RemoveHandler AXDb.SaveComplete, AddressOf AXDB_SaveComplete
-        RemoveHandler AXDb.SystemVariableChanged, AddressOf AXDB_SystemVariableChanged
-        RemoveHandler AXDb.SystemVariableWillChange, AddressOf AXDB_SystemVariableWillChange
-        RemoveHandler AXDb.WblockAborted, AddressOf AXDB_WblockAborted
-        RemoveHandler AXDb.WblockEnded, AddressOf AXDB_WblockEnded
-        RemoveHandler AXDb.WblockMappingAvailable, AddressOf AXDB_WblockMappingAvailable
-        RemoveHandler AXDb.WblockNotice, AddressOf AXDB_WblockNotice
-        RemoveHandler Autodesk.AutoCAD.DatabaseServices.Database.XrefAttachAborted, AddressOf AXDB_XrefAttachAborted
-        RemoveHandler AXDb.XrefAttachEnded, AddressOf AXDB_XrefAttachEnded
-        RemoveHandler AXDb.XrefBeginAttached, AddressOf AXDB_XrefBeginAttached
-        RemoveHandler AXDb.XrefBeginOtherAttached, AddressOf AXDB_XrefBeginOtherAttached
-        RemoveHandler AXDb.XrefBeginRestore, AddressOf AXDB_XrefBeginRestore
-        RemoveHandler AXDb.XrefComandeered, AddressOf AXDB_XrefComandeered
-        RemoveHandler AXDb.XrefPreXrefLockFile, AddressOf AXDB_XrefPreXrefLockFile
-        RemoveHandler AXDb.XrefRedirected, AddressOf AXDB_XrefRedirected
-        RemoveHandler AXDb.XrefRestoreAborted, AddressOf AXDB_XrefRestoreAborted
-        RemoveHandler AXDb.XrefRestoreEnded, AddressOf AXDB_XrefRestoreEnded
-        RemoveHandler AXDb.XrefSubCommandAborted, AddressOf AXDB_XrefSubCommandAborted
-        RemoveHandler AXDb.XrefSubCommandEnd, AddressOf AXDB_XrefSubCommandEnd
-        RemoveHandler AXDb.XrefSubCommandStart, AddressOf AXDB_XrefSubCommandStart
+        Try
+            If AXDb() Is Nothing Then Exit Sub
+            RemoveHandler AXDb.AbortDxfIn, AddressOf AXDB_AbortDxfIn
+            RemoveHandler AXDb.AbortDxfOut, AddressOf AXDB_AbortDxfOut
+            RemoveHandler AXDb.AbortSave, AddressOf AXDB_AbortSave
+            RemoveHandler AXDb.BeginDeepClone, AddressOf AXDB_BeginDeepClone
+            RemoveHandler AXDb.BeginDeepCloneTranslation, AddressOf AXDB_BeginDeepCloneTranslation
+            RemoveHandler AXDb.BeginDxfIn, AddressOf AXDB_BeginDxfIn
+            RemoveHandler AXDb.BeginDxfOut, AddressOf AXDB_BeginDxfOut
+            RemoveHandler AXDb.BeginInsert, AddressOf AXDB_BeginInsert
+            RemoveHandler AXDb.BeginSave, AddressOf AXDB_BeginSave
+            RemoveHandler AXDb.BeginWblockBlock, AddressOf AXDB_BeginWblockBlock
+            RemoveHandler AXDb.BeginWblockEntireDatabase, AddressOf AXDB_BeginWblockEntireDatabase
+            RemoveHandler AXDb.BeginWblockObjects, AddressOf AXDB_BeginWblockObjects
+            RemoveHandler AXDb.BeginWblockSelectedObjects, AddressOf AXDB_BeginWblockSelectedObjects
+            RemoveHandler Autodesk.AutoCAD.DatabaseServices.Database.DatabaseConstructed, AddressOf AXDB_DatabaseConstructed
+            RemoveHandler AXDb.DatabaseToBeDestroyed, AddressOf AXDB_DatabaseToBeDestroyed
+            RemoveHandler AXDb.DeepCloneAborted, AddressOf AXDB_DeepCloneAborted
+            RemoveHandler AXDb.DeepCloneEnded, AddressOf AXDB_DeepCloneEnded
+            RemoveHandler AXDb.Disposed, AddressOf AXDB_Disposed
+            RemoveHandler AXDb.DwgFileOpened, AddressOf AXDB_DwgFileOpened
+            RemoveHandler AXDb.DxfInComplete, AddressOf AXDB_DxfInComplete
+            RemoveHandler AXDb.DxfOutComplete, AddressOf AXDB_DxfOutComplete
+            RemoveHandler AXDb.InitialDwgFileOpenComplete, AddressOf AXDB_InitialDwgFileOpenComplete
+            RemoveHandler AXDb.InsertAborted, AddressOf AXDB_InsertAborted
+            RemoveHandler AXDb.InsertEnded, AddressOf AXDB_InsertEnded
+            RemoveHandler AXDb.InsertMappingAvailable, AddressOf AXDB_InsertMappingAvailable
+            RemoveHandler AXDb.ObjectAppended, AddressOf AXDB_ObjectAppended
+            RemoveHandler AXDb.ObjectErased, AddressOf AXDB_ObjectErased
+            RemoveHandler AXDb.ObjectModified, AddressOf AXDB_ObjectModified
+            RemoveHandler AXDb.ObjectOpenedForModify, AddressOf AXDB_ObjectOpenedForModify
+            RemoveHandler AXDb.ObjectReappended, AddressOf AXDB_ObjectReappended
+            RemoveHandler AXDb.ObjectUnappended, AddressOf AXDB_ObjectUnappended
+            RemoveHandler AXDb.PartialOpenNotice, AddressOf AXDB_PartialOpenNotice
+            RemoveHandler AXDb.ProxyResurrectionCompleted, AddressOf AXDB_ProxyResurrectionCompleted
+            RemoveHandler AXDb.SaveComplete, AddressOf AXDB_SaveComplete
+            RemoveHandler AXDb.SystemVariableChanged, AddressOf AXDB_SystemVariableChanged
+            RemoveHandler AXDb.SystemVariableWillChange, AddressOf AXDB_SystemVariableWillChange
+            RemoveHandler AXDb.WblockAborted, AddressOf AXDB_WblockAborted
+            RemoveHandler AXDb.WblockEnded, AddressOf AXDB_WblockEnded
+            RemoveHandler AXDb.WblockMappingAvailable, AddressOf AXDB_WblockMappingAvailable
+            RemoveHandler AXDb.WblockNotice, AddressOf AXDB_WblockNotice
+            RemoveHandler Autodesk.AutoCAD.DatabaseServices.Database.XrefAttachAborted, AddressOf AXDB_XrefAttachAborted
+            RemoveHandler AXDb.XrefAttachEnded, AddressOf AXDB_XrefAttachEnded
+            RemoveHandler AXDb.XrefBeginAttached, AddressOf AXDB_XrefBeginAttached
+            RemoveHandler AXDb.XrefBeginOtherAttached, AddressOf AXDB_XrefBeginOtherAttached
+            RemoveHandler AXDb.XrefBeginRestore, AddressOf AXDB_XrefBeginRestore
+            RemoveHandler AXDb.XrefComandeered, AddressOf AXDB_XrefComandeered
+            RemoveHandler AXDb.XrefPreXrefLockFile, AddressOf AXDB_XrefPreXrefLockFile
+            RemoveHandler AXDb.XrefRedirected, AddressOf AXDB_XrefRedirected
+            RemoveHandler AXDb.XrefRestoreAborted, AddressOf AXDB_XrefRestoreAborted
+            RemoveHandler AXDb.XrefRestoreEnded, AddressOf AXDB_XrefRestoreEnded
+            RemoveHandler AXDb.XrefSubCommandAborted, AddressOf AXDB_XrefSubCommandAborted
+            RemoveHandler AXDb.XrefSubCommandEnd, AddressOf AXDB_XrefSubCommandEnd
+            RemoveHandler AXDb.XrefSubCommandStart, AddressOf AXDB_XrefSubCommandStart
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub AXDB_AbortDxfIn(sender As Object, e As EventArgs)
         'AXDoc.Editor.WriteMessage("AXDB_AbortDxfIn")

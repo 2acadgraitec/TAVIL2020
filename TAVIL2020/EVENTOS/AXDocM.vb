@@ -39,19 +39,23 @@ Partial Public Class Eventos
         AddHandler AXDocM.DocumentToBeDestroyed, AddressOf AXDocM_DocumentToBeDestroyed
     End Sub
     Public Shared Sub Unsubscribe_AXDocM()
-        RemoveHandler AXDocM.DocumentActivated, AddressOf AXDocM_DocumentActivated
-        RemoveHandler AXDocM.DocumentActivationChanged, AddressOf AXDocM_DocumentActivationChanged
-        RemoveHandler AXDocM.DocumentBecameCurrent, AddressOf AXDocM_DocumentBecameCurrent
-        RemoveHandler AXDocM.DocumentCreated, AddressOf AXDocM_DocumentCreated
-        RemoveHandler AXDocM.DocumentCreateStarted, AddressOf AXDocM_DocumentCreateStarted
-        RemoveHandler AXDocM.DocumentCreationCanceled, AddressOf AXDocM_DocumentCreationCanceled
-        RemoveHandler AXDocM.DocumentDestroyed, AddressOf AXDocM_DocumentDestroyed
-        RemoveHandler AXDocM.DocumentLockModeChanged, AddressOf AXDocM_DocumentLockModeChanged
-        RemoveHandler AXDocM.DocumentLockModeChangeVetoed, AddressOf AXDocM_DocumentLockModeChangeVetoed
-        RemoveHandler AXDocM.DocumentLockModeWillChange, AddressOf AXDocM_DocumentLockModeWillChange
-        RemoveHandler AXDocM.DocumentToBeActivated, AddressOf AXDocM_DocumentToBeActivated
-        RemoveHandler AXDocM.DocumentToBeDeactivated, AddressOf AXDocM_DocumentToBeDeactivated
-        RemoveHandler AXDocM.DocumentToBeDestroyed, AddressOf AXDocM_DocumentToBeDestroyed
+        Try
+            RemoveHandler AXDocM.DocumentActivated, AddressOf AXDocM_DocumentActivated
+            RemoveHandler AXDocM.DocumentActivationChanged, AddressOf AXDocM_DocumentActivationChanged
+            RemoveHandler AXDocM.DocumentBecameCurrent, AddressOf AXDocM_DocumentBecameCurrent
+            RemoveHandler AXDocM.DocumentCreated, AddressOf AXDocM_DocumentCreated
+            RemoveHandler AXDocM.DocumentCreateStarted, AddressOf AXDocM_DocumentCreateStarted
+            RemoveHandler AXDocM.DocumentCreationCanceled, AddressOf AXDocM_DocumentCreationCanceled
+            RemoveHandler AXDocM.DocumentDestroyed, AddressOf AXDocM_DocumentDestroyed
+            RemoveHandler AXDocM.DocumentLockModeChanged, AddressOf AXDocM_DocumentLockModeChanged
+            RemoveHandler AXDocM.DocumentLockModeChangeVetoed, AddressOf AXDocM_DocumentLockModeChangeVetoed
+            RemoveHandler AXDocM.DocumentLockModeWillChange, AddressOf AXDocM_DocumentLockModeWillChange
+            RemoveHandler AXDocM.DocumentToBeActivated, AddressOf AXDocM_DocumentToBeActivated
+            RemoveHandler AXDocM.DocumentToBeDeactivated, AddressOf AXDocM_DocumentToBeDeactivated
+            RemoveHandler AXDocM.DocumentToBeDestroyed, AddressOf AXDocM_DocumentToBeDestroyed
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
 
     Public Shared Sub AXDocM_DocumentActivated(sender As Object, e As DocumentCollectionEventArgs)

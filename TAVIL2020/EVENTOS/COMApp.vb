@@ -52,29 +52,33 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_COMApp()
-        RemoveHandler COMApp.AppActivate, AddressOf COMApp_AppActivate
-        RemoveHandler COMApp.AppDeactivate, AddressOf COMApp_AppDeactivate
-        RemoveHandler COMApp.ARXLoaded, AddressOf COMApp_ARXLoaded
-        RemoveHandler COMApp.ARXUnloaded, AddressOf COMApp_ARXUnloaded
-        RemoveHandler COMApp.BeginCommand, AddressOf COMApp_BeginCommand
-        RemoveHandler COMApp.BeginFileDrop, AddressOf COMApp_BeginFileDrop
-        RemoveHandler COMApp.BeginLisp, AddressOf COMApp_BeginLisp
-        RemoveHandler COMApp.BeginModal, AddressOf COMApp_BeginModal
-        RemoveHandler COMApp.BeginOpen, AddressOf COMApp_BeginOpen
-        RemoveHandler COMApp.BeginPlot, AddressOf COMApp_BeginPlot
-        RemoveHandler COMApp.BeginQuit, AddressOf COMApp_BeginQuit
-        RemoveHandler COMApp.BeginSave, AddressOf COMApp_BeginSave
-        RemoveHandler COMApp.EndCommand, AddressOf COMApp_EndCommand
-        RemoveHandler COMApp.EndLisp, AddressOf COMApp_EndLisp
-        RemoveHandler COMApp.EndModal, AddressOf COMApp_EndModal
-        RemoveHandler COMApp.EndOpen, AddressOf COMApp_EndOpen
-        RemoveHandler COMApp.EndPlot, AddressOf COMApp_EndPlot
-        RemoveHandler COMApp.EndSave, AddressOf COMApp_EndSave
-        RemoveHandler COMApp.LispCancelled, AddressOf COMApp_LispCancelled
-        RemoveHandler COMApp.NewDrawing, AddressOf COMApp_NewDrawing
-        RemoveHandler COMApp.SysVarChanged, AddressOf COMApp_SysVarChanged
-        RemoveHandler COMApp.WindowChanged, AddressOf COMApp_WindowChanged
-        RemoveHandler COMApp.WindowMovedOrResized, AddressOf COMApp_WindowMovedOrResized
+        Try
+            RemoveHandler COMApp.AppActivate, AddressOf COMApp_AppActivate
+            RemoveHandler COMApp.AppDeactivate, AddressOf COMApp_AppDeactivate
+            RemoveHandler COMApp.ARXLoaded, AddressOf COMApp_ARXLoaded
+            RemoveHandler COMApp.ARXUnloaded, AddressOf COMApp_ARXUnloaded
+            RemoveHandler COMApp.BeginCommand, AddressOf COMApp_BeginCommand
+            RemoveHandler COMApp.BeginFileDrop, AddressOf COMApp_BeginFileDrop
+            RemoveHandler COMApp.BeginLisp, AddressOf COMApp_BeginLisp
+            RemoveHandler COMApp.BeginModal, AddressOf COMApp_BeginModal
+            RemoveHandler COMApp.BeginOpen, AddressOf COMApp_BeginOpen
+            RemoveHandler COMApp.BeginPlot, AddressOf COMApp_BeginPlot
+            RemoveHandler COMApp.BeginQuit, AddressOf COMApp_BeginQuit
+            RemoveHandler COMApp.BeginSave, AddressOf COMApp_BeginSave
+            RemoveHandler COMApp.EndCommand, AddressOf COMApp_EndCommand
+            RemoveHandler COMApp.EndLisp, AddressOf COMApp_EndLisp
+            RemoveHandler COMApp.EndModal, AddressOf COMApp_EndModal
+            RemoveHandler COMApp.EndOpen, AddressOf COMApp_EndOpen
+            RemoveHandler COMApp.EndPlot, AddressOf COMApp_EndPlot
+            RemoveHandler COMApp.EndSave, AddressOf COMApp_EndSave
+            RemoveHandler COMApp.LispCancelled, AddressOf COMApp_LispCancelled
+            RemoveHandler COMApp.NewDrawing, AddressOf COMApp_NewDrawing
+            RemoveHandler COMApp.SysVarChanged, AddressOf COMApp_SysVarChanged
+            RemoveHandler COMApp.WindowChanged, AddressOf COMApp_WindowChanged
+            RemoveHandler COMApp.WindowMovedOrResized, AddressOf COMApp_WindowMovedOrResized
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
     Public Shared Sub COMApp_AppActivate()
         'AXDoc.Editor.WriteMessage("COMApp_AppActivate")

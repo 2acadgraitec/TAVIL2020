@@ -103,7 +103,6 @@ Module movVar
     '
 #Region "UTILITIES"
     Public Function INICargar() As String()
-        If cfg Is Nothing Then cfg = New UtilesAlberto.Conf(System.Reflection.Assembly.GetExecutingAssembly)
         'If cXML Is Nothing Then cXML = New ClosedXML2acad.ClosedXML2acad
         Dim mensaje(1) As String
         '' Mensaje(0) contendrá los errores.

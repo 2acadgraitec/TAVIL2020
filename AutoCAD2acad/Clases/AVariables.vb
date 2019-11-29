@@ -29,6 +29,9 @@ Namespace A2acad
         Public oH As AcadHatch = Nothing                            'Hatch
         '
         ' CONSTANTES
+        Private Const keyPre As String = "aiiao2K19"
+        Private Const keySuf As String = "2aCAD"
+        Private ReadOnly activado As Boolean = False
         Public Const nSel As String = "2acad"
         Public Const estadocapas As String = "estado"
         ' En cada instancia de esta clase, le tendremos que dar regAPPA

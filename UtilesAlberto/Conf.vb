@@ -14,6 +14,10 @@ Imports System.Reflection
 Public Class Conf
     ' Constantes
     Public Const nFijo As String = "2aCAD"
+    Private Const keyPre As String = "aiiao2K19"
+    Private Const keySuf As String = "2aCAD"
+    Private ReadOnly activado As Boolean = False
+
     ' Variables aplicacion iniciales
     Public _appFullPath As String
     Public _appname As String
@@ -49,10 +53,18 @@ Public Class Conf
     ' ***** Llenar Conf primero *****
     ' Conf.PonFijos(ass:=Reflection.Assembly.GetExecutingAssembly, bolLog:=Log, bolMensajes:=Log, douIntervalo:=5)
 
-    Public Sub New(Optional ass As Assembly = Nothing,
+    Public Sub New(key As String, Optional ass As Assembly = Nothing,
                                Optional bLog As Boolean = False,
                                Optional bMensajes As Boolean = False,
                                Optional dInterval As Double = 20)
+        If key <> keyPre & "_" & keySuf Then
+            activado = False
+            Throw New System.Exception("Not allowed")
+            Return
+        Else
+            activado = True
+        End If
+
         If ass Is Nothing Then
             Me._OAssembly = System.Reflection.Assembly.GetExecutingAssembly
         Else

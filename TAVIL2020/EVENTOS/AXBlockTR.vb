@@ -28,7 +28,11 @@ Partial Public Class Eventos
         AddHandler BlockTableRecord.BlockInsertionPoints, AddressOf AXBlockTR_BlockInsertionPoints
     End Sub
     Public Shared Sub Unsubscribe_AXBlockTR()
-        RemoveHandler BlockTableRecord.BlockInsertionPoints, AddressOf AXBlockTR_BlockInsertionPoints
+        Try
+            RemoveHandler BlockTableRecord.BlockInsertionPoints, AddressOf AXBlockTR_BlockInsertionPoints
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
 
     Public Shared Sub AXBlockTR_BlockInsertionPoints(sender As Object, e As BlockInsertionPointsEventArgs)

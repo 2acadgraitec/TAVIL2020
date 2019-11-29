@@ -61,39 +61,43 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_AXEditor()
-        RemoveHandler AXEditor().SelectionRemoved, AddressOf AXEditor_SelectionRemoved_Handler
-        RemoveHandler AXEditor().SelectionAdded, AddressOf AXEditor_SelectionAdded_Handler
-        RemoveHandler AXEditor().Rollover, AddressOf AXEditor_Rollover_Handler
-        RemoveHandler AXEditor().PromptingForString, AddressOf AXEditor_PromptingForString_Handler
-        RemoveHandler AXEditor().PromptingForSelection, AddressOf AXEditor_PromptingForSelection_Handler
-        RemoveHandler AXEditor().PromptingForPoint, AddressOf AXEditor_PromptingForPoint_Handler
-        RemoveHandler AXEditor().PromptingForNestedEntity, AddressOf AXEditor_PromptingForNestedEntity_Handler
-        RemoveHandler AXEditor().PromptingForKeyword, AddressOf AXEditor_PromptingForKeyword_Handler
-        RemoveHandler AXEditor().PromptingForInteger, AddressOf AXEditor_PromptingForInteger_Handler
-        RemoveHandler AXEditor().PromptingForEntity, AddressOf AXEditor_PromptingForEntity_Handler
-        RemoveHandler AXEditor().PromptingForDouble, AddressOf AXEditor_PromptingForDouble_Handler
-        RemoveHandler AXEditor().PromptingForDistance, AddressOf AXEditor_PromptingForDistance_Handler
-        RemoveHandler AXEditor().PromptingForCorner, AddressOf AXEditor_PromptingForCorner_Handler
-        RemoveHandler AXEditor().PromptingForAngle, AddressOf AXEditor_PromptingForAngle_Handler
-        RemoveHandler AXEditor().PromptedForString, AddressOf AXEditor_PromptedForString_Handler
-        RemoveHandler AXEditor().PromptedForSelection, AddressOf AXEditor_PromptedForSelection_Handler
-        RemoveHandler AXEditor().PromptedForPoint, AddressOf AXEditor_PromptedForPoint_Handler
-        RemoveHandler AXEditor().PromptedForNestedEntity, AddressOf AXEditor_PromptedForNestedEntity_Handler
-        RemoveHandler AXEditor().PromptedForKeyword, AddressOf AXEditor_PromptedForKeyword_Handler
-        RemoveHandler AXEditor().PromptedForInteger, AddressOf AXEditor_PromptedForInteger_Handler
-        RemoveHandler AXEditor().PromptedForEntity, AddressOf AXEditor_PromptedForEntity_Handler
-        RemoveHandler AXEditor().PromptedForDouble, AddressOf AXEditor_PromptedForDouble_Handler
-        RemoveHandler AXEditor().PromptedForDistance, AddressOf AXEditor_PromptedForDistance_Handler
-        RemoveHandler AXEditor().PromptedForCorner, AddressOf AXEditor_PromptedForCorner_Handler
-        RemoveHandler AXEditor().PromptedForAngle, AddressOf AXEditor_PromptedForAngle_Handler
-        RemoveHandler AXEditor().PromptForSelectionEnding, AddressOf AXEditor_PromptForSelectionEnding_Handler
-        RemoveHandler AXEditor().PromptForEntityEnding, AddressOf AXEditor_PromptForEntityEnding_Handler
-        RemoveHandler AXEditor().PointMonitor, AddressOf AXEditor_PointMonitor_Handler
-        RemoveHandler AXEditor().PointFilter, AddressOf AXEditor_PointFilter_Handler
-        RemoveHandler AXEditor().LeavingQuiescentState, AddressOf AXEditor_LeavingQuiescentState_Handler
-        RemoveHandler AXEditor().EnteringQuiescentState, AddressOf AXEditor_EnteringQuiescentState_Handler
-        RemoveHandler AXEditor().DraggingEnded, AddressOf AXEditor_DraggingEnded_Handler
-        RemoveHandler AXEditor().Dragging, AddressOf AXEditor_Dragging_Handler
+        Try
+            RemoveHandler AXEditor().SelectionRemoved, AddressOf AXEditor_SelectionRemoved_Handler
+            RemoveHandler AXEditor().SelectionAdded, AddressOf AXEditor_SelectionAdded_Handler
+            RemoveHandler AXEditor().Rollover, AddressOf AXEditor_Rollover_Handler
+            RemoveHandler AXEditor().PromptingForString, AddressOf AXEditor_PromptingForString_Handler
+            RemoveHandler AXEditor().PromptingForSelection, AddressOf AXEditor_PromptingForSelection_Handler
+            RemoveHandler AXEditor().PromptingForPoint, AddressOf AXEditor_PromptingForPoint_Handler
+            RemoveHandler AXEditor().PromptingForNestedEntity, AddressOf AXEditor_PromptingForNestedEntity_Handler
+            RemoveHandler AXEditor().PromptingForKeyword, AddressOf AXEditor_PromptingForKeyword_Handler
+            RemoveHandler AXEditor().PromptingForInteger, AddressOf AXEditor_PromptingForInteger_Handler
+            RemoveHandler AXEditor().PromptingForEntity, AddressOf AXEditor_PromptingForEntity_Handler
+            RemoveHandler AXEditor().PromptingForDouble, AddressOf AXEditor_PromptingForDouble_Handler
+            RemoveHandler AXEditor().PromptingForDistance, AddressOf AXEditor_PromptingForDistance_Handler
+            RemoveHandler AXEditor().PromptingForCorner, AddressOf AXEditor_PromptingForCorner_Handler
+            RemoveHandler AXEditor().PromptingForAngle, AddressOf AXEditor_PromptingForAngle_Handler
+            RemoveHandler AXEditor().PromptedForString, AddressOf AXEditor_PromptedForString_Handler
+            RemoveHandler AXEditor().PromptedForSelection, AddressOf AXEditor_PromptedForSelection_Handler
+            RemoveHandler AXEditor().PromptedForPoint, AddressOf AXEditor_PromptedForPoint_Handler
+            RemoveHandler AXEditor().PromptedForNestedEntity, AddressOf AXEditor_PromptedForNestedEntity_Handler
+            RemoveHandler AXEditor().PromptedForKeyword, AddressOf AXEditor_PromptedForKeyword_Handler
+            RemoveHandler AXEditor().PromptedForInteger, AddressOf AXEditor_PromptedForInteger_Handler
+            RemoveHandler AXEditor().PromptedForEntity, AddressOf AXEditor_PromptedForEntity_Handler
+            RemoveHandler AXEditor().PromptedForDouble, AddressOf AXEditor_PromptedForDouble_Handler
+            RemoveHandler AXEditor().PromptedForDistance, AddressOf AXEditor_PromptedForDistance_Handler
+            RemoveHandler AXEditor().PromptedForCorner, AddressOf AXEditor_PromptedForCorner_Handler
+            RemoveHandler AXEditor().PromptedForAngle, AddressOf AXEditor_PromptedForAngle_Handler
+            RemoveHandler AXEditor().PromptForSelectionEnding, AddressOf AXEditor_PromptForSelectionEnding_Handler
+            RemoveHandler AXEditor().PromptForEntityEnding, AddressOf AXEditor_PromptForEntityEnding_Handler
+            RemoveHandler AXEditor().PointMonitor, AddressOf AXEditor_PointMonitor_Handler
+            RemoveHandler AXEditor().PointFilter, AddressOf AXEditor_PointFilter_Handler
+            RemoveHandler AXEditor().LeavingQuiescentState, AddressOf AXEditor_LeavingQuiescentState_Handler
+            RemoveHandler AXEditor().EnteringQuiescentState, AddressOf AXEditor_EnteringQuiescentState_Handler
+            RemoveHandler AXEditor().DraggingEnded, AddressOf AXEditor_DraggingEnded_Handler
+            RemoveHandler AXEditor().Dragging, AddressOf AXEditor_Dragging_Handler
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
 
     Public Shared Sub AXEditor_Dragging_Handler(ByVal sender As Object, ByVal e As DraggingEventArgs)

@@ -82,7 +82,6 @@ Public Class frmBloques
 
 
         ' Coger cada fichero DWG y sacar la imagen.
-        If clsA Is Nothing Then clsA = New a2.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente)
         'lv1.AutoArrange = True
         'lv1.BeginUpdate()     ' Que no se redibuje lv1
         For Each queFi As String In IO.Directory.GetFiles(fullDir, "*.dwg")

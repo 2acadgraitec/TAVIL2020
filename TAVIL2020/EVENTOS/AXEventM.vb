@@ -34,11 +34,15 @@ Partial Public Class Eventos
     End Sub
 
     Public Shared Sub Unsubscribe_AXEventM()
-        RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationDockLayoutChanged, AddressOf AXEventM_ApplicationDockLayoutChanged
-        RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationDocumentFrameChanged, AddressOf AXEventM_ApplicationDocumentFrameChanged
-        RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowMoved, AddressOf AXEventM_ApplicationMainWindowMoved
-        RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowSized, AddressOf AXEventM_ApplicationMainWindowSized
-        RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowVisibleChanged, AddressOf AXEventM_ApplicationMainWindowVisibleChanged
+        Try
+            RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationDockLayoutChanged, AddressOf AXEventM_ApplicationDockLayoutChanged
+            RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationDocumentFrameChanged, AddressOf AXEventM_ApplicationDocumentFrameChanged
+            RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowMoved, AddressOf AXEventM_ApplicationMainWindowMoved
+            RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowSized, AddressOf AXEventM_ApplicationMainWindowSized
+            RemoveHandler Autodesk.AutoCAD.Internal.Reactors.ApplicationEventManager.Instance.ApplicationMainWindowVisibleChanged, AddressOf AXEventM_ApplicationMainWindowVisibleChanged
+        Catch ex As system.Exception
+            Debug.Print(ex.ToString)
+        End Try
     End Sub
 
     Public Shared Sub AXEventM_ApplicationDockLayoutChanged(sender As Object, e As EventArgs)
