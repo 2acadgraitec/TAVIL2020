@@ -29,13 +29,23 @@ Partial Class frmBomDatos
         Me.BtnReportUnions = New System.Windows.Forms.Button()
         Me.TvUnions = New System.Windows.Forms.TreeView()
         Me.GRUPOS = New System.Windows.Forms.TabPage()
+        Me.cbPLANTA = New System.Windows.Forms.CheckBox()
         Me.BtnReportSelected = New System.Windows.Forms.Button()
         Me.LblCountGroups = New System.Windows.Forms.Label()
         Me.TvGroups = New System.Windows.Forms.TreeView()
-        Me.cbPLANTA = New System.Windows.Forms.CheckBox()
+        Me.PATAS = New System.Windows.Forms.TabPage()
+        Me.LblTotalPatas = New System.Windows.Forms.Label()
+        Me.pb1 = New System.Windows.Forms.ProgressBar()
+        Me.CbSoloPlanta = New System.Windows.Forms.CheckBox()
+        Me.cbXXX = New System.Windows.Forms.CheckBox()
+        Me.btnActualizar = New System.Windows.Forms.Button()
+        Me.BtnReportPatas = New System.Windows.Forms.Button()
+        Me.TvPatas = New System.Windows.Forms.TreeView()
+        Me.BOM = New System.Windows.Forms.TabPage()
         Me.BLOCKS.SuspendLayout()
         Me.UNIONES.SuspendLayout()
         Me.GRUPOS.SuspendLayout()
+        Me.PATAS.SuspendLayout()
         Me.SuspendLayout()
         '
         'BtnCerrar
@@ -56,6 +66,8 @@ Partial Class frmBomDatos
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BLOCKS.Controls.Add(Me.UNIONES)
         Me.BLOCKS.Controls.Add(Me.GRUPOS)
+        Me.BLOCKS.Controls.Add(Me.PATAS)
+        Me.BLOCKS.Controls.Add(Me.BOM)
         Me.BLOCKS.Location = New System.Drawing.Point(12, 12)
         Me.BLOCKS.Name = "BLOCKS"
         Me.BLOCKS.SelectedIndex = 0
@@ -118,6 +130,18 @@ Partial Class frmBomDatos
         Me.GRUPOS.Text = "GRUPOS"
         Me.GRUPOS.UseVisualStyleBackColor = True
         '
+        'cbPLANTA
+        '
+        Me.cbPLANTA.AutoSize = True
+        Me.cbPLANTA.Checked = True
+        Me.cbPLANTA.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbPLANTA.Location = New System.Drawing.Point(152, 51)
+        Me.cbPLANTA.Name = "cbPLANTA"
+        Me.cbPLANTA.Size = New System.Drawing.Size(116, 21)
+        Me.cbPLANTA.TabIndex = 40
+        Me.cbPLANTA.Text = "Sólo PLANTA"
+        Me.cbPLANTA.UseVisualStyleBackColor = True
+        '
         'BtnReportSelected
         '
         Me.BtnReportSelected.Enabled = False
@@ -147,17 +171,105 @@ Partial Class frmBomDatos
         Me.TvGroups.Size = New System.Drawing.Size(121, 296)
         Me.TvGroups.TabIndex = 0
         '
-        'cbPLANTA
+        'PATAS
         '
-        Me.cbPLANTA.AutoSize = True
-        Me.cbPLANTA.Checked = True
-        Me.cbPLANTA.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cbPLANTA.Location = New System.Drawing.Point(152, 51)
-        Me.cbPLANTA.Name = "cbPLANTA"
-        Me.cbPLANTA.Size = New System.Drawing.Size(116, 21)
-        Me.cbPLANTA.TabIndex = 40
-        Me.cbPLANTA.Text = "Sólo PLANTA"
-        Me.cbPLANTA.UseVisualStyleBackColor = True
+        Me.PATAS.Controls.Add(Me.LblTotalPatas)
+        Me.PATAS.Controls.Add(Me.pb1)
+        Me.PATAS.Controls.Add(Me.CbSoloPlanta)
+        Me.PATAS.Controls.Add(Me.cbXXX)
+        Me.PATAS.Controls.Add(Me.btnActualizar)
+        Me.PATAS.Controls.Add(Me.BtnReportPatas)
+        Me.PATAS.Controls.Add(Me.TvPatas)
+        Me.PATAS.Location = New System.Drawing.Point(4, 25)
+        Me.PATAS.Name = "PATAS"
+        Me.PATAS.Padding = New System.Windows.Forms.Padding(3)
+        Me.PATAS.Size = New System.Drawing.Size(373, 308)
+        Me.PATAS.TabIndex = 2
+        Me.PATAS.Text = "PATAS"
+        Me.PATAS.UseVisualStyleBackColor = True
+        '
+        'LblTotalPatas
+        '
+        Me.LblTotalPatas.AutoSize = True
+        Me.LblTotalPatas.Location = New System.Drawing.Point(149, 14)
+        Me.LblTotalPatas.Name = "LblTotalPatas"
+        Me.LblTotalPatas.Size = New System.Drawing.Size(105, 17)
+        Me.LblTotalPatas.TabIndex = 48
+        Me.LblTotalPatas.Text = "Total Patas = X"
+        '
+        'pb1
+        '
+        Me.pb1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pb1.Location = New System.Drawing.Point(152, 144)
+        Me.pb1.Name = "pb1"
+        Me.pb1.Size = New System.Drawing.Size(189, 18)
+        Me.pb1.TabIndex = 47
+        Me.pb1.Visible = False
+        '
+        'CbSoloPlanta
+        '
+        Me.CbSoloPlanta.AutoSize = True
+        Me.CbSoloPlanta.Checked = True
+        Me.CbSoloPlanta.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CbSoloPlanta.Location = New System.Drawing.Point(152, 77)
+        Me.CbSoloPlanta.Name = "CbSoloPlanta"
+        Me.CbSoloPlanta.Size = New System.Drawing.Size(116, 21)
+        Me.CbSoloPlanta.TabIndex = 46
+        Me.CbSoloPlanta.Text = "Sólo PLANTA"
+        Me.CbSoloPlanta.UseVisualStyleBackColor = True
+        '
+        'cbXXX
+        '
+        Me.cbXXX.AutoSize = True
+        Me.cbXXX.Checked = True
+        Me.cbXXX.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cbXXX.Location = New System.Drawing.Point(152, 50)
+        Me.cbXXX.Name = "cbXXX"
+        Me.cbXXX.Size = New System.Drawing.Size(89, 21)
+        Me.cbXXX.TabIndex = 45
+        Me.cbXXX.Text = "Sólo XXX"
+        Me.cbXXX.UseVisualStyleBackColor = True
+        '
+        'btnActualizar
+        '
+        Me.btnActualizar.BackColor = System.Drawing.Color.Red
+        Me.btnActualizar.Location = New System.Drawing.Point(152, 114)
+        Me.btnActualizar.Name = "btnActualizar"
+        Me.btnActualizar.Size = New System.Drawing.Size(128, 24)
+        Me.btnActualizar.TabIndex = 44
+        Me.btnActualizar.Text = "Actualizar Lista"
+        Me.btnActualizar.UseVisualStyleBackColor = False
+        '
+        'BtnReportPatas
+        '
+        Me.BtnReportPatas.Enabled = False
+        Me.BtnReportPatas.Location = New System.Drawing.Point(152, 258)
+        Me.BtnReportPatas.Name = "BtnReportPatas"
+        Me.BtnReportPatas.Size = New System.Drawing.Size(193, 32)
+        Me.BtnReportPatas.TabIndex = 43
+        Me.BtnReportPatas.Text = "Report PATAS"
+        Me.BtnReportPatas.UseVisualStyleBackColor = True
+        '
+        'TvPatas
+        '
+        Me.TvPatas.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.TvPatas.HideSelection = False
+        Me.TvPatas.Location = New System.Drawing.Point(5, 5)
+        Me.TvPatas.Name = "TvPatas"
+        Me.TvPatas.Size = New System.Drawing.Size(121, 296)
+        Me.TvPatas.TabIndex = 41
+        '
+        'BOM
+        '
+        Me.BOM.Location = New System.Drawing.Point(4, 25)
+        Me.BOM.Name = "BOM"
+        Me.BOM.Padding = New System.Windows.Forms.Padding(3)
+        Me.BOM.Size = New System.Drawing.Size(373, 308)
+        Me.BOM.TabIndex = 3
+        Me.BOM.Text = "BOM (Bill Of Material)"
+        Me.BOM.UseVisualStyleBackColor = True
         '
         'frmBomDatos
         '
@@ -180,6 +292,8 @@ Partial Class frmBomDatos
         Me.UNIONES.PerformLayout()
         Me.GRUPOS.ResumeLayout(False)
         Me.GRUPOS.PerformLayout()
+        Me.PATAS.ResumeLayout(False)
+        Me.PATAS.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -194,4 +308,13 @@ Partial Class frmBomDatos
     Friend WithEvents TvUnions As Windows.Forms.TreeView
     Friend WithEvents LblTotalUniones As Windows.Forms.Label
     Friend WithEvents cbPLANTA As Windows.Forms.CheckBox
+    Friend WithEvents PATAS As Windows.Forms.TabPage
+    Friend WithEvents BOM As Windows.Forms.TabPage
+    Friend WithEvents BtnReportPatas As Windows.Forms.Button
+    Friend WithEvents TvPatas As Windows.Forms.TreeView
+    Friend WithEvents CbSoloPlanta As Windows.Forms.CheckBox
+    Friend WithEvents cbXXX As Windows.Forms.CheckBox
+    Friend WithEvents btnActualizar As Windows.Forms.Button
+    Friend WithEvents pb1 As Windows.Forms.ProgressBar
+    Friend WithEvents LblTotalPatas As Windows.Forms.Label
 End Class

@@ -12,7 +12,7 @@ Public Class frmAutonumera
     Dim FamiliaProxyUltimo As String = ""
 
     Private Sub frmAutonumera_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.Text = "AUTONUMERACION - v" & cfg._appversion
+        Me.Text = "AUTONUMERACION - v" & appVersion
 
         'ElementoProxyRecomendado = RecomiendaElementoLibre()
         'AddHandler Autodesk.AutoCAD.ApplicationServices.Application.Idle, AddressOf frmAutonumera_mod.AutoEnumera_AppIdle

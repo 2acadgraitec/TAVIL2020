@@ -5,7 +5,6 @@ Imports Autodesk.AutoCAD.ApplicationServices
 Imports TAVIL2020.TAVIL2020
 Imports System.Windows.Forms
 Imports System.Linq
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 
 Public Class frmPatas
@@ -21,7 +20,7 @@ Public Class frmPatas
         If cPT Is Nothing Then cPT = New clsPT
         app_procesointerno = True
         oBlR = Nothing
-        Me.Text = "PATAS - v" & cfg._appversion
+        Me.Text = "PATAS - v" & appVersion
         'btnActualizar_Click(Nothing, Nothing)
         ultimaVista = Eventos.COMDoc.ActiveViewport
         btnActualizar.Enabled = True
@@ -112,8 +111,7 @@ Public Class frmPatas
     End Sub
     Private Sub btnListar_Click(sender As Object, e As EventArgs) Handles btnListar.Click
         Dim nFile As String = DateTime.Now.ToString("yyyyMMddHHmmss") & "·ListadoPatas.csv"
-        Dim nFolder As String = cfg._appfolder & "\LOG"
-        Dim fFullPath As String = IO.Path.Combine(nFolder, nFile)
+        Dim fFullPath As String = IO.Path.Combine(appFolder, nFile)
         Dim soloPlanta As Boolean = True
         Dim result As MsgBoxResult = MsgBox("¿Resumen final sólo de bloques de Planta?" & vbCrLf & vbCrLf &
                   "SI" & vbTab & "-->" & vbTab & " Resumen final SOLO bloque de Planta" & vbCrLf &
@@ -127,13 +125,6 @@ Public Class frmPatas
             soloPlanta = True
         End If
         '
-        Try
-            If IO.Directory.Exists(nFolder) = False Then
-                IO.Directory.CreateDirectory(nFolder)
-            End If
-        Catch ex As Exception
-            fFullPath = IO.Path.Combine(cfg._appfolder, nFile)
-        End Try
         Dim cabecera As String = "BLOQUE;CANTIDAD;CODE/DIRECT.;WIDTH;RADIUS;HEIGHT" & vbCrLf
         Dim mensaje As String = ""
         Dim cabecera1 As String = vbCrLf & vbCrLf & vbCrLf & "RESUMEN DE BLOQUES DE PATAS" & IIf(soloPlanta = True, " (SOLO PLANTA)", "") & ";;;;;" & vbCrLf & "ITEM_NUMBER;CANTIDAD;;;;" & vbCrLf

@@ -6,7 +6,6 @@ Imports TAVIL2020.TAVIL2020
 Imports System.Drawing
 Imports System.Linq
 Imports System.Windows.Forms
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 Imports TAVIL2020
 
@@ -20,6 +19,7 @@ Public Class ClsUnion
     Private _T2OUTFEED As String = ""
     Private _T2INCLINATION As String = "0"
     Private _ROTATION As String = ""
+    Private _LADO As String = "L"
 
 #Region "PROPERTIES"
     Public Property HANDLE As String = ""
@@ -142,6 +142,15 @@ Public Class ClsUnion
         End Set
     End Property
 
+    Public Property LADO As String
+        Get
+            Return _LADO
+        End Get
+        Set(value As String)
+            _LADO = value
+        End Set
+    End Property
+
 #End Region
     ''' <summary>
     ''' Editar uniones existentes o Nuevas inserciones masivas.
@@ -166,6 +175,7 @@ Public Class ClsUnion
         Me.T2OUTFEED = clsA.XLeeDato(UnionBlock.Handle, "T2OUTFEED")
         Me.T2INCLINATION = clsA.XLeeDato(UnionBlock.Handle, "T2INCLINATION")
         Me.ROTATION = clsA.XLeeDato(UnionBlock.Handle, "ROTATION")
+        Me.LADO = clsA.XLeeDato(UnionBlock.Handle, "LADO")
         Try
             T1Block = Eventos.COMDoc().HandleToObject(Me._T1HANDLE)
         Catch ex As Exception
@@ -197,7 +207,7 @@ Public Class ClsUnion
     Public Sub New(handle As String, Union As String, Units As String,
                    T1Handle As String, T1Infeed As String, T1Inclination As String,
                     T2Handle As String, T2Outfeed As String, T2Inclination As String,
-                    Rotation As String)
+                    Rotation As String, lado As String)
         Me.HANDLE = handle
         'PonDatosX(Union, Units, T1Handle, T1Handle, T1Inclination, T2Handle, T2Outfeed, T2Inclination, Rotation)
         Try
@@ -215,6 +225,7 @@ Public Class ClsUnion
         Me.T2OUTFEED = T2Outfeed
         Me.T2INCLINATION = T2Inclination
         Me.ROTATION = Rotation
+        Me.LADO = lado
         Try
             T1Block = Eventos.COMDoc().HandleToObject(Me._T1HANDLE)
         Catch ex As Exception

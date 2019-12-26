@@ -5,7 +5,6 @@ Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.DatabaseServices
 Imports Autodesk.AutoCAD.Geometry
 Imports Autodesk.AutoCAD.EditorInput
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 
 
@@ -47,8 +46,9 @@ Namespace TAVIL2020
                 ' ***** Inicializar los eventos que necesitemos. Y los objetos principales de AutoCAD
                 Eventos.Eventos_Inicializa()
                 ' **************************
-                cfg = New UtilesAlberto.Conf("aiiao2K19_2aCAD", System.Reflection.Assembly.GetExecutingAssembly)
-                clsA = New AutoCAD2acad.A2acad.A2acad(Eventos.COMApp, cfg._appFullPath, regAPPCliente, "aiiao2K19_2aCAD")
+                cIni = New clsINI()
+                'cfg = New UtilesAlberto.Conf("aiiao2K19_2aCAD", System.Reflection.Assembly.GetExecutingAssembly)
+                clsA = New AutoCAD2acad.A2acad.A2acad(Eventos.COMApp, appFull, regAPPCliente, "aiiao2K19_2aCAD")
             Catch ex As [System].Exception
                 MsgBox(ex.ToString)
                 Exit Sub
@@ -66,23 +66,23 @@ Namespace TAVIL2020
                 Dim txtError As String() = INICargar()
                 If txtError(0) <> "" Then
                     MsgBox(txtError(0))
-                    If Log Then cfg.PonLog(txtError(0), True)
+                    If Log Then PonLog(txtError(0), True)
                     Exit Sub
                 Else
-                    If Log Then cfg.PonLog(txtError(1), True)
+                    If Log Then PonLog(txtError(1), True)
                 End If
             Catch ex As System.Exception
                 MsgBox("Activate--> INICargar --> " & ex.Message)
                 Exit Sub
             End Try
-            If Log Then cfg.PonLog("Añadidos enventos", True)
+            If Log Then PonLog("Añadidos enventos", True)
             ' 
             ' Rellenar las clasese con los datos de Excel
             'cPT = New PT
             '
             ' Cargar los datos del fichero LAYOUTDB.xlsx
             ' Si está abierto, propone cerrarlo o cancelar, salimos sin cargar el AddIn
-            If uau.FicheroEstaAbiertoMensaje(LAYOUTDB, cfg._appname) = MsgBoxResult.Cancel Then
+            If Utiles.FicheroEstaAbiertoMensaje(LAYOUTDB, appName) = MsgBoxResult.Cancel Then
                 Exit Sub
             End If
 
@@ -102,7 +102,6 @@ Namespace TAVIL2020
             End Try
             ' Do plug-in application clean up here
             clsA = Nothing
-            cfg = Nothing
             'Me.Finalize()
             GC.Collect()
             GC.WaitForPendingFinalizers()

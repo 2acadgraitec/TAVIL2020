@@ -1,10 +1,9 @@
 ﻿Imports System.Windows.Forms
-Imports ua = UtilesAlberto.Utiles
 
 Public Class frmConfigura
     Private Sub frmConfigura_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Eventos.SYSMONVAR(True)
-        Me.Text = "CONFIGURACIÓN - v" & cfg._appversion
+        Me.Text = "CONFIGURACIÓN - v" & appVersion
         PonConfiguracionInicial()
     End Sub
 
@@ -19,28 +18,28 @@ Public Class frmConfigura
         Dim actualizadatos As Boolean = False
         If LAYOUTDB <> txtExcelDb.Text Then
             LAYOUTDB = txtExcelDb.Text
-            ua.IniWrite(cfg._appini, "OPTIONS", "LAYOUTDB", LAYOUTDB)
+            cIni.IniWrite(appIni, "OPTIONS", "LAYOUTDB", LAYOUTDB)
             actualizadatos = True
         End If
         If BloqueRecursos <> txtBloqueRecursos.Text Then
             BloqueRecursos = txtBloqueRecursos.Text
-            ua.IniWrite(cfg._appini, "OPTIONS", "BloqueRecursos", BloqueRecursos)
+            cIni.IniWrite(appIni, "OPTIONS", "BloqueRecursos", BloqueRecursos)
         End If
         '
         If BloquesDir <> txtDirBloques.Text Then
             BloquesDir = txtDirBloques.Text
-            ua.IniWrite(cfg._appini, "OPTIONS", "BloquesDir", BloquesDir)
+            cIni.IniWrite(appIni, "OPTIONS", "BloquesDir", BloquesDir)
             actualizadatos = True
         End If
         '
         If PatasCapa <> txtPatasCapa.Text Then
             PatasCapa = txtPatasCapa.Text
-            ua.IniWrite(cfg._appini, "OPTIONS", "PatasCapa", PatasCapa)
+            cIni.IniWrite(appIni, "OPTIONS", "PatasCapa", PatasCapa)
         End If
         '
         If CintasCapa <> txtCintasCapa.Text Then
             CintasCapa = txtCintasCapa.Text
-            ua.IniWrite(cfg._appini, "OPTIONS", "CintasCapa", CintasCapa)
+            cIni.IniWrite(appIni, "OPTIONS", "CintasCapa", CintasCapa)
         End If
         ' Actualizar colecciones de clsLAYOUTDB
         If actualizadatos = True Then btnReReadDB_Click(Nothing, Nothing)

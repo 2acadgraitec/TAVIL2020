@@ -6,7 +6,6 @@ Imports Autodesk.AutoCAD.ApplicationServices
 Imports Autodesk.AutoCAD.DatabaseServices
 Imports Autodesk.AutoCAD.Geometry
 Imports Autodesk.AutoCAD.EditorInput
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 
 ' This line is not mandatory, but improves loading performances
@@ -33,7 +32,7 @@ Namespace TAVIL2020
         <CommandMethod("TAVILUTILIDADES", "TAVILACERCADE", "TAVILACERCADE", CommandFlags.Modal + CommandFlags.Session)>
         Public Sub TAVILACERCADE() ' This method can have any name
             ' Put your command code here
-            MsgBox(cfg._appnameversion)
+            MsgBox(appNameandversion)
         End Sub
 
         ' Application Session Command with localized name
@@ -90,13 +89,13 @@ Namespace TAVIL2020
             End If
             '
             ' Si está abierto, propone cerrarlo o cancelar, salimos sin cargar el AddIn
-            If uau.FicheroEstaAbiertoMensaje(LAYOUTDB, "TAVIL.Patas") = MsgBoxResult.Cancel Then
+            If Utiles.FicheroEstaAbiertoMensaje(LAYOUTDB, "TAVIL.Patas") = MsgBoxResult.Cancel Then
                 Exit Sub
             End If
             '
             ' Rellenar las clases con los datos de Excel
             cPT = New clsPT
-            If Log Then cfg.PonLog("Llenada clase datos patas (cPT)", False)
+            If Log Then PonLog("Llenada clase datos patas (cPT)", False)
 
             CierraFormularios()
             '
@@ -134,7 +133,7 @@ Namespace TAVIL2020
             '
             ' Rellenar las clases con los datos de Excel
             cU = New UNIONESExcelFilas
-            If Log Then cfg.PonLog("Llenada clase datos UNIONES (cU)", False)
+            If Log Then PonLog("Llenada clase datos UNIONES (cU)", False)
             '
             CierraFormularios()
             '

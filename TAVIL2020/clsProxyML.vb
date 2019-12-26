@@ -14,7 +14,6 @@ Imports AXWin = Autodesk.AutoCAD.Windows
 Imports Autodesk.AutoCAD.DatabaseServices
 Imports Autodesk.AutoCAD.Geometry
 Imports Autodesk.AutoCAD.EditorInput
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 '
 Public Class clsProxyML

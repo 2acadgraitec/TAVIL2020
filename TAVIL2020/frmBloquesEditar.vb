@@ -18,7 +18,7 @@ Public Class frmBloquesEditar
     Private Sub frmBloquesEditar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
         app_procesointerno = True
-        Me.Text = "BLOCK EDITOR - v" & cfg._appversion
+        Me.Text = "BLOCK EDITOR - v" & appVersion
         Bloque_PonDatos()
     End Sub
 

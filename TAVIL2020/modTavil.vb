@@ -5,7 +5,6 @@ Imports Autodesk.AutoCAD.ApplicationServices
 Imports TAVIL2020.TAVIL2020
 Imports System.Windows.Forms
 Imports System.Linq
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 Imports Ev = TAVIL2020.Eventos
 

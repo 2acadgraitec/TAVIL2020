@@ -6,7 +6,6 @@ Imports TAVIL2020.TAVIL2020
 Imports System.Windows.Forms
 Imports AutoCAD2acad.A2acad
 Imports System.Linq
-Imports ua = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 Imports System.Runtime.InteropServices
 
@@ -28,7 +27,8 @@ Module movVar
     ' ***** CLASES
     Public clsA As a2.A2acad = Nothing
     Public clsD As clsLAYOUTDBS4 = Nothing
-    Public cfg As UtilesAlberto.Conf
+    Public cIni As clsINI = Nothing
+    'Public cfg As UtilesAlberto.Conf
     'Public cXML As ClosedXML2acad.ClosedXML2acad
     Public pataD As clsBloquePataDatos     ' Datos de un bloque de pata (Parametros y Atributos)
     ' ***** CLASES con los datos de cada Hoja Excel
@@ -91,14 +91,16 @@ Module movVar
     '
     '
     ' ***** VARIABLES APLICACION
-    'Public app_folder As String = My.Application.Info.DirectoryPath     '' Solo Directorio
-    'Public app_name As String = My.Application.Info.AssemblyName        '' 
-    'Public app_folderandname As String = IO.Path.Combine(app_folder, app_name)        '' 
-    'Public app_fullPath As String = IO.Path.Combine(app_folder, app_name & ".dll")
-    'Public app_version As String = My.Application.Info.Version.ToString
-    'Public app_nameandversion As String = app_name & " - v" & app_version
-    'Public app_log As String = app_folderandname & ".log"
-    'Public app_conf As String = app_fullPath & ".config"
+    Public appFull As String = System.Reflection.Assembly.GetExecutingAssembly.Location
+    Public appFolder As String = IO.Path.GetDirectoryName(appFull)     '' Solo Directorio
+    Public appName As String = My.Application.Info.AssemblyName        '' 
+    Public appFolderandname As String = IO.Path.Combine(appFolder, appName)        '' 
+    Public appVersion As String = My.Application.Info.Version.ToString
+    Public appNameandversion As String = appName & " - v" & appVersion
+    Public appIni As String = IO.Path.ChangeExtension(appFull, ".ini")
+    Public appLog As String = IO.Path.ChangeExtension(appFull, ".log")
+    Public appConf As String = IO.Path.ChangeExtension(appFull, ".config")
+    Public appXLSX As String = IO.Path.Combine(appFolder, "LAYOUTDBS4.xlsx")
     Public app_procesointerno As Boolean = False 'afleta
     '
 #Region "UTILITIES"
@@ -131,67 +133,67 @@ Module movVar
         'HojaConceptos=CONCEPTOS
         'HojaIdiomas=IDIOMAS
 
-        Dim LogTemp As String = ua.IniGet(cfg._appini, "OPTIONS", "Log")
+        Dim LogTemp As String = cIni.IniGet(appIni, "OPTIONS", "Log")
         Log = IIf(LogTemp = "1", True, False)
         mensaje(1) &= "Log = " & Log & vbCrLf
         '
-        BloqueRecursos = ua.IniGet(cfg._appini, "OPTIONS", "BloqueRecursos")
+        BloqueRecursos = cIni.IniGet(appIni, "OPTIONS", "BloqueRecursos")
         If BloqueRecursos <> "" Then
-            BloqueRecursos = IO.Path.Combine(cfg._appfolder, BloqueRecursos)
+            BloqueRecursos = IO.Path.Combine(appFolder, BloqueRecursos)
         End If
         mensaje(1) &= "BloqueRecursos = " & BloqueRecursos & vbCrLf
         '
-        Dim sizeImgTemp As String = ua.IniGet(cfg._appini, "OPTIONS", "sizeImg")
+        Dim sizeImgTemp As String = cIni.IniGet(appIni, "OPTIONS", "sizeImg")
         sizeImg = IIf(IsNumeric(sizeImgTemp), CInt(sizeImgTemp), 100)
         mensaje(1) &= "sizeImg = " & sizeImg.ToString & vbCrLf
         '
-        BloquesDir = ua.IniGet(cfg._appini, "OPTIONS", "BloquesDir")
+        BloquesDir = cIni.IniGet(appIni, "OPTIONS", "BloquesDir")
         If BloquesDir.StartsWith(".\") Then
-            BloquesDir = BloquesDir.Replace(".\", cfg._appfolder & "\")
+            BloquesDir = BloquesDir.Replace(".\", appFolder & "\")
         ElseIf BloquesDir.Contains("\") = False And BloquesDir.Contains(":") = False Then
-            BloquesDir = IO.Path.Combine(cfg._appfolder, BloquesDir)
+            BloquesDir = IO.Path.Combine(appFolder, BloquesDir)
         End If
         mensaje(1) &= "BloquesDir = " & BloquesDir & vbCrLf
         '
-        PatasDir = ua.IniGet(cfg._appini, "OPTIONS", "PatasDir")
+        PatasDir = cIni.IniGet(appIni, "OPTIONS", "PatasDir")
         PatasDir = IO.Path.Combine(BloquesDir, PatasDir)
         mensaje(1) &= "PatasDir = " & PatasDir & vbCrLf
         '
-        PatasCapa = ua.IniGet(cfg._appini, "OPTIONS", "PatasCapa")
-        PatasRef = ua.IniGet(cfg._appini, "OPTIONS", "PatasRef")
+        PatasCapa = cIni.IniGet(appIni, "OPTIONS", "PatasCapa")
+        PatasRef = cIni.IniGet(appIni, "OPTIONS", "PatasRef")
         mensaje(1) &= "PatasCapa = " & PatasCapa & vbCrLf
         mensaje(1) &= "PatasRef = " & PatasRef & vbCrLf
         '
-        CintasDir = ua.IniGet(cfg._appini, "OPTIONS", "CintasDir")
+        CintasDir = cIni.IniGet(appIni, "OPTIONS", "CintasDir")
         CintasDir = IO.Path.Combine(BloquesDir, CintasDir)
         mensaje(1) &= "CintasDir = " & CintasDir & vbCrLf
         '
-        CintasCapa = ua.IniGet(cfg._appini, "OPTIONS", "CintasCapa")
-        CintasRef = ua.IniGet(cfg._appini, "OPTIONS", "CintasRef")
+        CintasCapa = cIni.IniGet(appIni, "OPTIONS", "CintasCapa")
+        CintasRef = cIni.IniGet(appIni, "OPTIONS", "CintasRef")
         mensaje(1) &= "CintasCapa = " & CintasCapa & vbCrLf
         mensaje(1) &= "CintasRef = " & CintasRef & vbCrLf
         '
-        Dim partes() As String = ua.IniGet(cfg._appini, "OPTIONS", "patasSiPlanta").Split(","c)
+        Dim partes() As String = cIni.IniGet(appIni, "OPTIONS", "patasSiPlanta").Split(","c)
         If partes IsNot Nothing AndAlso partes.Count > 0 Then
             ReDim patasSIPlanta(partes.Count - 1) : partes.CopyTo(patasSIPlanta, 0)
         End If
         ReDim partes(-1)
-        partes = ua.IniGet(cfg._appini, "OPTIONS", "patasNoPlanta").Split(","c)
+        partes = cIni.IniGet(appIni, "OPTIONS", "patasNoPlanta").Split(","c)
         If partes IsNot Nothing AndAlso partes.Count > 0 Then
             ReDim patasNoPlanta(partes.Count - 1) : partes.CopyTo(patasNoPlanta, 0)
         End If
         '
         ' LAYOUTDB=LAYOUTDBS4.xlsx
-        LAYOUTDB = ua.IniGet(cfg._appini, "OPTIONS", "LAYOUTDB")
+        LAYOUTDB = cIni.IniGet(appIni, "OPTIONS", "LAYOUTDB")
         If LAYOUTDB.StartsWith(".\") Then
-            LAYOUTDB = LAYOUTDB.Replace(".\", cfg._appfolder & "\")
+            LAYOUTDB = LAYOUTDB.Replace(".\", appFolder & "\")
         ElseIf LAYOUTDB.Contains("\") = False And LAYOUTDB.Contains(":") = False Then
-            LAYOUTDB = IO.Path.Combine(cfg._appfolder, LAYOUTDB)
+            LAYOUTDB = IO.Path.Combine(appFolder, LAYOUTDB)
         End If
         mensaje(1) &= "LAYOUTDB = " & LAYOUTDB & vbCrLf
         '
         'HojasTransportadores= TRD3-TRANSP.RODILLOS,TRD3-TRANSP.BAJADA_RODILLOS_G,TRD3-TRANSP.CURVA_RODILLOS,TCB3-TRANSP.CON_BANDA
-        Dim partesHojasTransportadores As String() = ua.IniGet(cfg._appini, "OPTIONS", "HojasTransportadores").Split(","c)
+        Dim partesHojasTransportadores As String() = cIni.IniGet(appIni, "OPTIONS", "HojasTransportadores").Split(","c)
         If partesHojasTransportadores IsNot Nothing AndAlso partesHojasTransportadores.Count > 0 Then
             HojasTransportadores = New List(Of String)
             HojasTransportadores.AddRange(partesHojasTransportadores)
@@ -199,27 +201,27 @@ Module movVar
         End If
         '
         'HojaPatas = PT
-        HojaPatas = ua.IniGet(cfg._appini, "OPTIONS", "HojaPatas")
+        HojaPatas = cIni.IniGet(appIni, "OPTIONS", "HojaPatas")
         mensaje(1) &= "HojaPatas = " & HojaPatas & vbCrLf
         '
         'HojaUniones = UNIONES
-        HojaUniones = ua.IniGet(cfg._appini, "OPTIONS", "HojaUniones")
+        HojaUniones = cIni.IniGet(appIni, "OPTIONS", "HojaUniones")
         mensaje(1) &= "HojaUniones = " & HojaUniones & vbCrLf
         '
         'HojaATR = ATR
-        HojaATR = ua.IniGet(cfg._appini, "OPTIONS", "HojaATR")
+        HojaATR = cIni.IniGet(appIni, "OPTIONS", "HojaATR")
         mensaje(1) &= "HojaATR = " & HojaATR & vbCrLf
         '
         'HojaSeleccionables = SELECCIONABLES
-        HojaSeleccionables = ua.IniGet(cfg._appini, "OPTIONS", "HojaSeleccionables")
+        HojaSeleccionables = cIni.IniGet(appIni, "OPTIONS", "HojaSeleccionables")
         mensaje(1) &= "HojaSeleccionables = " & HojaSeleccionables & vbCrLf
         '
         'HojaConceptos = CONCEPTOS
-        HojaConceptos = ua.IniGet(cfg._appini, "OPTIONS", "HojaConceptos")
+        HojaConceptos = cIni.IniGet(appIni, "OPTIONS", "HojaConceptos")
         mensaje(1) &= "HojaConceptos = " & HojaConceptos & vbCrLf
         '
         'HojaIdiomas = IDIOMAS
-        HojaIdiomas = ua.IniGet(cfg._appini, "OPTIONS", "HojaIdiomas")
+        HojaIdiomas = cIni.IniGet(appIni, "OPTIONS", "HojaIdiomas")
         mensaje(1) &= "HojaIdiomas = " & HojaIdiomas & vbCrLf
         '
         ' Al fichero log la configuración leida.
@@ -270,6 +272,12 @@ Module movVar
         If frmUn IsNot Nothing Then frmUn.Close()
         If frmAg IsNot Nothing Then frmAg.Close()
         If frmBo IsNot Nothing Then frmBo.Close()
+    End Sub
+
+    Public Sub PonLog(ByVal quetexto As String, Optional ByVal borrar As Boolean = False)
+        If borrar = True And IO.File.Exists(appLog) Then IO.File.Delete(appLog)
+        If quetexto.EndsWith(vbCrLf) = False Then quetexto &= vbCrLf
+        IO.File.AppendAllText(appLog, Date.Now & vbTab & quetexto)
     End Sub
 #End Region
 End Module

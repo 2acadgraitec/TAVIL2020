@@ -76,7 +76,7 @@ End Class
 
 Public Class UNIONESExcelFila
     ' TRD300XX	FLAT	132353 o 132348; 120291	1; 1	TRD30305	FLAT		RR     Primer transportador/union Recto. Segundo transportador/union Recto
-    Public nFila As Integer = -1
+    Public NFila As Integer = -1
     Public INFEED_CONVEYOR As String = ""           ' TRD300XX
     Public INFEED_INCLINATION As String = ""        ' FLAT
     Private _UNION As String = ""                   ' 132353 o 132348; 120291
@@ -85,8 +85,11 @@ Public Class UNIONESExcelFila
     Public OUTFEED_INCLINATION As String = ""       ' FLAT
     Public ANGLE As String = ""                     ' "" o 90
     Public INFORMACION As String = ""               ' RR     Primer transportador/union Recto. Segundo transportador/union Recto
-    Public Rows As List(Of DataGridViewRow)
+    'Public Rows As List(Of DataGridViewRow)
+    Public RowsL As Dictionary(Of String, List(Of DataGridViewRow))
     Public hayerror As Boolean = False
+    Public ladotiene As Boolean = False
+    Public LADO As String = "L"
 
     Public Property UNION As String
         Get
@@ -108,7 +111,7 @@ Public Class UNIONESExcelFila
 
     Public Sub New(fila As ce.IXLRow)
         'If cXML Is Nothing Then cXML = New ClosedXML2acad.ClosedXML2acad
-        nFila = fila.RowNumber
+        NFila = fila.RowNumber
         For Each oCell As ce.IXLCell In fila.Cells.AsParallel
             Dim cabecera As String = oCell.WorksheetColumn.FirstCell.Value.ToString.Trim
             Dim valor As String = oCell.Value
@@ -123,9 +126,70 @@ Public Class UNIONESExcelFila
                 Case "INFORMACION" : Me.INFORMACION = Convert.ToString(valor).Trim
             End Select
         Next
-        FilasDataGridView_Crea()
+        If Me.UNION.Contains("|") AndAlso Me.UNITS.Contains("|") Then
+            ladotiene = True
+            FilasDataGridView_Crea_LADO()
+        Else
+            ladotiene = False
+            FilasDataGridView_Crea()
+        End If
+    End Sub
+    Public Sub FilasDataGridView_Crea_LADO()
+        'Dim lados() As String = [Enum].GetNames(GetType(LADO))      ' Array con L,C,R
+        RowsL = New Dictionary(Of String, List(Of DataGridViewRow))
+        Dim uniones As String() = Me.UNION.Split("|"c)
+        Dim unidades As String() = Me.UNITS.Split("|"c)
+        If uniones.Count <> unidades.Count Then
+            MsgBox("Error in Excel. Columns UNION and UNITS in Row " & Me.NFila)
+            hayerror = True
+            Exit Sub
+        Else
+            hayerror = False
+        End If
+        '
+        For x As Integer = 0 To uniones.Count - 1
+            Dim lado As String = uniones(x).Substring(0, 1)     'L, C o R
+            Dim uni As String = uniones(x).Substring(2)         '132353 o 132348; 12029
+            '
+            Dim unionesP() As String = uni.Split(";")
+            Dim unidadesP() As String = unidades(x).Split(";")
+            If unionesP.Count <> unidadesP.Count Then
+                MsgBox("Error in Excel. Columns UNION and UNITS in Row " & Me.NFila)
+                hayerror = True
+                Exit Sub
+            Else
+                hayerror = False
+            End If
+            '
+            Dim Row As New List(Of DataGridViewRow)
+            For y As Integer = 0 To unionesP.Count - 1
+                Dim Fila As New DataGridViewRow
+                Dim Ctext As New DataGridViewComboBoxCell
+                Dim Ttext As New DataGridViewTextBoxCell
+                Dim TUnits As New DataGridViewTextBoxCell
+                '
+                TUnits.Value = unidadesP(y)
+                If unionesP(y).Contains("o") Then
+                    Dim partes() As String = unionesP(y).Split("o")
+                    Ctext.Items.AddRange(partes)
+                    Ctext.Value = partes(0)
+                    Fila.Cells.Add(Ctext)
+                Else
+                    Ttext.Value = unionesP(y)
+                    Fila.Cells.Add(Ttext)
+                End If
+                Fila.Cells.Add(TUnits)
+                Row.Add(Fila)
+                'TUnits = Nothing
+                'Ctext = Nothing
+                'Ttext = Nothing
+                'Fila = Nothing
+            Next
+            RowsL.Add(lado.ToUpper, Row)
+        Next
     End Sub
     Public Sub FilasDataGridView_Crea()
+        RowsL = New Dictionary(Of String, List(Of DataGridViewRow))
         Dim unionesP() As String = Me.UNION.Split(";")
         Dim unidadesP() As String = Me.UNITS.Split(";")
         If unionesP.Count <> unidadesP.Count Then
@@ -136,8 +200,7 @@ Public Class UNIONESExcelFila
             hayerror = False
         End If
         '
-        Rows = New List(Of DataGridViewRow)
-        '
+        Dim Row As New List(Of DataGridViewRow)
         For x As Integer = 0 To unionesP.Count - 1
             Dim Fila As New DataGridViewRow
             Dim Ctext As New DataGridViewComboBoxCell
@@ -155,11 +218,12 @@ Public Class UNIONESExcelFila
                 Fila.Cells.Add(Ttext)
             End If
             Fila.Cells.Add(TUnits)
-            Rows.Add(Fila)
+            Row.Add(Fila)
             'TUnits = Nothing
             'Ctext = Nothing
             'Ttext = Nothing
             'Fila = Nothing
         Next
+        RowsL.Add("L", Row)
     End Sub
 End Class

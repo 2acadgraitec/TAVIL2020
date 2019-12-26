@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="clsBloquePataDatos.vb" />
+    <Compile Include="clsINI.vb" />
     <Compile Include="clsLAYOUTDBS4.vb" />
     <Compile Include="clsProxyML.vb" />
     <Compile Include="clsProxyMLCol.vb" />
@@ -258,6 +259,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TRANSPORTADORESExcelFilas.vb" />
+    <Compile Include="UtilesFicheros.vb" />
     <Compile Include="Utilidades.vb" />
   </ItemGroup>
   <ItemGroup>
@@ -294,6 +296,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -435,10 +438,6 @@
     <ProjectReference Include="..\AutoCAD2acad\AutoCAD2acad.vbproj">
       <Project>{c45fea81-2a3c-47a8-baea-35ae18db94a2}</Project>
       <Name>AutoCAD2acad</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UtilesAlberto\UtilesAlberto.vbproj">
-      <Project>{7e7b7fd9-7145-4607-b2b8-bb292871b260}</Project>
-      <Name>UtilesAlberto</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

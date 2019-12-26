@@ -6,7 +6,6 @@ Imports TAVIL2020.TAVIL2020
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports System.Linq
-Imports uau = UtilesAlberto.Utiles
 Imports a2 = AutoCAD2acad.A2acad
 
 Public Class frmUniones
@@ -22,7 +21,7 @@ Public Class frmUniones
 
     Private Sub frmUniones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
-        Me.Text = HojaUniones & " - v" & cfg._appversion
+        Me.Text = HojaUniones & " - v" & appVersion
         ' Cargar recursos
         Using oLock As DocumentLock = Eventos.AXDoc.LockDocument
             'clsA.ClonaTODODesdeDWG(BloqueRecursos, True, True)
@@ -133,10 +132,12 @@ Public Class frmUniones
         '
         DgvUnion.Rows.Clear()
         If UClsUnion.ExcelFilaUnion IsNot Nothing AndAlso
-            UClsUnion.ExcelFilaUnion.Rows IsNot Nothing _
-            AndAlso UClsUnion.ExcelFilaUnion.Rows.Count > 0 Then
-            DgvUnion.Rows.AddRange(UClsUnion.ExcelFilaUnion.Rows.ToArray)
+            UClsUnion.ExcelFilaUnion.RowsL IsNot Nothing _
+            AndAlso UClsUnion.ExcelFilaUnion.RowsL.Count > 0 Then
+            DgvUnion.Rows.AddRange(UClsUnion.ExcelFilaUnion.RowsL(UClsUnion.ExcelFilaUnion.LADO).ToArray)
         End If
+        ' LADO
+        ListBox_SeleccionaPorTexto(LbLado, UClsUnion.LADO)
     End Sub
     Private Sub tvUniones_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles tvUniones.MouseDoubleClick
         Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag, conZoom:=True)
@@ -250,7 +251,7 @@ Public Class frmUniones
     End Sub
 
 
-    Private Sub LbT1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbInclinationT1.SelectedIndexChanged, LbInclinationT2.SelectedIndexChanged, LbRotation.SelectedIndexChanged
+    Private Sub LbT1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbInclinationT1.SelectedIndexChanged, LbInclinationT2.SelectedIndexChanged, LbRotation.SelectedIndexChanged, LbLado.SelectedIndexChanged
         If GUnion.Enabled = False Then Exit Sub
         '
         If UltimoBloqueT1 IsNot Nothing AndAlso
@@ -307,6 +308,7 @@ Public Class frmUniones
             UClsUnion.UNITS = String.Join(";", DatosUnits.ToArray)
             UClsUnion.ROTATION = LbRotation.Text
             UClsUnion.UNIONFin_Pon(Me.DgvUnion)   ' Escribir finalmente los atributos UNION y UNITS en el bloque.
+            UClsUnion.LADO = LbLado.Text
         Else
             UClsUnion = New ClsUnion(
                 UltimoBloqueUnion.Handle,
@@ -318,7 +320,8 @@ Public Class frmUniones
                 UltimoBloqueT2.Handle,
                 ActualFilaExcel.OUTFEED_CONVEYOR,
                 LbInclinationT2.Text,
-                LbRotation.Text)
+                LbRotation.Text,
+                LbLado.Text)
             UClsUnion.UNIONFin_Pon(Me.DgvUnion)
         End If
         '
@@ -383,11 +386,15 @@ Public Class frmUniones
         ActualFilaExcel = cU.Fila_BuscaDame(UltimoBloqueT1.EffectiveName.Substring(0, 8), LbInclinationT1.Text, UltimoBloqueT2.EffectiveName.Substring(0, 8), LbInclinationT2.Text, angulo)
         If ActualFilaExcel IsNot Nothing Then
             DgvUnion.Tag = ActualFilaExcel
-            DgvUnion.Rows.AddRange(ActualFilaExcel.Rows.ToArray)
+            DgvUnion.Rows.AddRange(ActualFilaExcel.RowsL(ActualFilaExcel.LADO).ToArray)
             'DgvUnion.Height = DgvUnion.PreferredSize.Height
+            LblLado.Visible = ActualFilaExcel.RowsL.Count > 1
+            LbLado.Visible = ActualFilaExcel.RowsL.Count > 1
         End If
         If UClsUnion IsNot Nothing Then
             UClsUnion.UNION_PonValue(DgvUnion)
+            LblLado.Visible = True
+            LbLado.Visible = True
         End If
         Datos_2CompruebaDatos()
     End Sub

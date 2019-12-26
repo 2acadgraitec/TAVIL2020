@@ -7,7 +7,7 @@ Public Class frmBloques
         Eventos.SYSMONVAR(True)
         app_procesointerno = True
         oBlR = Nothing
-        Me.Text = "GESTOR BLOQUES - v" & cfg._appversion
+        Me.Text = "GESTOR BLOQUES - v" & appVersion
         ListBoxDirectorios_llena()
     End Sub
 

@@ -30,7 +30,9 @@ Partial Class frmUniones
         Me.BtnInsertarUnion = New System.Windows.Forms.Button()
         Me.GUnion = New System.Windows.Forms.GroupBox()
         Me.DgvUnion = New System.Windows.Forms.DataGridView()
-        Me.Label4 = New System.Windows.Forms.Label()
+        Me.UNION = New System.Windows.Forms.DataGridViewComboBoxColumn()
+        Me.UNITS = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblRotation = New System.Windows.Forms.Label()
         Me.LbRotation = New System.Windows.Forms.ListBox()
         Me.LbInclinationT2 = New System.Windows.Forms.ListBox()
         Me.LbInclinationT1 = New System.Windows.Forms.ListBox()
@@ -49,8 +51,8 @@ Partial Class frmUniones
         Me.BtnInsertaMultiplesUniones = New System.Windows.Forms.Button()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.LblUniones = New System.Windows.Forms.Label()
-        Me.UNION = New System.Windows.Forms.DataGridViewComboBoxColumn()
-        Me.UNITS = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LblLado = New System.Windows.Forms.Label()
+        Me.LbLado = New System.Windows.Forms.ListBox()
         Me.GUnion.SuspendLayout()
         CType(Me.DgvUnion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -113,8 +115,10 @@ Partial Class frmUniones
         'GUnion
         '
         Me.GUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GUnion.Controls.Add(Me.LbLado)
+        Me.GUnion.Controls.Add(Me.LblLado)
         Me.GUnion.Controls.Add(Me.DgvUnion)
-        Me.GUnion.Controls.Add(Me.Label4)
+        Me.GUnion.Controls.Add(Me.LblRotation)
         Me.GUnion.Controls.Add(Me.LbRotation)
         Me.GUnion.Controls.Add(Me.LbInclinationT2)
         Me.GUnion.Controls.Add(Me.LbInclinationT1)
@@ -151,13 +155,30 @@ Partial Class frmUniones
         Me.DgvUnion.Size = New System.Drawing.Size(175, 104)
         Me.DgvUnion.TabIndex = 37
         '
-        'Label4
+        'UNION
         '
-        Me.Label4.Location = New System.Drawing.Point(183, 194)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(94, 22)
-        Me.Label4.TabIndex = 35
-        Me.Label4.Text = "ROTATION :"
+        Me.UNION.Frozen = True
+        Me.UNION.HeaderText = "UNION"
+        Me.UNION.MinimumWidth = 6
+        Me.UNION.Name = "UNION"
+        Me.UNION.Width = 125
+        '
+        'UNITS
+        '
+        Me.UNITS.Frozen = True
+        Me.UNITS.HeaderText = "UNITS"
+        Me.UNITS.MinimumWidth = 6
+        Me.UNITS.Name = "UNITS"
+        Me.UNITS.ReadOnly = True
+        Me.UNITS.Width = 50
+        '
+        'LblRotation
+        '
+        Me.LblRotation.Location = New System.Drawing.Point(209, 187)
+        Me.LblRotation.Name = "LblRotation"
+        Me.LblRotation.Size = New System.Drawing.Size(94, 22)
+        Me.LblRotation.TabIndex = 35
+        Me.LblRotation.Text = "ROTATION :"
         '
         'LbRotation
         '
@@ -330,21 +351,23 @@ Partial Class frmUniones
         Me.LblUniones.TabIndex = 28
         Me.LblUniones.Text = "."
         '
-        'UNION
+        'LblLado
         '
-        Me.UNION.Frozen = True
-        Me.UNION.HeaderText = "UNION"
-        Me.UNION.MinimumWidth = 6
-        Me.UNION.Name = "UNION"
+        Me.LblLado.Location = New System.Drawing.Point(243, 241)
+        Me.LblLado.Name = "LblLado"
+        Me.LblLado.Size = New System.Drawing.Size(56, 22)
+        Me.LblLado.TabIndex = 38
+        Me.LblLado.Text = "LADO :"
         '
-        'UNITS
+        'LbLado
         '
-        Me.UNITS.Frozen = True
-        Me.UNITS.HeaderText = "UNITS"
-        Me.UNITS.MinimumWidth = 6
-        Me.UNITS.Name = "UNITS"
-        Me.UNITS.ReadOnly = True
-        Me.UNITS.Width = 50
+        Me.LbLado.FormattingEnabled = True
+        Me.LbLado.ItemHeight = 16
+        Me.LbLado.Items.AddRange(New Object() {"L", "C", "R"})
+        Me.LbLado.Location = New System.Drawing.Point(309, 241)
+        Me.LbLado.Name = "LbLado"
+        Me.LbLado.Size = New System.Drawing.Size(66, 52)
+        Me.LbLado.TabIndex = 39
         '
         'frmUniones
         '
@@ -403,9 +426,11 @@ Partial Class frmUniones
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents LbInclinationT2 As Windows.Forms.ListBox
     Friend WithEvents LbInclinationT1 As Windows.Forms.ListBox
-    Friend WithEvents Label4 As Windows.Forms.Label
+    Friend WithEvents LblRotation As Windows.Forms.Label
     Friend WithEvents LbRotation As Windows.Forms.ListBox
     Friend WithEvents DgvUnion As Windows.Forms.DataGridView
     Friend WithEvents UNION As Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents UNITS As Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents LbLado As Windows.Forms.ListBox
+    Friend WithEvents LblLado As Windows.Forms.Label
 End Class

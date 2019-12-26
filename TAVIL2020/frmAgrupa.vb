@@ -10,7 +10,7 @@ Public Class frmAgrupa
     Public conMensaje As Boolean = True
     Private Sub frmAgrupa_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
-        Me.Text = "AGRUPAR ELEMENTOS LINEA - v" & cfg._appversion
+        Me.Text = "AGRUPAR ELEMENTOS LINEA - v" & appVersion
         app_procesointerno = True
         gbAdministrar.Enabled = False
         btnGrupoBorrar.Enabled = False
