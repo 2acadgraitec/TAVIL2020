@@ -29,6 +29,8 @@ Partial Class frmUniones
         Me.cbZoom = New System.Windows.Forms.CheckBox()
         Me.BtnInsertarUnion = New System.Windows.Forms.Button()
         Me.GUnion = New System.Windows.Forms.GroupBox()
+        Me.LbLado = New System.Windows.Forms.ListBox()
+        Me.LblLado = New System.Windows.Forms.Label()
         Me.DgvUnion = New System.Windows.Forms.DataGridView()
         Me.UNION = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.UNITS = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -51,8 +53,6 @@ Partial Class frmUniones
         Me.BtnInsertaMultiplesUniones = New System.Windows.Forms.Button()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.LblUniones = New System.Windows.Forms.Label()
-        Me.LblLado = New System.Windows.Forms.Label()
-        Me.LbLado = New System.Windows.Forms.ListBox()
         Me.GUnion.SuspendLayout()
         CType(Me.DgvUnion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -136,6 +136,24 @@ Partial Class frmUniones
         Me.GUnion.TabIndex = 20
         Me.GUnion.TabStop = False
         Me.GUnion.Text = "Crear / Editar Unión"
+        '
+        'LbLado
+        '
+        Me.LbLado.FormattingEnabled = True
+        Me.LbLado.ItemHeight = 16
+        Me.LbLado.Items.AddRange(New Object() {"L", "C", "R"})
+        Me.LbLado.Location = New System.Drawing.Point(309, 241)
+        Me.LbLado.Name = "LbLado"
+        Me.LbLado.Size = New System.Drawing.Size(66, 52)
+        Me.LbLado.TabIndex = 39
+        '
+        'LblLado
+        '
+        Me.LblLado.Location = New System.Drawing.Point(243, 241)
+        Me.LblLado.Name = "LblLado"
+        Me.LblLado.Size = New System.Drawing.Size(56, 22)
+        Me.LblLado.TabIndex = 38
+        Me.LblLado.Text = "LADO :"
         '
         'DgvUnion
         '
@@ -350,24 +368,6 @@ Partial Class frmUniones
         Me.LblUniones.Size = New System.Drawing.Size(12, 17)
         Me.LblUniones.TabIndex = 28
         Me.LblUniones.Text = "."
-        '
-        'LblLado
-        '
-        Me.LblLado.Location = New System.Drawing.Point(243, 241)
-        Me.LblLado.Name = "LblLado"
-        Me.LblLado.Size = New System.Drawing.Size(56, 22)
-        Me.LblLado.TabIndex = 38
-        Me.LblLado.Text = "LADO :"
-        '
-        'LbLado
-        '
-        Me.LbLado.FormattingEnabled = True
-        Me.LbLado.ItemHeight = 16
-        Me.LbLado.Items.AddRange(New Object() {"L", "C", "R"})
-        Me.LbLado.Location = New System.Drawing.Point(309, 241)
-        Me.LbLado.Name = "LbLado"
-        Me.LbLado.Size = New System.Drawing.Size(66, 52)
-        Me.LbLado.TabIndex = 39
         '
         'frmUniones
         '

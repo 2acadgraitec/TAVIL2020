@@ -160,13 +160,15 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLASES-HOJAS\UNIONESXFilas.vb" />
+    <Compile Include="CLASES-HOJAS\UNIONESYFilas.vb" />
     <Compile Include="clsBloquePataDatos.vb" />
     <Compile Include="clsINI.vb" />
     <Compile Include="clsLAYOUTDBS4.vb" />
     <Compile Include="clsProxyML.vb" />
     <Compile Include="clsProxyMLCol.vb" />
     <Compile Include="clsTransportador.vb" />
-    <Compile Include="CLASES-HOJAS\UNIONESExcelFilas.vb" />
+    <Compile Include="CLASES-HOJAS\UNIONESFilas.vb" />
     <Compile Include="ClsUnion.vb" />
     <Compile Include="EVENTOS\AXBlockTR.vb" />
     <Compile Include="EVENTOS\AXEditor.vb" />

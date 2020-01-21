@@ -9,10 +9,10 @@ Imports a2 = AutoCAD2acad.A2acad
 Public Class UNIONES
     Public Shared LUniones As New List(Of UNION)                ' Todas las uniones
     Public Shared NUniones As New Dictionary(Of String, Integer)  ' Totales de Uniones
-    Public Shared Sub UNION_Crea(h As String)
+    Public Shared Sub UNION_Crea(handle As String)
         If LUniones Is Nothing Then LUniones = New List(Of UNION)
         If NUniones Is Nothing Then NUniones = New Dictionary(Of String, Integer)
-        Dim oUnion As UNION = New UNION(h)
+        Dim oUnion As UNION = New UNION(handle)
         LUniones.Add(oUnion)
         If NUniones.ContainsKey(oUnion.KEY) Then
             NUniones(oUnion.KEY) += 1
@@ -26,7 +26,8 @@ Public Class UNIONES
             Exit Sub
         End If
         '
-        Dim columnas() As String = {"BLOCK", "COUNT", "UNION", "UNITS", "ROTATION"}
+
+        Dim columnas() As String = {"BLOCK", "COUNT", "UNION", "UNITS", "ANGLE", "ANGLEL", "ANGLER"}
         Dim fiOut As String = IO.Path.ChangeExtension(Eventos.COMDoc.Path, "UNIONS.csv")
         If IO.File.Exists(fiOut) Then IO.File.Delete(fiOut)
         Dim texto As String = String.Join(";", columnas) & vbCrLf
@@ -43,7 +44,7 @@ Public Class UNIONES
                 Continue For
             End If
             '
-            texto &= oU.NAME & ";" & NUniones(key) & ";" & oU.UNION.Replace(";", "|") & ";" & oU.UNITS.Replace(";", "|") & ";" & oU.ROTATION & vbCrLf
+            texto &= oU.NAME & ";" & NUniones(key) & ";" & oU.UNION.Replace(";", "|") & ";" & oU.UNITS.Replace(";", "|") & ";" & oU.ANGLE & ";" & oU.ANGLEL & ";" & oU.ANGLER & vbCrLf
         Next
         texto = texto.Substring(0, texto.Length - 2)
         IO.File.WriteAllText(fiOut, texto, Text.Encoding.UTF8)
@@ -51,37 +52,74 @@ Public Class UNIONES
     End Sub
 End Class
 Public Class UNION
-    Public HANDLE As String
-    Public NAME As String
-    Public UNION As String
-    Public UNITS As String
-    Public T1INFEED As String
-    Public T2OUTFEED As String
-    Private _ROTATION As String
-    Public KEY As String        ' Todas las propiedades concatenadas.
-    Public Property ROTATION As String
+    Public Property HANDLE As String
+    Public Property NAME As String
+    Public Property UNION As String
+    Public Property UNITS As String
+    Public Property T1INFEED As String
+    Public Property T1INFEEDL As String
+    Public Property T1INFEEDR As String
+    Public Property T2OUTFEED As String
+    Public Property T2OUTFEEDL As String
+    Public Property T2OUTFEEDR As String
+
+    Private Property _ANGLE As String
+    Private Property _ANGLEL As String
+    Private Property _ANGLER As String
+    Public Property HOJA As String = "UNIONES"
+    Public Property KEY As String        ' Todas las propiedades concatenadas.
+    'Public Property DUNIONUNITS As Dictionary(Of String, Integer)
+
+    Public Property ANGLE As String
         Set(value As String)
-            If value = "" Then value = "0"
-            _ROTATION = value
+            If (value = "" OrElse value Is Nothing) Then value = "0"
+            _ANGLE = value
         End Set
         Get
-            Return _ROTATION
+            Return _ANGLE
+        End Get
+    End Property
+    Public Property ANGLEL As String
+        Set(value As String)
+            If (value = "" OrElse value Is Nothing) Then value = "0"
+            _ANGLEL = value
+        End Set
+        Get
+            Return _ANGLEL
+        End Get
+    End Property
+    Public Property ANGLER As String
+        Set(value As String)
+            If (value = "" OrElse value Is Nothing) Then value = "0"
+            _ANGLER = value
+        End Set
+        Get
+            Return _ANGLER
         End Get
     End Property
     '
-    Public Sub New(h As String) 'Handle
-        Dim acadObj As AcadObject = Eventos.COMDoc.HandleToObject(h)
+    Public Sub New(handle As String) 'Handle
+        'DUNIONUNITS = New Dictionary(Of String, Integer)
+        Dim acadObj As AcadObject = Eventos.COMDoc.HandleToObject(handle)
         If acadObj IsNot Nothing AndAlso TypeOf acadObj Is AcadBlockReference Then
             Dim oBl As AcadBlockReference = acadObj
             Dim oBlDatos As New AutoCAD2acad.A2acad.Bloque_Datos(oBl)
-            Me.HANDLE = h
+            Me.HANDLE = handle
             Me.NAME = oBl.EffectiveName
             Me.UNION = clsA.Bloque_DameDato_AttPropX(oBlDatos, "UNION")
             Me.UNITS = clsA.Bloque_DameDato_AttPropX(oBlDatos, "UNITS")
             Me.T1INFEED = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T1INFEED")
+            Me.T1INFEEDL = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T1INFEEDL")
+            Me.T1INFEEDR = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T1INFEEDR")
             Me.T2OUTFEED = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T2OUTFEED")
-            Me.ROTATION = clsA.Bloque_DameDato_AttPropX(oBlDatos, "ROTATION")
-            KEY = UNION & UNITS & T1INFEED & T2OUTFEED & ROTATION
+            Me.T2OUTFEEDL = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T2OUTFEEDL")
+            Me.T2OUTFEEDR = clsA.Bloque_DameDato_AttPropX(oBlDatos, "T2OUTFEEDR")
+            Me.ANGLE = clsA.Bloque_DameDato_AttPropX(oBlDatos, "ANGLE")
+            Me.ANGLE = clsA.Bloque_DameDato_AttPropX(oBlDatos, "ANGLEL")
+            Me.ANGLE = clsA.Bloque_DameDato_AttPropX(oBlDatos, "ANGLER")
+            KEY = UNION & UNITS & T1INFEED & T1INFEEDL & T1INFEEDR & T2OUTFEED & T2OUTFEEDL & T2OUTFEEDR & ANGLE & ANGLEL & ANGLER
+            ' Poner la hoja correspondiente
+
         End If
     End Sub
 End Class

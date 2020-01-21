@@ -13,7 +13,7 @@ Public Class frmUniones
     Private UltimoBloqueT1 As AcadBlockReference = Nothing
     Private UltimoBloqueT2 As AcadBlockReference = Nothing
     Private UClsUnion As ClsUnion = Nothing
-    Public ActualFilaExcel As UNIONESExcelFila = Nothing
+    Public ActualFilaExcel As UNIONESFila = Nothing
     Private HighlightedPictureBox As PictureBox = Nothing
     Private oTT As ToolTip = Nothing
     Private capaUnionesVisible As Boolean = True
@@ -122,9 +122,9 @@ Public Class frmUniones
             End Try
         End If
         '
-        If UClsUnion.ROTATION = "0" OrElse UClsUnion.ROTATION = "" Then
+        If UClsUnion.ANGLE = "0" OrElse UClsUnion.ANGLE = "" Then
             LbRotation.SelectedIndex = 0
-        ElseIf UClsUnion.ROTATION = "90" Then
+        ElseIf UClsUnion.ANGLE = "90" Then
             LbRotation.SelectedIndex = 1
         Else
             LbRotation.SelectedIndex = -1
@@ -306,7 +306,7 @@ Public Class frmUniones
             UClsUnion.T2OUTFEED = ActualFilaExcel.OUTFEED_CONVEYOR
             UClsUnion.UNION = String.Join(";", DatosUnion.ToArray)
             UClsUnion.UNITS = String.Join(";", DatosUnits.ToArray)
-            UClsUnion.ROTATION = LbRotation.Text
+            UClsUnion.ANGLE = LbRotation.Text
             UClsUnion.UNIONFin_Pon(Me.DgvUnion)   ' Escribir finalmente los atributos UNION y UNITS en el bloque.
             UClsUnion.LADO = LbLado.Text
         Else

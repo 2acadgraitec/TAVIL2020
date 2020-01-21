@@ -18,7 +18,7 @@ Public Class ClsUnion
     Private _T2HANDLE As String = ""
     Private _T2OUTFEED As String = ""
     Private _T2INCLINATION As String = "0"
-    Private _ROTATION As String = ""
+    Private _ANGLE As String = ""
     Private _LADO As String = "L"
 
 #Region "PROPERTIES"
@@ -26,7 +26,7 @@ Public Class ClsUnion
     Public Property UnionBlock As AcadBlockReference = Nothing
     Public Property T1Block As AcadBlockReference = Nothing
     Public Property T2Block As AcadBlockReference = Nothing
-    Public Property ExcelFilaUnion As UNIONESExcelFila = Nothing
+    Public Property ExcelFilaUnion As UNIONESFila = Nothing
     Public Property UNIONFin As String = ""
 
     Public Property UNION As String
@@ -125,18 +125,18 @@ Public Class ClsUnion
             End If
         End Set
     End Property
-    Public Property ROTATION As String
+    Public Property ANGLE As String
         Get
-            If Me._ROTATION = "0" Then
+            If Me._ANGLE = "0" Then
                 Return ""
             Else
-                Return _ROTATION
+                Return _ANGLE
             End If
         End Get
         Set(value As String)
             If value = "" Then value = "0"
-            If value <> _ROTATION Then
-                _ROTATION = value
+            If value <> _ANGLE Then
+                _ANGLE = value
                 'clsA.XPonDato(Me.HANDLE, "ROTATION", value)
             End If
         End Set
@@ -174,18 +174,18 @@ Public Class ClsUnion
         Me.T2HANDLE = clsA.XLeeDato(UnionBlock.Handle, "T2HANDLE")
         Me.T2OUTFEED = clsA.XLeeDato(UnionBlock.Handle, "T2OUTFEED")
         Me.T2INCLINATION = clsA.XLeeDato(UnionBlock.Handle, "T2INCLINATION")
-        Me.ROTATION = clsA.XLeeDato(UnionBlock.Handle, "ROTATION")
+        Me.ANGLE = clsA.XLeeDato(UnionBlock.Handle, "ROTATION")
         Me.LADO = clsA.XLeeDato(UnionBlock.Handle, "LADO")
         Try
-            T1Block = Eventos.COMDoc().HandleToObject(Me._T1HANDLE)
+            If Me._T1HANDLE <> "" AndAlso IsNumeric(Me._T1HANDLE) Then T1Block = Eventos.COMDoc().HandleToObject(Me._T1HANDLE)
         Catch ex As Exception
         End Try
         Try
-            T2Block = Eventos.COMDoc().HandleToObject(Me._T2HANDLE)
+            If Me._T2HANDLE <> "" AndAlso IsNumeric(Me._T2HANDLE) Then T2Block = Eventos.COMDoc().HandleToObject(Me._T2HANDLE)
         Catch ex As Exception
         End Try
         If Me.T1INFEED <> "" AndAlso Me.T1INCLINATION <> "" AndAlso Me.T2OUTFEED <> "" AndAlso Me.T2INCLINATION <> "" Then
-            ExcelFilaUnion = cU.Fila_BuscaDame(Me.T1INFEED, Me.T1INCLINATION, Me.T2OUTFEED, Me.T2INCLINATION, Me.ROTATION)
+            ExcelFilaUnion = cU.Fila_BuscaDame(Me.T1INFEED, Me.T1INCLINATION, Me.T2OUTFEED, Me.T2INCLINATION, Me.ANGLE)
         End If
         'If Me.UNION = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNION = ExcelFilaUnion.UNION
         'If Me.UNITS = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNITS = ExcelFilaUnion.UNITS
@@ -224,7 +224,7 @@ Public Class ClsUnion
         Me.T2HANDLE = T2Handle
         Me.T2OUTFEED = T2Outfeed
         Me.T2INCLINATION = T2Inclination
-        Me.ROTATION = Rotation
+        Me.ANGLE = Rotation
         Me.LADO = lado
         Try
             T1Block = Eventos.COMDoc().HandleToObject(Me._T1HANDLE)
@@ -235,7 +235,7 @@ Public Class ClsUnion
         Catch ex As Exception
         End Try
         If Me.T1INFEED <> "" AndAlso Me.T1INCLINATION <> "" AndAlso Me.T2OUTFEED <> "" AndAlso Me.T2INCLINATION <> "" Then
-            ExcelFilaUnion = cU.Fila_BuscaDame(Me.T1INFEED, Me.T1INCLINATION, Me.T2OUTFEED, Me.T2INCLINATION, Me.ROTATION)
+            ExcelFilaUnion = cU.Fila_BuscaDame(Me.T1INFEED, Me.T1INCLINATION, Me.T2OUTFEED, Me.T2INCLINATION, Me.ANGLE)
         End If
     End Sub
 
@@ -258,7 +258,7 @@ Public Class ClsUnion
                 clsA.XPonDato(Me.HANDLE, "T2HANDLE", Me.T2HANDLE)
                 clsA.XPonDato(Me.HANDLE, "T2OUTFEED", Me.T2OUTFEED)
                 clsA.XPonDato(Me.HANDLE, "T2INCLINATION", Me.T2INCLINATION)
-                clsA.XPonDato(Me.HANDLE, "ROTATION", Me.ROTATION)
+                clsA.XPonDato(Me.HANDLE, "ROTATION", Me.ANGLE)
             Catch ex As Exception
                 Exit Sub
             End Try

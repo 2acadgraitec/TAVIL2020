@@ -132,7 +132,7 @@ Namespace TAVIL2020
             '
             '
             ' Rellenar las clases con los datos de Excel
-            cU = New UNIONESExcelFilas
+            cU = New UNIONESFilas
             If Log Then PonLog("Llenada clase datos UNIONES (cU)", False)
             '
             CierraFormularios()

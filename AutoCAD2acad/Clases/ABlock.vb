@@ -434,7 +434,7 @@ RETRY:
             If resultado = "" AndAlso oBlD.propiedades IsNot Nothing Then
                 resultado = BloqueDinamico_ParametroDame(oBlD.propiedades, nameprobusco)
             End If
-
+            If resultado Is Nothing Then resultado = ""
             Return resultado
         End Function
         '' Devuelto todos los atributos (GetAttributes + GetConstantAttributes)

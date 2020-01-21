@@ -21,8 +21,8 @@ Namespace A2acad
         ''' <param name="queApp">AcadApplication que cargamos al inicio del desarrollo</param>
         ''' <param name="_appFullPathPadreDll">fullPath de la DLL que instancia esta clase (app_fullpath)</param>
         ''' <param name="queAppReg">regApp que creamos en variables [CLIENTE]2acad</param>
-        Public Sub New(queApp As Autodesk.AutoCAD.Interop.AcadApplication, _appFullPathPadreDll As String, queAppReg As String, key As String)
-            If key <> keyPre & "_" & keySuf Then
+        Public Sub New(k As String, queApp As Autodesk.AutoCAD.Interop.AcadApplication, _appFullPathPadreDll As String, queAppReg As String)
+            If k <> key Then
                 activado = False
                 Throw New System.Exception("Not allowed")
                 Return
