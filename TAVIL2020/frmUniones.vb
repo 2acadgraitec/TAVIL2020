@@ -21,7 +21,7 @@ Public Class frmUniones
 
     Private Sub frmUniones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
-        Me.Text = HojaUniones & " - v" & appVersion
+        Me.Text = "UNIONES - v" & appVersion
         ' Cargar recursos
         Using oLock As DocumentLock = Eventos.AXDoc.LockDocument
             'clsA.ClonaTODODesdeDWG(BloqueRecursos, True, True)
@@ -30,7 +30,7 @@ Public Class frmUniones
             clsA.Clona_UnBloqueDesdeDWG(BloqueRecursos, "UNION")
         End Using
         PonToolTipControles()
-        Dim queCapa As AcadLayer = clsA.CapaDame(HojaUniones)
+        Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
         If queCapa IsNot Nothing Then
             capaUnionesVisible = queCapa.LayerOn
             queCapa.LayerOn = True
@@ -45,7 +45,7 @@ Public Class frmUniones
     Private Sub frmUniones_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
         Eventos.SYSMONVAR()
         If cbCapa.Enabled = True Then
-            Dim queCapa As AcadLayer = clsA.CapaDame(HojaUniones)
+            Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
             If queCapa IsNot Nothing Then
                 queCapa.LayerOn = capaUnionesVisible
                 queCapa.Freeze = Not (cbCapa.Checked)
@@ -95,7 +95,7 @@ Public Class frmUniones
         End Try
         '
         Dim lUniHANLE As IEnumerable(Of ClsUnion) = From x In LClsUnion
-                                                    Where x.HANDLE = handle
+                                                    Where x.UnionHANDLE = handle
                                                     Select x
         If lUniHANLE.Count > 0 Then
             UClsUnion = lUniHANLE.First
@@ -197,7 +197,7 @@ Public Class frmUniones
         Next
     End Sub
     Private Sub CbCapa_CheckedChanged(sender As Object, e As EventArgs) Handles cbCapa.CheckedChanged
-        Dim queCapa As AcadLayer = clsA.CapaDame(HojaUniones)
+        Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
         If queCapa IsNot Nothing Then
             queCapa.LayerOn = cbCapa.Checked
             queCapa.Freeze = Not (cbCapa.Checked)

@@ -5,11 +5,11 @@ Imports System.Windows.Forms
 Public Class UNIONESXFilas
     Public nHoja As String = HojaUniones
     Public Campos As List(Of String)
-    Public filas As List(Of UNIONESXFila)        ' Key = ITEM_NUMBER, Value = clsPTItem
+    Public filasX As List(Of UNIONESXFila)        ' Key = ITEM_NUMBER, Value = clsPTItem
     Public Sub New()
         'If cXML Is Nothing Then cXML = New ClosedXML2acad.ClosedXML2acad
         Campos = New List(Of String)
-        filas = New List(Of UNIONESXFila)
+        filasX = New List(Of UNIONESXFila)
         '
         For Each fila As ce.IXLRow In modClosedXMLTavil.Excel_LeeFilar(LAYOUTDB, nHoja, concabeceras:=True).AsParallel
             If fila.RowNumber = 1 Then
@@ -17,34 +17,49 @@ Public Class UNIONESXFilas
                     Campos.Add(Convert.ToString(oCe.Value))
                 Next
             Else
-                filas.Add(New UNIONESXFila(fila))
+                filasX.Add(New UNIONESXFila(fila))
             End If
             System.Windows.Forms.Application.DoEvents()
         Next
     End Sub
     ' inC y outC siempre enviarlos con 8 carácteres (Pueden ser TRD300XX o TRD30015)
     ' Debemos buscar el que sea único, con las XX y sin las XX
-    Public Function Fila_BuscaDame(inC As String, inInc As String, outC As String, outInc As String, angle As String) As UNIONESXFila
+    Public Function Fila_BuscaDame(inCL As String, inIncL As String,
+                                   inCR As String, inIncR As String,
+                                   outC As String, outInc As String, angle As String) As UNIONESXFila
         Dim resultado As UNIONESXFila = Nothing
-        Dim inCFin As String = ""
+        Dim inCLFin As String = ""
+        Dim inCRFin As String = ""
         Dim outCFin As String = ""
         '
-        ' Filtro 1 (para ver si existe inC con 8 carácteres o con 6 y terminado en XX)
-        Dim filtros() As String = {inC, inC.Substring(0, 6) & "XX"}
+        ' Filtro 1 (para ver si existe inCL con 8 carácteres o con 6 y terminado en XX)
+        Dim filtros() As String = {inCL.ToUpper, inCL.Substring(0, 6) & "XX".ToUpper}
         For Each filtro As String In filtros
-            Dim f1 As IEnumerable(Of UNIONESXFila) = From x In filas
-                                                     Where x.INFEED_CONVEYOR.ToUpper.Trim = filtro
+            Dim f1 As IEnumerable(Of UNIONESXFila) = From x In filasX
+                                                     Where x.INFEED_CONVEYOR_L.ToUpper.Trim = filtro
                                                      Select x
             If f1 IsNot Nothing AndAlso f1.Count > 0 Then
-                inCFin = filtro
+                inCLFin = filtro
                 Exit For
             End If
         Next
-        ' Filtro 2 (para ver si existe outC con 8 carácteres o con 6 y terminado en XX)
-        filtros = {outC, outC.Substring(0, 6) & "XX"}
+        '
+        ' Filtro 2 (para ver si existe inCR con 8 carácteres o con 6 y terminado en XX)
+        filtros = {inCR.ToUpper, inCR.Substring(0, 6) & "XX".ToUpper}
         For Each filtro As String In filtros
-            Dim f1 As IEnumerable(Of UNIONESXFila) = From x In filas
-                                                     Where x.INFEED_CONVEYOR.ToUpper.Trim = filtro
+            Dim f1 As IEnumerable(Of UNIONESXFila) = From x In filasX
+                                                     Where x.INFEED_CONVEYOR_R.ToUpper.Trim = filtro
+                                                     Select x
+            If f1 IsNot Nothing AndAlso f1.Count > 0 Then
+                inCRFin = filtro
+                Exit For
+            End If
+        Next
+        ' Filtro 3 (para ver si existe outC con 8 carácteres o con 6 y terminado en XX)
+        filtros = {outC.ToUpper, outC.Substring(0, 6) & "XX".ToUpper}
+        For Each filtro As String In filtros
+            Dim f1 As IEnumerable(Of UNIONESXFila) = From x In filasX
+                                                     Where x.OUTFEED_CONVEYOR.ToUpper.Trim = filtro
                                                      Select x
             If f1 IsNot Nothing AndAlso f1.Count > 0 Then
                 outCFin = filtro
@@ -52,7 +67,7 @@ Public Class UNIONESXFilas
             End If
         Next
         '
-        If inCFin = "" OrElse outCFin = "" Then
+        If inCLFin = "" OrElse inCRFin = "" OrElse outCFin = "" Then
             ' Salimos con Nothing
             Return resultado
             'Exit Function
@@ -60,67 +75,18 @@ Public Class UNIONESXFilas
         '
         '
         If angle = "0" Then angle = ""
-        Dim fila = From x In filas
-                   Where x.INFEED_CONVEYOR.Trim.StartsWith(inCFin) AndAlso
-                                    x.INFEED_INCLINATION.Trim = inInc.Trim AndAlso
-                                    x.OUTFEED_CONVEYOR.Trim.StartsWith(outCFin.Trim) AndAlso
-                                    x.OUTFEED_INCLINATION.Trim = outInc.Trim AndAlso
-                                    x.ANGLE.Trim = angle.Trim
+        Dim fila = From x In filasX
+                   Where x.INFEED_CONVEYOR_L.Trim.StartsWith(inCLFin) AndAlso
+                   x.INFEED_INCLINATION_L.Trim = inIncL.Trim AndAlso
+                   x.INFEED_CONVEYOR_R.Trim.StartsWith(inCRFin) AndAlso
+                   x.INFEED_INCLINATION_R.Trim = inIncR.Trim AndAlso
+                   x.OUTFEED_CONVEYOR.Trim.StartsWith(outCFin.Trim) AndAlso
+                   x.OUTFEED_INCLINATION.Trim = outInc.Trim AndAlso
+                   x.ANGLE.Trim = angle.Trim
                    Select x
         '
         If fila.Count > 0 Then
             resultado = fila.FirstOrDefault
-        End If
-        '
-        Return resultado
-    End Function
-    ' inC siempre enviarlos con 8 carácteres (Pueden ser TRD300XX o TRD30015)
-    ' Debemos buscar el que sea único, con las XX y sin las XX
-    Public Function Fila_InclinationsInOut(inC As String, INFEED As Boolean) As String()
-        Dim resultado As String() = {}
-        Dim inCFin As String = ""
-        '
-        ' Filtro 1 (para ver si existe inC con 8 carácteres o con 6 y terminado en XX)
-        Dim filtros() As String = {inC, inC.Substring(0, 6) & "XX"}
-        For Each filtro As String In filtros
-            Dim f1 As IEnumerable(Of UNIONESXFila) = Nothing
-            If INFEED Then
-                f1 = From x In Me.filas
-                     Where x.INFEED_CONVEYOR.ToUpper.Trim = filtro
-                     Select x
-
-            Else
-                f1 = From x In Me.filas
-                     Where x.OUTFEED_CONVEYOR.ToUpper.Trim = filtro
-                     Select x
-            End If
-            If f1 IsNot Nothing AndAlso f1.Count > 0 Then
-                inCFin = filtro
-                Exit For
-            End If
-        Next
-        '
-        If inCFin = "" Then
-            ' Salimos con Nothing
-            Return resultado
-            'Exit Function
-        End If
-
-        Dim inclinations As IEnumerable(Of String) = Nothing
-        If INFEED Then
-            inclinations = From x In Me.filas
-                           Where x.INFEED_CONVEYOR.Trim.StartsWith(inCFin)
-                           Select x.INFEED_INCLINATION
-                           Distinct
-        Else
-            inclinations = From x In Me.filas
-                           Where x.OUTFEED_CONVEYOR.Trim.StartsWith(inCFin)
-                           Select x.OUTFEED_INCLINATION
-                           Distinct
-        End If
-        '
-        If inclinations.Count > 0 Then
-            resultado = inclinations.ToArray
         End If
         '
         Return resultado

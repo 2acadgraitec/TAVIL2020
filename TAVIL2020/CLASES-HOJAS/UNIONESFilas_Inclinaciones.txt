@@ -1,0 +1,51 @@
+   ' inC siempre enviarlos con 8 carácteres (Pueden ser TRD300XX o TRD30015)
+    ' Debemos buscar el que sea único, con las XX y sin las XX
+    Public Function Fila_InclinationsInOut(inC As String, INFEED As Boolean) As String()
+        Dim resultado As String() = {}
+        Dim inCFin As String = ""
+        '
+        ' Filtro 1 (para ver si existe inC con 8 carácteres o con 6 y terminado en XX)
+        Dim filtros() As String = {inC.ToUpper, inC.Substring(0, 6) & "XX".ToUpper}
+        For Each filtro As String In filtros
+            Dim f1 As IEnumerable(Of UNIONESFila) = Nothing
+            If INFEED Then
+                f1 = From x In Me.filas
+                     Where x.INFEED_CONVEYOR.ToUpper.Trim = filtro
+                     Select x
+
+            Else
+                f1 = From x In Me.filas
+                     Where x.OUTFEED_CONVEYOR.ToUpper.Trim = filtro
+                     Select x
+            End If
+            If f1 IsNot Nothing AndAlso f1.Count > 0 Then
+                inCFin = filtro
+                Exit For
+            End If
+        Next
+        '
+        If inCFin = "" Then
+            ' Salimos con Nothing
+            Return resultado
+            'Exit Function
+        End If
+
+        Dim inclinations As IEnumerable(Of String) = Nothing
+        If INFEED Then
+            inclinations = From x In Me.filas
+                           Where x.INFEED_CONVEYOR.Trim.StartsWith(inCFin)
+                           Select x.INFEED_INCLINATION
+                           Distinct
+        Else
+            inclinations = From x In Me.filas
+                           Where x.OUTFEED_CONVEYOR.Trim.StartsWith(inCFin)
+                           Select x.OUTFEED_INCLINATION
+                           Distinct
+        End If
+        '
+        If inclinations.Count > 0 Then
+            resultado = inclinations.ToArray
+        End If
+        '
+        Return resultado
+    End Function

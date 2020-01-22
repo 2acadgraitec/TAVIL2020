@@ -422,6 +422,44 @@ Public Module modClosedXMLTavil
         Return resultado
     End Function
     '
+    Public Function Excel_LeeFilar(ByVal queExcel As String, queHojas As String(), Optional concabeceras As Boolean = True) As List(Of IXLRow)
+        ' concabeceras = True, fila 1 serán las cabeceras de columna.
+        ' concabeceras = False, fila 1 será la primera fila de datos.
+        Dim resultado As New List(Of IXLRow)
+        '
+        ' ***** Cerrar Excel
+        'CierraProceso("EXCEL")
+        '
+        ' quePlantilla = "". Escribiremos en queExcelFin original
+        Using xlWb As XLWorkbook = New XLWorkbook(queExcel, XLEventTracking.Disabled)
+            Dim xlWs As IXLWorksheet = Nothing
+            For Each queHoja As String In queHojas
+                Try
+                    xlWs = xlWb.Worksheet(queHoja)
+                Catch ex As Exception
+                    Continue For
+                End Try
+                Dim columnas As Integer = xlWs.FirstRow.CellsUsed.Count
+                Dim filas As Integer = xlWs.FirstColumn.CellsUsed.Count
+                'Dim todo As IXLRange = xlWs.CellsUsed
+                '
+                ' ***** Iteramos con las filas
+                For x As Integer = 1 To filas
+                    Dim valor As String = xlWs.Row(x).FirstCell.Value.ToString
+                    If valor = "" Then
+                        Exit For
+                    Else
+                        resultado.Add(xlWs.Row(x))
+                    End If
+                Next
+            Next
+        End Using
+        ' Efectuamos una recolección de elementos no utilizados,
+        ' ya que no se cierra la instancia de Excel existente
+        ' en el Administrador de Tareas.
+        LimpiaMemoria()
+        Return resultado
+    End Function
     Public Function Excel_LeeFilar(ByVal queExcel As String, Optional queHoja As String = "", Optional concabeceras As Boolean = True) As List(Of IXLRow)
         ' concabeceras = True, fila 1 serán las cabeceras de columna.
         ' concabeceras = False, fila 1 será la primera fila de datos.

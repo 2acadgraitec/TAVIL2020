@@ -83,7 +83,8 @@ Module movVar
     Public CintasRef As String = "REF.CINTES"
     Public LAYOUTDB As String = "LAYOUTDBS4.xlsx"                  ' fullPath del fichero LAYOUTDB.xlsx que hace de base de datos.
     Public HojaPatas As String = "PT"
-    Public HojaUniones As String = "UNIONES"
+    Public CapaUniones As String = "UNIONES"
+    Public HojasUniones As String() = {"UNIONES", "UNIONES_Y", "UNIONES_X"}
     Public HojaATR As String = "ATR"
     Public HojaSeleccionables As String = "SELECCIONABLES"
     Public HojaConceptos As String = "CONCEPTOS"
@@ -205,8 +206,8 @@ Module movVar
         mensaje(1) &= "HojaPatas = " & HojaPatas & vbCrLf
         '
         'HojaUniones = UNIONES
-        HojaUniones = cIni.IniGet(appIni, "OPTIONS", "HojaUniones")
-        mensaje(1) &= "HojaUniones = " & HojaUniones & vbCrLf
+        CapaUniones = cIni.IniGet(appIni, "OPTIONS", "CapaUniones")
+        mensaje(1) &= "CapaUniones = " & CapaUniones & vbCrLf
         '
         'HojaATR = ATR
         HojaATR = cIni.IniGet(appIni, "OPTIONS", "HojaATR")

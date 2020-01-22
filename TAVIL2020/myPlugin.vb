@@ -48,7 +48,7 @@ Namespace TAVIL2020
                 ' **************************
                 cIni = New clsINI()
                 'cfg = New UtilesAlberto.Conf("aiiao2K19_2aCAD", System.Reflection.Assembly.GetExecutingAssembly)
-                clsA = New AutoCAD2acad.A2acad.A2acad(Eventos.COMApp, appFull, regAPPCliente, "aiiao2K19_2aCAD")
+                clsA = New AutoCAD2acad.A2acad.A2acad("aiiao2K20_2aCAD", Eventos.COMApp, appFull, regAPPCliente)
             Catch ex As [System].Exception
                 MsgBox(ex.ToString)
                 Exit Sub

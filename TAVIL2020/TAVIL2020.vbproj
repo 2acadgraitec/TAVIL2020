@@ -160,8 +160,6 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CLASES-HOJAS\UNIONESXFilas.vb" />
-    <Compile Include="CLASES-HOJAS\UNIONESYFilas.vb" />
     <Compile Include="clsBloquePataDatos.vb" />
     <Compile Include="clsINI.vb" />
     <Compile Include="clsLAYOUTDBS4.vb" />
