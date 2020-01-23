@@ -33,9 +33,9 @@
       AppName="TAVIL2020"
       Version="1.0.0.0"
       ModuleName="TAVIL2020.cuix" />
-    <ComponentEntry
+    <!--<ComponentEntry
       AppName="AutoCAD2acad"
       Version="2019.0.0.1"
-      ModuleName="AutoCAD2acad.dll" />
+      ModuleName="AutoCAD2acad.dll" />-->
 	</Components>
 </ApplicationPackage>

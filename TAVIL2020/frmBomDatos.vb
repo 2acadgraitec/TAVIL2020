@@ -112,14 +112,14 @@ Partial Public Class frmBomDatos
     End Sub
 
     Private Sub BtnReportUnions_Click(sender As Object, e As EventArgs) Handles BtnReportUnions.Click
-        Call Global.TAVIL2020.UNIONES.Report_UNIONES()
+        Call Global.TAVIL2020.UNIONES.Report_UNIONES_TODO()
     End Sub
 
     Public Sub tvUnions_LlenaXDATA()
         BtnReportUnions.Enabled = False
         ' Rellenar tvGrupos con los grupos que haya ([nombre grupo]) Sacado de XData elementos (regAPPCliente, XData = "GRUPO")
         TvUnions.Nodes.Clear()
-        Dim arrTodos As ArrayList = clsA.SeleccionaDameBloquesTODOS(regAPPCliente, "UNION")
+        Dim arrTodos As ArrayList = clsA.SeleccionaDameBloquesTODOS(regAPPCliente, "UNION") ', CapaUniones) ', "UNION")
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
             Exit Sub
         End If
@@ -129,10 +129,10 @@ Partial Public Class frmBomDatos
             Dim oUnion As UNION = Global.TAVIL2020.UNIONES.LUniones.Last
             '
             Dim oNode As New TreeNode
-            oNode.Text = oUnion.HANDLE
-            oNode.Name = oUnion.HANDLE
-            oNode.Tag = oUnion.HANDLE
-            oNode.ToolTipText = oUnion.HANDLE & vbCrLf & oUnion.NAME
+            oNode.Text = oUnion.UnionHANDLE
+            oNode.Name = oUnion.UnionHANDLE
+            oNode.Tag = oUnion.UnionHANDLE
+            oNode.ToolTipText = oUnion.UnionHANDLE & vbCrLf & oUnion.UnionBlock.EffectiveName
             TvUnions.Nodes.Add(oNode)
             oNode = Nothing
             acadObj = Nothing

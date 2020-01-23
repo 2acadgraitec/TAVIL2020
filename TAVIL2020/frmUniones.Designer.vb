@@ -29,22 +29,12 @@ Partial Class frmUniones
         Me.cbZoom = New System.Windows.Forms.CheckBox()
         Me.BtnInsertarUnion = New System.Windows.Forms.Button()
         Me.GUnion = New System.Windows.Forms.GroupBox()
-        Me.LbLado = New System.Windows.Forms.ListBox()
-        Me.LblLado = New System.Windows.Forms.Label()
         Me.DgvUnion = New System.Windows.Forms.DataGridView()
         Me.UNION = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.UNITS = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LblRotation = New System.Windows.Forms.Label()
-        Me.LbRotation = New System.Windows.Forms.ListBox()
-        Me.LbInclinationT2 = New System.Windows.Forms.ListBox()
-        Me.LbInclinationT1 = New System.Windows.Forms.ListBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.BtnAceptar = New System.Windows.Forms.Button()
         Me.BtnCancelar = New System.Windows.Forms.Button()
-        Me.LblT2 = New System.Windows.Forms.Label()
-        Me.LblT1 = New System.Windows.Forms.Label()
-        Me.BtnT2 = New System.Windows.Forms.Button()
-        Me.BtnT1 = New System.Windows.Forms.Button()
         Me.BtnCrearUnion = New System.Windows.Forms.Button()
         Me.BtnEditarUnion = New System.Windows.Forms.Button()
         Me.BtnBorrarUnion = New System.Windows.Forms.Button()
@@ -53,6 +43,9 @@ Partial Class frmUniones
         Me.BtnInsertaMultiplesUniones = New System.Windows.Forms.Button()
         Me.cbTipo = New System.Windows.Forms.ComboBox()
         Me.LblUniones = New System.Windows.Forms.Label()
+        Me.BtnReportTodo = New System.Windows.Forms.Button()
+        Me.BtnReportTotal = New System.Windows.Forms.Button()
+        Me.PUnion = New System.Windows.Forms.Panel()
         Me.GUnion.SuspendLayout()
         CType(Me.DgvUnion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -61,7 +54,7 @@ Partial Class frmUniones
         '
         Me.btnCerrar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCerrar.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCerrar.Location = New System.Drawing.Point(659, 465)
+        Me.btnCerrar.Location = New System.Drawing.Point(806, 465)
         Me.btnCerrar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCerrar.Name = "btnCerrar"
         Me.btnCerrar.Size = New System.Drawing.Size(89, 28)
@@ -104,8 +97,9 @@ Partial Class frmUniones
         '
         'BtnInsertarUnion
         '
+        Me.BtnInsertarUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnInsertarUnion.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnInsertarUnion.Location = New System.Drawing.Point(123, 336)
+        Me.BtnInsertarUnion.Location = New System.Drawing.Point(357, 76)
         Me.BtnInsertarUnion.Name = "BtnInsertarUnion"
         Me.BtnInsertarUnion.Size = New System.Drawing.Size(132, 45)
         Me.BtnInsertarUnion.TabIndex = 19
@@ -115,54 +109,26 @@ Partial Class frmUniones
         'GUnion
         '
         Me.GUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.GUnion.Controls.Add(Me.LbLado)
-        Me.GUnion.Controls.Add(Me.LblLado)
         Me.GUnion.Controls.Add(Me.DgvUnion)
-        Me.GUnion.Controls.Add(Me.LblRotation)
-        Me.GUnion.Controls.Add(Me.LbRotation)
-        Me.GUnion.Controls.Add(Me.LbInclinationT2)
-        Me.GUnion.Controls.Add(Me.LbInclinationT1)
         Me.GUnion.Controls.Add(Me.Label2)
         Me.GUnion.Controls.Add(Me.BtnAceptar)
         Me.GUnion.Controls.Add(Me.BtnCancelar)
-        Me.GUnion.Controls.Add(Me.LblT2)
-        Me.GUnion.Controls.Add(Me.LblT1)
-        Me.GUnion.Controls.Add(Me.BtnT2)
-        Me.GUnion.Controls.Add(Me.BtnT1)
         Me.GUnion.Controls.Add(Me.BtnInsertarUnion)
-        Me.GUnion.Location = New System.Drawing.Point(368, 29)
+        Me.GUnion.Location = New System.Drawing.Point(378, 277)
         Me.GUnion.Name = "GUnion"
-        Me.GUnion.Size = New System.Drawing.Size(381, 387)
+        Me.GUnion.Size = New System.Drawing.Size(518, 132)
         Me.GUnion.TabIndex = 20
         Me.GUnion.TabStop = False
-        Me.GUnion.Text = "Crear / Editar Unión"
-        '
-        'LbLado
-        '
-        Me.LbLado.FormattingEnabled = True
-        Me.LbLado.ItemHeight = 16
-        Me.LbLado.Items.AddRange(New Object() {"L", "C", "R"})
-        Me.LbLado.Location = New System.Drawing.Point(309, 241)
-        Me.LbLado.Name = "LbLado"
-        Me.LbLado.Size = New System.Drawing.Size(66, 52)
-        Me.LbLado.TabIndex = 39
-        '
-        'LblLado
-        '
-        Me.LblLado.Location = New System.Drawing.Point(243, 241)
-        Me.LblLado.Name = "LblLado"
-        Me.LblLado.Size = New System.Drawing.Size(56, 22)
-        Me.LblLado.TabIndex = 38
-        Me.LblLado.Text = "LADO :"
         '
         'DgvUnion
         '
         Me.DgvUnion.AllowUserToAddRows = False
         Me.DgvUnion.AllowUserToDeleteRows = False
+        Me.DgvUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.DgvUnion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DgvUnion.ColumnHeadersVisible = False
         Me.DgvUnion.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UNION, Me.UNITS})
-        Me.DgvUnion.Location = New System.Drawing.Point(13, 226)
+        Me.DgvUnion.Location = New System.Drawing.Point(111, 16)
         Me.DgvUnion.MaximumSize = New System.Drawing.Size(175, 104)
         Me.DgvUnion.MinimumSize = New System.Drawing.Size(175, 104)
         Me.DgvUnion.Name = "DgvUnion"
@@ -190,47 +156,10 @@ Partial Class frmUniones
         Me.UNITS.ReadOnly = True
         Me.UNITS.Width = 50
         '
-        'LblRotation
-        '
-        Me.LblRotation.Location = New System.Drawing.Point(209, 187)
-        Me.LblRotation.Name = "LblRotation"
-        Me.LblRotation.Size = New System.Drawing.Size(94, 22)
-        Me.LblRotation.TabIndex = 35
-        Me.LblRotation.Text = "ROTATION :"
-        '
-        'LbRotation
-        '
-        Me.LbRotation.FormattingEnabled = True
-        Me.LbRotation.ItemHeight = 16
-        Me.LbRotation.Items.AddRange(New Object() {"0", "90"})
-        Me.LbRotation.Location = New System.Drawing.Point(309, 187)
-        Me.LbRotation.Name = "LbRotation"
-        Me.LbRotation.Size = New System.Drawing.Size(66, 36)
-        Me.LbRotation.TabIndex = 34
-        '
-        'LbInclinationT2
-        '
-        Me.LbInclinationT2.FormattingEnabled = True
-        Me.LbInclinationT2.ItemHeight = 16
-        Me.LbInclinationT2.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbInclinationT2.Location = New System.Drawing.Point(309, 108)
-        Me.LbInclinationT2.Name = "LbInclinationT2"
-        Me.LbInclinationT2.Size = New System.Drawing.Size(66, 52)
-        Me.LbInclinationT2.TabIndex = 31
-        '
-        'LbInclinationT1
-        '
-        Me.LbInclinationT1.FormattingEnabled = True
-        Me.LbInclinationT1.ItemHeight = 16
-        Me.LbInclinationT1.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbInclinationT1.Location = New System.Drawing.Point(309, 29)
-        Me.LbInclinationT1.Name = "LbInclinationT1"
-        Me.LbInclinationT1.Size = New System.Drawing.Size(66, 52)
-        Me.LbInclinationT1.TabIndex = 30
-        '
         'Label2
         '
-        Me.Label2.Location = New System.Drawing.Point(10, 201)
+        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label2.Location = New System.Drawing.Point(6, 17)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(114, 22)
         Me.Label2.TabIndex = 28
@@ -240,7 +169,7 @@ Partial Class frmUniones
         '
         Me.BtnAceptar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAceptar.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnAceptar.Location = New System.Drawing.Point(301, 354)
+        Me.BtnAceptar.Location = New System.Drawing.Point(415, 17)
         Me.BtnAceptar.Name = "BtnAceptar"
         Me.BtnAceptar.Size = New System.Drawing.Size(74, 27)
         Me.BtnAceptar.TabIndex = 26
@@ -251,46 +180,12 @@ Partial Class frmUniones
         '
         Me.BtnCancelar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCancelar.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnCancelar.Location = New System.Drawing.Point(8, 353)
+        Me.BtnCancelar.Location = New System.Drawing.Point(302, 17)
         Me.BtnCancelar.Name = "BtnCancelar"
         Me.BtnCancelar.Size = New System.Drawing.Size(74, 27)
         Me.BtnCancelar.TabIndex = 25
         Me.BtnCancelar.Text = "Cancelar"
         Me.BtnCancelar.UseVisualStyleBackColor = False
-        '
-        'LblT2
-        '
-        Me.LblT2.Location = New System.Drawing.Point(154, 108)
-        Me.LblT2.Name = "LblT2"
-        Me.LblT2.Size = New System.Drawing.Size(149, 52)
-        Me.LblT2.TabIndex = 23
-        Me.LblT2.Text = "Datos T2:"
-        '
-        'LblT1
-        '
-        Me.LblT1.Location = New System.Drawing.Point(154, 29)
-        Me.LblT1.Name = "LblT1"
-        Me.LblT1.Size = New System.Drawing.Size(149, 52)
-        Me.LblT1.TabIndex = 22
-        Me.LblT1.Text = "Datos T1:"
-        '
-        'BtnT2
-        '
-        Me.BtnT2.Location = New System.Drawing.Point(13, 108)
-        Me.BtnT2.Name = "BtnT2"
-        Me.BtnT2.Size = New System.Drawing.Size(132, 41)
-        Me.BtnT2.TabIndex = 21
-        Me.BtnT2.Text = "Transportador 2"
-        Me.BtnT2.UseVisualStyleBackColor = True
-        '
-        'BtnT1
-        '
-        Me.BtnT1.Location = New System.Drawing.Point(13, 29)
-        Me.BtnT1.Name = "BtnT1"
-        Me.BtnT1.Size = New System.Drawing.Size(132, 41)
-        Me.BtnT1.TabIndex = 20
-        Me.BtnT1.Text = "Transportador 1"
-        Me.BtnT1.UseVisualStyleBackColor = True
         '
         'BtnCrearUnion
         '
@@ -369,12 +264,46 @@ Partial Class frmUniones
         Me.LblUniones.TabIndex = 28
         Me.LblUniones.Text = "."
         '
+        'BtnReportTodo
+        '
+        Me.BtnReportTodo.Enabled = False
+        Me.BtnReportTodo.Location = New System.Drawing.Point(178, 322)
+        Me.BtnReportTodo.Name = "BtnReportTodo"
+        Me.BtnReportTodo.Size = New System.Drawing.Size(71, 47)
+        Me.BtnReportTodo.TabIndex = 29
+        Me.BtnReportTodo.Text = "TODO"
+        Me.BtnReportTodo.UseVisualStyleBackColor = True
+        '
+        'BtnReportTotal
+        '
+        Me.BtnReportTotal.Enabled = False
+        Me.BtnReportTotal.Location = New System.Drawing.Point(279, 322)
+        Me.BtnReportTotal.Name = "BtnReportTotal"
+        Me.BtnReportTotal.Size = New System.Drawing.Size(70, 47)
+        Me.BtnReportTotal.TabIndex = 30
+        Me.BtnReportTotal.Text = "TOTAL"
+        Me.BtnReportTotal.UseVisualStyleBackColor = True
+        '
+        'PUnion
+        '
+        Me.PUnion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PUnion.Location = New System.Drawing.Point(378, 13)
+        Me.PUnion.Margin = New System.Windows.Forms.Padding(0)
+        Me.PUnion.MaximumSize = New System.Drawing.Size(516, 258)
+        Me.PUnion.MinimumSize = New System.Drawing.Size(516, 258)
+        Me.PUnion.Name = "PUnion"
+        Me.PUnion.Size = New System.Drawing.Size(516, 258)
+        Me.PUnion.TabIndex = 31
+        '
         'frmUniones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCerrar
-        Me.ClientSize = New System.Drawing.Size(761, 503)
+        Me.ClientSize = New System.Drawing.Size(908, 503)
+        Me.Controls.Add(Me.PUnion)
+        Me.Controls.Add(Me.BtnReportTotal)
+        Me.Controls.Add(Me.BtnReportTodo)
         Me.Controls.Add(Me.LblUniones)
         Me.Controls.Add(Me.cbTipo)
         Me.Controls.Add(Me.BtnInsertaMultiplesUniones)
@@ -409,10 +338,6 @@ Partial Class frmUniones
     Friend WithEvents cbZoom As Windows.Forms.CheckBox
     Friend WithEvents BtnInsertarUnion As Windows.Forms.Button
     Friend WithEvents GUnion As Windows.Forms.GroupBox
-    Friend WithEvents BtnT2 As Windows.Forms.Button
-    Friend WithEvents BtnT1 As Windows.Forms.Button
-    Friend WithEvents LblT2 As Windows.Forms.Label
-    Friend WithEvents LblT1 As Windows.Forms.Label
     Friend WithEvents BtnCrearUnion As Windows.Forms.Button
     Friend WithEvents BtnEditarUnion As Windows.Forms.Button
     Friend WithEvents BtnBorrarUnion As Windows.Forms.Button
@@ -424,13 +349,10 @@ Partial Class frmUniones
     Friend WithEvents cbTipo As Windows.Forms.ComboBox
     Friend WithEvents LblUniones As Windows.Forms.Label
     Friend WithEvents Label2 As Windows.Forms.Label
-    Friend WithEvents LbInclinationT2 As Windows.Forms.ListBox
-    Friend WithEvents LbInclinationT1 As Windows.Forms.ListBox
-    Friend WithEvents LblRotation As Windows.Forms.Label
-    Friend WithEvents LbRotation As Windows.Forms.ListBox
     Friend WithEvents DgvUnion As Windows.Forms.DataGridView
     Friend WithEvents UNION As Windows.Forms.DataGridViewComboBoxColumn
     Friend WithEvents UNITS As Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents LbLado As Windows.Forms.ListBox
-    Friend WithEvents LblLado As Windows.Forms.Label
+    Friend WithEvents BtnReportTodo As Windows.Forms.Button
+    Friend WithEvents BtnReportTotal As Windows.Forms.Button
+    Friend WithEvents PUnion As Windows.Forms.Panel
 End Class

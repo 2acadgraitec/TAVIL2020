@@ -9,10 +9,10 @@ Imports a2 = AutoCAD2acad.A2acad
 Imports Ev = TAVIL2020.Eventos
 
 Public Module modTavil
-    Public LClsUnion As List(Of ClsUnion)
+    Public LClsUnion As List(Of UNION)
     Public Function tvUniones_DameListTreeNodes(Optional queFiltro As EFiltro = EFiltro.TODOS) As List(Of TreeNode)
         Dim lUni As New List(Of TreeNode)
-        LClsUnion = New List(Of ClsUnion)
+        LClsUnion = New List(Of UNION)
         '
         Dim arrTodos As List(Of String) = clsA.SeleccionaDameHandle_PorNombreBloque(NombreBloqueUNION)
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
@@ -38,7 +38,7 @@ Public Module modTavil
             '
             If queFiltro.ToString = EFiltro.TODOS.ToString Then
                 lUni.Add(oNode)
-                LClsUnion.Add(New ClsUnion(oBl.Handle))
+                LClsUnion.Add(New UNION(oBl.Handle))
             ElseIf queFiltro.ToString = EFiltro.XXX.ToString Then
                 'Dim t1 As String = clsA.XLeeDato(oBl.Handle, "T1HANDLE")
                 'Dim t2 As String = clsA.XLeeDato(oBl.Handle, "T2HANDLE")
@@ -50,7 +50,7 @@ Public Module modTavil
                 Dim Uni As String = clsA.XLeeDato(oBl.Handle, "UNION")
                 If Uni = "" OrElse Uni = "XXX" Then
                     lUni.Add(oNode)
-                    LClsUnion.Add(New ClsUnion(oBl.Handle))
+                    LClsUnion.Add(New UNION(oBl.Handle))
                 Else
                     Continue For
                 End If

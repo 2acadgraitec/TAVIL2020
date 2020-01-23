@@ -259,6 +259,24 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="TRANSPORTADORESExcelFilas.vb" />
+    <Compile Include="USERCONTROL\UCUnion.Designer.vb">
+      <DependentUpon>UCUnion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="USERCONTROL\UCUnion.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="USERCONTROL\UCUnionX.Designer.vb">
+      <DependentUpon>UCUnionX.vb</DependentUpon>
+    </Compile>
+    <Compile Include="USERCONTROL\UCUnionX.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="USERCONTROL\UCUnionY.Designer.vb">
+      <DependentUpon>UCUnionY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="USERCONTROL\UCUnionY.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UtilesFicheros.vb" />
     <Compile Include="Utilidades.vb" />
   </ItemGroup>
@@ -292,6 +310,15 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="USERCONTROL\UCUnion.resx">
+      <DependentUpon>UCUnion.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="USERCONTROL\UCUnionX.resx">
+      <DependentUpon>UCUnionX.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="USERCONTROL\UCUnionY.resx">
+      <DependentUpon>UCUnionY.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +466,9 @@
       <Project>{c45fea81-2a3c-47a8-baea-35ae18db94a2}</Project>
       <Name>AutoCAD2acad</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

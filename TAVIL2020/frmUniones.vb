@@ -9,15 +9,18 @@ Imports System.Linq
 Imports a2 = AutoCAD2acad.A2acad
 
 Public Class frmUniones
-    Private UltimoBloqueUnion As AcadBlockReference = Nothing
-    Private UltimoBloqueT1 As AcadBlockReference = Nothing
-    Private UltimoBloqueT2 As AcadBlockReference = Nothing
-    Private UClsUnion As ClsUnion = Nothing
-    Public ActualFilaExcel As UNIONESFila = Nothing
+    Public Shared UltimoBloqueUnion As AcadBlockReference = Nothing
+    Public Shared UltimoBloqueT1 As AcadBlockReference = Nothing
+    Public Shared UltimoBloqueT2 As AcadBlockReference = Nothing
+    Public Shared UClsUnion As UNION = Nothing
+    Public Shared ActualFilaExcel As UNIONESFila = Nothing
     Private HighlightedPictureBox As PictureBox = Nothing
     Private oTT As ToolTip = Nothing
     Private capaUnionesVisible As Boolean = True
     Private EsUnionNueva As Boolean = False
+    Public Shared UUni As UCUnion = Nothing
+    Public Shared UUniX As UCUnionX = Nothing
+    Public Shared UUniY As UCUnionY = Nothing
 
     Private Sub frmUniones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Eventos.SYSMONVAR(True)
@@ -29,7 +32,8 @@ Public Class frmUniones
             'clsA.ClonaBloqueDesdeDWG(IO.Path.Combine(IO.Path.GetDirectoryName(BloqueRecursos), "UNION.dwg"), "UNION")
             clsA.Clona_UnBloqueDesdeDWG(BloqueRecursos, "UNION")
         End Using
-        PonToolTipControles()
+        FrmPon("U")
+        'PonToolTipControles()
         Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
         If queCapa IsNot Nothing Then
             capaUnionesVisible = queCapa.LayerOn
@@ -40,6 +44,28 @@ Public Class frmUniones
         End If
         clsA.SelectionSet_Delete()
         cbTipo.Text = "TODOS"
+    End Sub
+
+    Public Sub FrmPon(tipo As String)
+        PUnion.Controls.Clear()
+        UUni = New UCUnion
+        UUniX = New UCUnionX
+        UUniY = New UCUnionY
+        PUnion.SuspendLayout()
+        ' tipo = u, y, x
+        If tipo.ToUpper = "U" Then
+            UUni.Enabled = False
+            PUnion.Controls.Add(UUni)
+        ElseIf tipo.ToUpper = "X" Then
+            UUniX = New UCUnionX
+            UUniX.Enabled = False
+            PUnion.Controls.Add(UUniX)
+        ElseIf tipo.ToUpper = "Y" Then
+            UUniY = New UCUniony
+            UUniY.Enabled = False
+            PUnion.Controls.Add(UUniY)
+        End If
+        PUnion.ResumeLayout()
     End Sub
 
     Private Sub frmUniones_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
@@ -94,9 +120,9 @@ Public Class frmUniones
             Exit Sub
         End Try
         '
-        Dim lUniHANLE As IEnumerable(Of ClsUnion) = From x In LClsUnion
-                                                    Where x.UnionHANDLE = handle
-                                                    Select x
+        Dim lUniHANLE As IEnumerable(Of UNION) = From x In LClsUnion
+                                                 Where x.UnionHANDLE = handle
+                                                 Select x
         If lUniHANLE.Count > 0 Then
             UClsUnion = lUniHANLE.First
         Else
@@ -107,8 +133,7 @@ Public Class frmUniones
         If UClsUnion.T1HANDLE <> "" Then
             Try
                 UltimoBloqueT1 = Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
-                If UClsUnion.T1INCLINATION <> "" Then ListBox_SeleccionaPorTexto(LbInclinationT1, UClsUnion.T1INCLINATION)
-                LblT1.Text = "Datos T1:" & vbCrLf & UltimoBloqueT1.EffectiveName & vbCrLf & UClsUnion.T1INFEED
+                If UClsUnion.T1INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUni.LbInclinationT1, UClsUnion.T1INCLINATION)
             Catch ex As Exception
             End Try
         End If
@@ -116,18 +141,17 @@ Public Class frmUniones
         If UClsUnion.T2HANDLE <> "" Then
             Try
                 UltimoBloqueT2 = Eventos.COMDoc().HandleToObject(UClsUnion.T2HANDLE)
-                If UClsUnion.T2INCLINATION <> "" Then ListBox_SeleccionaPorTexto(LbInclinationT2, UClsUnion.T2INCLINATION)
-                LblT2.Text = "Datos T2:" & vbCrLf & UltimoBloqueT2.EffectiveName & vbCrLf & UClsUnion.T2OUTFEED
+                If UClsUnion.T2INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUni.LbInclinationT2, UClsUnion.T2INCLINATION)
             Catch ex As Exception
             End Try
         End If
         '
         If UClsUnion.ANGLE = "0" OrElse UClsUnion.ANGLE = "" Then
-            LbRotation.SelectedIndex = 0
+            UUni.LbAngle.SelectedIndex = 0
         ElseIf UClsUnion.ANGLE = "90" Then
-            LbRotation.SelectedIndex = 1
+            UUni.LbAngle.SelectedIndex = 1
         Else
-            LbRotation.SelectedIndex = -1
+            UUni.LbAngle.SelectedIndex = -1
         End If
         '
         DgvUnion.Rows.Clear()
@@ -137,7 +161,7 @@ Public Class frmUniones
             DgvUnion.Rows.AddRange(UClsUnion.ExcelFilaUnion.RowsL(UClsUnion.ExcelFilaUnion.LADO).ToArray)
         End If
         ' LADO
-        ListBox_SeleccionaPorTexto(LbLado, UClsUnion.LADO)
+        ListBox_SeleccionaPorTexto(UUni.LbLado, UClsUnion.LADO)
     End Sub
     Private Sub tvUniones_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles tvUniones.MouseDoubleClick
         Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag, conZoom:=True)
@@ -152,8 +176,8 @@ Public Class frmUniones
         UClsUnion = Nothing
         '
         GUnion.Enabled = True
-        BtnT1.Enabled = True
-        BtnT2.Enabled = True
+        UUni.BtnT1.Enabled = True
+        UUni.BtnT2.Enabled = True
         BtnInsertarUnion.Visible = True
         BtnInsertarUnion.Enabled = False
         BtnAceptar.Visible = False
@@ -221,6 +245,7 @@ Public Class frmUniones
                 '    'tvUniones.SelectedNode = Nothing
                 '    'tvUniones_AfterSelect(Nothing, Nothing)
                 'End If
+                If oBlr IsNot Nothing Then UNIONES.UNION_Crea(oBlr.Handle)
             Loop While oBlr IsNot Nothing
         Catch ex As Exception
             Debug.Print(ex.ToString)
@@ -229,7 +254,7 @@ Public Class frmUniones
         Me.Visible = True
     End Sub
 
-    Private Sub BtnT1_Click(sender As Object, e As EventArgs) Handles BtnT1.Click
+    Private Sub BtnT1_Click(sender As Object, e As EventArgs)
         Me.Visible = False
         clsA.ActivaAppAPI()
         UltimoBloqueT1 = clsA.Bloque_SeleccionaDame
@@ -239,7 +264,7 @@ Public Class frmUniones
         Me.Visible = True
         LbT1_SelectedIndexChanged(Nothing, Nothing)
     End Sub
-    Private Sub BtnT2_Click(sender As Object, e As EventArgs) Handles BtnT2.Click
+    Private Sub BtnT2_Click(sender As Object, e As EventArgs)
         Me.Visible = False
         clsA.ActivaAppAPI()
         UltimoBloqueT2 = clsA.Bloque_SeleccionaDame
@@ -251,14 +276,14 @@ Public Class frmUniones
     End Sub
 
 
-    Private Sub LbT1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles LbInclinationT1.SelectedIndexChanged, LbInclinationT2.SelectedIndexChanged, LbRotation.SelectedIndexChanged, LbLado.SelectedIndexChanged
+    Private Sub LbT1_SelectedIndexChanged(sender As Object, e As EventArgs)
         If GUnion.Enabled = False Then Exit Sub
         '
         If UltimoBloqueT1 IsNot Nothing AndAlso
             UltimoBloqueT2 IsNot Nothing AndAlso
-            LbInclinationT1.SelectedIndex >= 0 AndAlso
-            LbInclinationT2.SelectedIndex >= 0 AndAlso
-            LbRotation.SelectedIndex >= 0 Then
+            UUni.LbInclinationT1.SelectedIndex >= 0 AndAlso
+            UUni.LbInclinationT2.SelectedIndex >= 0 AndAlso
+            UUni.LbAngle.SelectedIndex >= 0 Then
             Datos_1PonUnion()   ' Rellenar datos union y ejecutar las 2 comprobaciones siguientes.
         Else
             DgvUnion.Rows.Clear()
@@ -299,29 +324,29 @@ Public Class frmUniones
         If UClsUnion IsNot Nothing Then
             UClsUnion.ExcelFilaUnion = ActualFilaExcel
             UClsUnion.T1HANDLE = UltimoBloqueT1.Handle
-            UClsUnion.T1INCLINATION = LbInclinationT1.Text
+            UClsUnion.T1INCLINATION = UUni.LbInclinationT1.Text
             UClsUnion.T1INFEED = ActualFilaExcel.INFEED_CONVEYOR
             UClsUnion.T2HANDLE = UltimoBloqueT2.Handle
-            UClsUnion.T2INCLINATION = LbInclinationT2.Text
+            UClsUnion.T2INCLINATION = UUni.LbInclinationT2.Text
             UClsUnion.T2OUTFEED = ActualFilaExcel.OUTFEED_CONVEYOR
             UClsUnion.UNION = String.Join(";", DatosUnion.ToArray)
             UClsUnion.UNITS = String.Join(";", DatosUnits.ToArray)
-            UClsUnion.ANGLE = LbRotation.Text
+            UClsUnion.ANGLE = UUni.LbAngle.Text
             UClsUnion.UNIONFin_Pon(Me.DgvUnion)   ' Escribir finalmente los atributos UNION y UNITS en el bloque.
-            UClsUnion.LADO = LbLado.Text
+            UClsUnion.LADO = UUni.LbLado.Text
         Else
-            UClsUnion = New ClsUnion(
+            UClsUnion = New UNION(
                 UltimoBloqueUnion.Handle,
                 String.Join(";", DatosUnion.ToArray),
                 String.Join(";", DatosUnits.ToArray),
                 UltimoBloqueT1.Handle,
                 ActualFilaExcel.INFEED_CONVEYOR,
-                LbInclinationT1.Text,
+                UUni.LbInclinationT1.Text,
                 UltimoBloqueT2.Handle,
                 ActualFilaExcel.OUTFEED_CONVEYOR,
-                LbInclinationT2.Text,
-                LbRotation.Text,
-                LbLado.Text)
+                UUni.LbInclinationT2.Text,
+                UUni.LbAngle.Text,
+                UUni.LbLado.Text)
             UClsUnion.UNIONFin_Pon(Me.DgvUnion)
         End If
         '
@@ -343,10 +368,8 @@ Public Class frmUniones
         BtnEditarUnion.Enabled = False
         BtnBorrarUnion.Enabled = False
         GUnion.Enabled = False
-        BtnT1.Enabled = False : BtnT1.BackColor = btnOn
-        LblT1.Text = "Datos T1: "
-        BtnT2.Enabled = False : BtnT2.BackColor = btnOn
-        LblT2.Text = "Datos T2: "
+        UUni.BtnT1.Enabled = False : UUni.BtnT1.BackColor = btnOn
+        UUni.BtnT2.Enabled = False : UUni.BtnT2.BackColor = btnOn
         BtnInsertarUnion.Enabled = False : BtnInsertarUnion.BackColor = btnOn
         BorraDatos()
     End Sub
@@ -368,35 +391,35 @@ Public Class frmUniones
         oTT.SetToolTip(Me.BtnBorrarUnion, "Mostra/Ocultar capa UNIONES")
         oTT.SetToolTip(Me.BtnInsertaMultiplesUniones, "Insertar múltiples bloques '" & NombreBloqueUNION & "'")
         '
-        oTT.SetToolTip(Me.BtnT1, "Seleccionar Transportador 1")
-        oTT.SetToolTip(Me.BtnT2, "Seleccionar Transportador 2")
+        'oTT.SetToolTip(frmU.BtnT1, "Seleccionar Transportador 1")
+        'oTT.SetToolTip(frmU.BtnT2, "Seleccionar Transportador 2")
         oTT.SetToolTip(Me.BtnInsertarUnion, "Insertar o Mover Unión")
         oTT.SetToolTip(Me.btnCerrar, "Cerrar Uniones")
         oTT.SetToolTip(Me.BtnAceptar, "Aceptar unión y escribir atributos")
     End Sub
 
     Public Sub Datos_1PonUnion()
-        If GUnion.Enabled = False Then Exit Sub
-        If UltimoBloqueT1 Is Nothing OrElse UltimoBloqueT2 Is Nothing Then Exit Sub
-        DgvUnion.Rows.Clear()
-        DgvUnion.Tag = Nothing
-        '
-        Dim angulo As String = LbRotation.Text
-        'UltimaFilaExcel = cU.Fila_BuscaDame(UltimoBloqueT1.EffectiveName.Split("_"c)(0), LbInclinationT1.Text, UltimoBloqueT2.EffectiveName.Split("_"c)(0), LbInclinationT2.Text, angulo)
-        ActualFilaExcel = cU.Fila_BuscaDame(UltimoBloqueT1.EffectiveName.Substring(0, 8), LbInclinationT1.Text, UltimoBloqueT2.EffectiveName.Substring(0, 8), LbInclinationT2.Text, angulo)
-        If ActualFilaExcel IsNot Nothing Then
-            DgvUnion.Tag = ActualFilaExcel
-            DgvUnion.Rows.AddRange(ActualFilaExcel.RowsL(ActualFilaExcel.LADO).ToArray)
-            'DgvUnion.Height = DgvUnion.PreferredSize.Height
-            LblLado.Visible = ActualFilaExcel.RowsL.Count > 1
-            LbLado.Visible = ActualFilaExcel.RowsL.Count > 1
-        End If
-        If UClsUnion IsNot Nothing Then
-            UClsUnion.UNION_PonValue(DgvUnion)
-            LblLado.Visible = True
-            LbLado.Visible = True
-        End If
-        Datos_2CompruebaDatos()
+        'If GUnion.Enabled = False Then Exit Sub
+        'If UltimoBloqueT1 Is Nothing OrElse UltimoBloqueT2 Is Nothing Then Exit Sub
+        'DgvUnion.Rows.Clear()
+        'DgvUnion.Tag = Nothing
+        ''
+        'Dim angulo As String = LbRotation.Text
+        ''UltimaFilaExcel = cU.Fila_BuscaDame(UltimoBloqueT1.EffectiveName.Split("_"c)(0), LbInclinationT1.Text, UltimoBloqueT2.EffectiveName.Split("_"c)(0), LbInclinationT2.Text, angulo)
+        'ActualFilaExcel = cU.Fila_BuscaDame(UltimoBloqueT1.EffectiveName.Substring(0, 8), LbInclinationT1.Text, UltimoBloqueT2.EffectiveName.Substring(0, 8), LbInclinationT2.Text, angulo)
+        'If ActualFilaExcel IsNot Nothing Then
+        '    DgvUnion.Tag = ActualFilaExcel
+        '    DgvUnion.Rows.AddRange(ActualFilaExcel.RowsL(ActualFilaExcel.LADO).ToArray)
+        '    'DgvUnion.Height = DgvUnion.PreferredSize.Height
+        '    LblLado.Visible = ActualFilaExcel.RowsL.Count > 1
+        '    LbLado.Visible = ActualFilaExcel.RowsL.Count > 1
+        'End If
+        'If UClsUnion IsNot Nothing Then
+        '    UClsUnion.UNION_PonValue(DgvUnion)
+        '    LblLado.Visible = True
+        '    LbLado.Visible = True
+        'End If
+        'Datos_2CompruebaDatos()
     End Sub
     Public Sub Datos_2CompruebaDatos()
         ' Salir, si no esta activo GUnion
@@ -407,31 +430,19 @@ Public Class frmUniones
         BtnAceptar.Enabled = False
         '
         ' Comprobar objetos. BtnT1 y BtnT2 siempre activo
-        BtnT1.Enabled = True
-        BtnT2.Enabled = True
+        UUni.BtnT1.Enabled = True
+        UUni.BtnT2.Enabled = True
         ' *** BtnT1
         If UltimoBloqueT1 IsNot Nothing Then
-            If ActualFilaExcel Is Nothing Then
-                LblT1.Text = "Datos T1:" & vbCrLf & UltimoBloqueT1.EffectiveName
-            Else
-                LblT1.Text = "Datos T1:" & vbCrLf & UltimoBloqueT1.EffectiveName & vbCrLf & ActualFilaExcel.INFEED_CONVEYOR
-            End If
-            BtnT1.BackColor = btnOn
+            UUni.BtnT1.BackColor = btnOn
         Else
-            LblT1.Text = "Datos T1:"
-            BtnT1.BackColor = btnOff
+            UUni.BtnT1.BackColor = btnOff
         End If
         ' *** BtnT2
         If UltimoBloqueT2 IsNot Nothing Then
-            If ActualFilaExcel Is Nothing Then
-                LblT2.Text = "Datos T2:" & vbCrLf & UltimoBloqueT2.EffectiveName
-            Else
-                LblT2.Text = "Datos T2:" & vbCrLf & UltimoBloqueT2.EffectiveName & vbCrLf & ActualFilaExcel.OUTFEED_CONVEYOR
-            End If
-            BtnT2.BackColor = btnOn
+            UUni.BtnT2.BackColor = btnOn
         Else
-            LblT2.Text = "Datos T2:"
-            BtnT2.BackColor = btnOff
+            UUni.BtnT2.BackColor = btnOff
         End If
         '
         Datos_3PonEstadoBotonesInsertarAceptar()
@@ -449,9 +460,9 @@ Public Class frmUniones
         ' *** BtnInsertarUnion y BtnAceptar
         If UltimoBloqueT1 IsNot Nothing AndAlso
                 UltimoBloqueT2 IsNot Nothing AndAlso
-                LbInclinationT1.SelectedIndex > -1 AndAlso
-                LbInclinationT2.SelectedIndex > -1 AndAlso
-                LbRotation.SelectedIndex > -1 AndAlso
+                UUni.LbInclinationT1.SelectedIndex > -1 AndAlso
+                UUni.LbInclinationT2.SelectedIndex > -1 AndAlso
+                UUni.LbAngle.SelectedIndex > -1 AndAlso
                 DgvUnion.Rows.Count > 0 Then
             BtnInsertarUnion.Enabled = True
             BtnAceptar.Enabled = True
@@ -512,6 +523,17 @@ Public Class frmUniones
         cbCapa.Enabled = (tvUniones.Nodes.Count > 0)
         LblUniones.Text = tvUniones.Nodes.Count & " Uniones"
         tvUniones.EndUpdate()
+        ' Falla si la llamamos como tarea
+        'Dim t As New Threading.Thread(AddressOf TvUniones_CreaUNION) : t.Start()
+        TvUniones_CreaUNION()
+    End Sub
+
+    Public Sub TvUniones_CreaUNION()
+        For Each oNode As TreeNode In tvUniones.Nodes
+            UNIONES.UNION_Crea(oNode.Name)
+        Next
+        BtnReportTodo.Enabled = True : BtnReportTodo.Refresh()
+        BtnReportTotal.Enabled = True : BtnReportTotal.Refresh()
     End Sub
 
     Public Sub Uniones_SeleccionarObjetos(HandleUnion As String, Optional conZoom As Boolean = False)
@@ -575,14 +597,20 @@ Public Class frmUniones
     '
     Public Sub BorraDatos()
         'GUnion.Enabled = True
-        LblT1.Text = "Datos T1:" ': LblT1.Refresh()
-        LblT2.Text = "Datos T2:" ': LblT2.Refresh()
-        Me.LbInclinationT1.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
-        Me.LbInclinationT2.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
-        Me.LbRotation.SelectedIndex = -1 ': Me.LbRotation.Refresh()
+        UUni.LbInclinationT1.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
+        UUni.LbInclinationT2.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
+        UUni.LbAngle.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         Me.DgvUnion.Rows.Clear()
         'Me.DgvUnion.Height = Me.DgvUnion.PreferredSize.Height
         'GUnion.Enabled = False
+    End Sub
+
+    Private Sub BtnReportTodo_Click(sender As Object, e As EventArgs) Handles BtnReportTodo.Click
+        UNIONES.Report_UNIONES_TODO()
+    End Sub
+
+    Private Sub BtnReportTotal_Click(sender As Object, e As EventArgs) Handles BtnReportTotal.Click
+        UNIONES.Report_UNIONES_TOTALES()
     End Sub
 #End Region
 End Class
