@@ -19,7 +19,8 @@ Public Class UCUnionX
         oTt.ReshowDelay = 100   ' Tiempo de espera entre controles
         oTt.ShowAlways = True   ' Forzar a que se muestre el tooltip, aunque no este activo el Form.
         '
-        oTt.SetToolTip(BtnT1, "Seleccionar Transportador 1")
+        oTt.SetToolTip(BtnT1L, "Seleccionar Transportador 1 (Inquierda)")
+        oTt.SetToolTip(BtnT1R, "Seleccionar Transportador 1 (Derecha)")
         oTt.SetToolTip(BtnT2, "Seleccionar Transportador 2")
     End Sub
 End Class

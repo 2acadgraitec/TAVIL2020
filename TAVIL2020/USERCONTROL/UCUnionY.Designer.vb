@@ -27,22 +27,27 @@ Partial Class UCUnionY
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.LbLado = New System.Windows.Forms.ListBox()
-        Me.LblLado = New System.Windows.Forms.Label()
         Me.LblRotation = New System.Windows.Forms.Label()
-        Me.LbAngle = New System.Windows.Forms.ListBox()
-        Me.LbInclinationT2 = New System.Windows.Forms.ListBox()
-        Me.LbInclinationT1 = New System.Windows.Forms.ListBox()
-        Me.BtnT2 = New System.Windows.Forms.Button()
+        Me.LbAngleL = New System.Windows.Forms.ListBox()
+        Me.LbIncL = New System.Windows.Forms.ListBox()
+        Me.LbInc = New System.Windows.Forms.ListBox()
+        Me.BtnT2L = New System.Windows.Forms.Button()
         Me.BtnT1 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LbAngleR = New System.Windows.Forms.ListBox()
+        Me.LbIncR = New System.Windows.Forms.ListBox()
+        Me.BtnT2R = New System.Windows.Forms.Button()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'BtnBuscar
         '
         Me.BtnBuscar.Enabled = False
-        Me.BtnBuscar.Location = New System.Drawing.Point(162, 214)
+        Me.BtnBuscar.Location = New System.Drawing.Point(3, 223)
         Me.BtnBuscar.Name = "BtnBuscar"
         Me.BtnBuscar.Size = New System.Drawing.Size(180, 32)
         Me.BtnBuscar.TabIndex = 72
@@ -52,25 +57,26 @@ Partial Class UCUnionY
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(379, 127)
+        Me.Label2.Location = New System.Drawing.Point(442, 134)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(97, 17)
+        Me.Label2.Size = New System.Drawing.Size(49, 17)
         Me.Label2.TabIndex = 71
-        Me.Label2.Text = "INCLINATION:"
+        Me.Label2.Text = "INCLI.:"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(40, 127)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(8, 94)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(97, 17)
+        Me.Label1.Size = New System.Drawing.Size(46, 16)
         Me.Label1.TabIndex = 70
-        Me.Label1.Text = "INCLINATION:"
+        Me.Label1.Text = "INCLI.:"
         '
         'PictureBox2
         '
         Me.PictureBox2.Image = Global.TAVIL2020.My.Resources.Resources.Transportador_300x206
-        Me.PictureBox2.Location = New System.Drawing.Point(376, 12)
+        Me.PictureBox2.Location = New System.Drawing.Point(260, 172)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(100, 66)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -80,108 +86,151 @@ Partial Class UCUnionY
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.TAVIL2020.My.Resources.Resources.Transportador_300x206
-        Me.PictureBox1.Location = New System.Drawing.Point(37, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(91, 96)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(100, 66)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.PictureBox1.TabIndex = 68
         Me.PictureBox1.TabStop = False
         '
-        'LbLado
-        '
-        Me.LbLado.FormattingEnabled = True
-        Me.LbLado.ItemHeight = 16
-        Me.LbLado.Items.AddRange(New Object() {"NONE", "L", "C", "R"})
-        Me.LbLado.Location = New System.Drawing.Point(213, 109)
-        Me.LbLado.Name = "LbLado"
-        Me.LbLado.Size = New System.Drawing.Size(66, 68)
-        Me.LbLado.TabIndex = 67
-        '
-        'LblLado
-        '
-        Me.LblLado.Location = New System.Drawing.Point(212, 89)
-        Me.LblLado.Name = "LblLado"
-        Me.LblLado.Size = New System.Drawing.Size(56, 17)
-        Me.LblLado.TabIndex = 66
-        Me.LblLado.Text = "LADO :"
-        '
         'LblRotation
         '
-        Me.LblRotation.Location = New System.Drawing.Point(212, 13)
+        Me.LblRotation.Location = New System.Drawing.Point(364, 134)
         Me.LblRotation.Name = "LblRotation"
         Me.LblRotation.Size = New System.Drawing.Size(67, 17)
         Me.LblRotation.TabIndex = 65
         Me.LblRotation.Text = "ANGLE :"
         '
-        'LbAngle
+        'LbAngleL
         '
-        Me.LbAngle.FormattingEnabled = True
-        Me.LbAngle.ItemHeight = 16
-        Me.LbAngle.Items.AddRange(New Object() {"0", "90"})
-        Me.LbAngle.Location = New System.Drawing.Point(213, 33)
-        Me.LbAngle.Name = "LbAngle"
-        Me.LbAngle.Size = New System.Drawing.Size(66, 36)
-        Me.LbAngle.TabIndex = 64
+        Me.LbAngleL.FormattingEnabled = True
+        Me.LbAngleL.ItemHeight = 16
+        Me.LbAngleL.Items.AddRange(New Object() {"0", "90"})
+        Me.LbAngleL.Location = New System.Drawing.Point(367, 154)
+        Me.LbAngleL.Name = "LbAngleL"
+        Me.LbAngleL.Size = New System.Drawing.Size(66, 36)
+        Me.LbAngleL.TabIndex = 64
         '
-        'LbInclinationT2
+        'LbIncL
         '
-        Me.LbInclinationT2.FormattingEnabled = True
-        Me.LbInclinationT2.ItemHeight = 16
-        Me.LbInclinationT2.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbInclinationT2.Location = New System.Drawing.Point(393, 147)
-        Me.LbInclinationT2.Name = "LbInclinationT2"
-        Me.LbInclinationT2.Size = New System.Drawing.Size(66, 52)
-        Me.LbInclinationT2.TabIndex = 63
+        Me.LbIncL.FormattingEnabled = True
+        Me.LbIncL.ItemHeight = 16
+        Me.LbIncL.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbIncL.Location = New System.Drawing.Point(445, 154)
+        Me.LbIncL.Name = "LbIncL"
+        Me.LbIncL.Size = New System.Drawing.Size(66, 52)
+        Me.LbIncL.TabIndex = 63
         '
-        'LbInclinationT1
+        'LbInc
         '
-        Me.LbInclinationT1.FormattingEnabled = True
-        Me.LbInclinationT1.ItemHeight = 16
-        Me.LbInclinationT1.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbInclinationT1.Location = New System.Drawing.Point(52, 147)
-        Me.LbInclinationT1.Name = "LbInclinationT1"
-        Me.LbInclinationT1.Size = New System.Drawing.Size(66, 52)
-        Me.LbInclinationT1.TabIndex = 62
+        Me.LbInc.FormattingEnabled = True
+        Me.LbInc.ItemHeight = 16
+        Me.LbInc.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbInc.Location = New System.Drawing.Point(11, 113)
+        Me.LbInc.Name = "LbInc"
+        Me.LbInc.Size = New System.Drawing.Size(66, 52)
+        Me.LbInc.TabIndex = 62
         '
-        'BtnT2
+        'BtnT2L
         '
-        Me.BtnT2.Location = New System.Drawing.Point(358, 84)
-        Me.BtnT2.Name = "BtnT2"
-        Me.BtnT2.Size = New System.Drawing.Size(132, 37)
-        Me.BtnT2.TabIndex = 61
-        Me.BtnT2.Text = "Transportador 2"
-        Me.BtnT2.UseVisualStyleBackColor = True
+        Me.BtnT2L.Location = New System.Drawing.Point(288, 131)
+        Me.BtnT2L.Name = "BtnT2L"
+        Me.BtnT2L.Size = New System.Drawing.Size(45, 35)
+        Me.BtnT2L.TabIndex = 61
+        Me.BtnT2L.Text = "T2L"
+        Me.BtnT2L.UseVisualStyleBackColor = True
         '
         'BtnT1
         '
-        Me.BtnT1.Location = New System.Drawing.Point(26, 84)
+        Me.BtnT1.Location = New System.Drawing.Point(124, 55)
         Me.BtnT1.Name = "BtnT1"
-        Me.BtnT1.Size = New System.Drawing.Size(122, 37)
+        Me.BtnT1.Size = New System.Drawing.Size(35, 35)
         Me.BtnT1.TabIndex = 60
-        Me.BtnT1.Text = "Transportador 1"
+        Me.BtnT1.Text = "T1"
         Me.BtnT1.UseVisualStyleBackColor = True
         '
-        'UCUnion
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(442, 7)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(49, 17)
+        Me.Label3.TabIndex = 78
+        Me.Label3.Text = "INCLI.:"
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.TAVIL2020.My.Resources.Resources.Transportador_300x206
+        Me.PictureBox3.Location = New System.Drawing.Point(260, 43)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(100, 66)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox3.TabIndex = 77
+        Me.PictureBox3.TabStop = False
+        '
+        'Label4
+        '
+        Me.Label4.Location = New System.Drawing.Point(364, 7)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(67, 17)
+        Me.Label4.TabIndex = 76
+        Me.Label4.Text = "ANGLE :"
+        '
+        'LbAngleR
+        '
+        Me.LbAngleR.FormattingEnabled = True
+        Me.LbAngleR.ItemHeight = 16
+        Me.LbAngleR.Items.AddRange(New Object() {"0", "90"})
+        Me.LbAngleR.Location = New System.Drawing.Point(367, 27)
+        Me.LbAngleR.Name = "LbAngleR"
+        Me.LbAngleR.Size = New System.Drawing.Size(66, 36)
+        Me.LbAngleR.TabIndex = 75
+        '
+        'LbIncR
+        '
+        Me.LbIncR.FormattingEnabled = True
+        Me.LbIncR.ItemHeight = 16
+        Me.LbIncR.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbIncR.Location = New System.Drawing.Point(445, 27)
+        Me.LbIncR.Name = "LbIncR"
+        Me.LbIncR.Size = New System.Drawing.Size(66, 52)
+        Me.LbIncR.TabIndex = 74
+        '
+        'BtnT2R
+        '
+        Me.BtnT2R.Location = New System.Drawing.Point(288, 3)
+        Me.BtnT2R.Name = "BtnT2R"
+        Me.BtnT2R.Size = New System.Drawing.Size(45, 35)
+        Me.BtnT2R.TabIndex = 73
+        Me.BtnT2R.Text = "T2R"
+        Me.BtnT2R.UseVisualStyleBackColor = True
+        '
+        'UCUnionY
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.PictureBox3)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.LbAngleR)
+        Me.Controls.Add(Me.LbIncR)
+        Me.Controls.Add(Me.BtnT2R)
         Me.Controls.Add(Me.BtnBuscar)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.PictureBox1)
-        Me.Controls.Add(Me.LbLado)
-        Me.Controls.Add(Me.LblLado)
         Me.Controls.Add(Me.LblRotation)
-        Me.Controls.Add(Me.LbAngle)
-        Me.Controls.Add(Me.LbInclinationT2)
-        Me.Controls.Add(Me.LbInclinationT1)
-        Me.Controls.Add(Me.BtnT2)
+        Me.Controls.Add(Me.LbAngleL)
+        Me.Controls.Add(Me.LbIncL)
+        Me.Controls.Add(Me.LbInc)
+        Me.Controls.Add(Me.BtnT2L)
         Me.Controls.Add(Me.BtnT1)
-        Me.Name = "UCUnion"
+        Me.Name = "UCUnionY"
         Me.Size = New System.Drawing.Size(516, 258)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -192,12 +241,16 @@ Partial Class UCUnionY
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents PictureBox2 As Windows.Forms.PictureBox
     Friend WithEvents PictureBox1 As Windows.Forms.PictureBox
-    Friend WithEvents LbLado As Windows.Forms.ListBox
-    Friend WithEvents LblLado As Windows.Forms.Label
     Friend WithEvents LblRotation As Windows.Forms.Label
-    Friend WithEvents LbAngle As Windows.Forms.ListBox
-    Friend WithEvents LbInclinationT2 As Windows.Forms.ListBox
-    Friend WithEvents LbInclinationT1 As Windows.Forms.ListBox
-    Friend WithEvents BtnT2 As Windows.Forms.Button
+    Friend WithEvents LbAngleL As Windows.Forms.ListBox
+    Friend WithEvents LbIncL As Windows.Forms.ListBox
+    Friend WithEvents LbInc As Windows.Forms.ListBox
+    Friend WithEvents BtnT2L As Windows.Forms.Button
     Friend WithEvents BtnT1 As Windows.Forms.Button
+    Friend WithEvents Label3 As Windows.Forms.Label
+    Friend WithEvents PictureBox3 As Windows.Forms.PictureBox
+    Friend WithEvents Label4 As Windows.Forms.Label
+    Friend WithEvents LbAngleR As Windows.Forms.ListBox
+    Friend WithEvents LbIncR As Windows.Forms.ListBox
+    Friend WithEvents BtnT2R As Windows.Forms.Button
 End Class

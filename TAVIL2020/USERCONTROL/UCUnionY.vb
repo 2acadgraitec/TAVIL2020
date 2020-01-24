@@ -20,6 +20,7 @@ Public Class UCUnionY
         oTt.ShowAlways = True   ' Forzar a que se muestre el tooltip, aunque no este activo el Form.
         '
         oTt.SetToolTip(BtnT1, "Seleccionar Transportador 1")
-        oTt.SetToolTip(BtnT2, "Seleccionar Transportador 2")
+        oTt.SetToolTip(BtnT2L, "Seleccionar Transportador 2 (Izquierda)")
+        oTt.SetToolTip(BtnT2R, "Seleccionar Transportador 2 (Derecha)")
     End Sub
 End Class

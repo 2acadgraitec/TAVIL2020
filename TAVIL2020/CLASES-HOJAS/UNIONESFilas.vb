@@ -343,6 +343,6 @@ Public Class UNIONESFila
             'Ttext = Nothing
             'Fila = Nothing
         Next
-        RowsL.Add("L", Row)
+        RowsL.Add("", Row)
     End Sub
 End Class
