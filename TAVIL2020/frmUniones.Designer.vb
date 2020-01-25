@@ -46,6 +46,7 @@ Partial Class frmUniones
         Me.BtnReportTodo = New System.Windows.Forms.Button()
         Me.BtnReportTotal = New System.Windows.Forms.Button()
         Me.PUnion = New System.Windows.Forms.Panel()
+        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.GUnion.SuspendLayout()
         CType(Me.DgvUnion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -99,9 +100,9 @@ Partial Class frmUniones
         '
         Me.BtnInsertarUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnInsertarUnion.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnInsertarUnion.Location = New System.Drawing.Point(357, 76)
+        Me.BtnInsertarUnion.Location = New System.Drawing.Point(340, 92)
         Me.BtnInsertarUnion.Name = "BtnInsertarUnion"
-        Me.BtnInsertarUnion.Size = New System.Drawing.Size(132, 45)
+        Me.BtnInsertarUnion.Size = New System.Drawing.Size(132, 28)
         Me.BtnInsertarUnion.TabIndex = 19
         Me.BtnInsertarUnion.Text = "Insertar Unión"
         Me.BtnInsertarUnion.UseVisualStyleBackColor = False
@@ -109,6 +110,7 @@ Partial Class frmUniones
         'GUnion
         '
         Me.GUnion.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.GUnion.Controls.Add(Me.BtnBuscar)
         Me.GUnion.Controls.Add(Me.DgvUnion)
         Me.GUnion.Controls.Add(Me.Label2)
         Me.GUnion.Controls.Add(Me.BtnAceptar)
@@ -169,7 +171,7 @@ Partial Class frmUniones
         '
         Me.BtnAceptar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.BtnAceptar.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnAceptar.Location = New System.Drawing.Point(415, 17)
+        Me.BtnAceptar.Location = New System.Drawing.Point(438, 53)
         Me.BtnAceptar.Name = "BtnAceptar"
         Me.BtnAceptar.Size = New System.Drawing.Size(74, 27)
         Me.BtnAceptar.TabIndex = 26
@@ -180,7 +182,7 @@ Partial Class frmUniones
         '
         Me.BtnCancelar.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.BtnCancelar.BackColor = System.Drawing.SystemColors.Control
-        Me.BtnCancelar.Location = New System.Drawing.Point(302, 17)
+        Me.BtnCancelar.Location = New System.Drawing.Point(302, 53)
         Me.BtnCancelar.Name = "BtnCancelar"
         Me.BtnCancelar.Size = New System.Drawing.Size(74, 27)
         Me.BtnCancelar.TabIndex = 25
@@ -295,6 +297,16 @@ Partial Class frmUniones
         Me.PUnion.Size = New System.Drawing.Size(516, 258)
         Me.PUnion.TabIndex = 31
         '
+        'BtnBuscar
+        '
+        Me.BtnBuscar.Enabled = False
+        Me.BtnBuscar.Location = New System.Drawing.Point(304, 14)
+        Me.BtnBuscar.Name = "BtnBuscar"
+        Me.BtnBuscar.Size = New System.Drawing.Size(208, 25)
+        Me.BtnBuscar.TabIndex = 73
+        Me.BtnBuscar.Text = "Buscar UNION/UNITS"
+        Me.BtnBuscar.UseVisualStyleBackColor = True
+        '
         'frmUniones
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -355,4 +367,5 @@ Partial Class frmUniones
     Friend WithEvents BtnReportTodo As Windows.Forms.Button
     Friend WithEvents BtnReportTotal As Windows.Forms.Button
     Friend WithEvents PUnion As Windows.Forms.Panel
+    Friend WithEvents BtnBuscar As Windows.Forms.Button
 End Class

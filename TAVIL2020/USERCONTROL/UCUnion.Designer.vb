@@ -22,7 +22,6 @@ Partial Class UCUnion
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -38,16 +37,6 @@ Partial Class UCUnion
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'BtnBuscar
-        '
-        Me.BtnBuscar.Enabled = False
-        Me.BtnBuscar.Location = New System.Drawing.Point(3, 223)
-        Me.BtnBuscar.Name = "BtnBuscar"
-        Me.BtnBuscar.Size = New System.Drawing.Size(180, 32)
-        Me.BtnBuscar.TabIndex = 72
-        Me.BtnBuscar.Text = "Buscar UNION/UNITS"
-        Me.BtnBuscar.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -165,7 +154,6 @@ Partial Class UCUnion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.BtnBuscar)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox2)
@@ -179,15 +167,13 @@ Partial Class UCUnion
         Me.Controls.Add(Me.BtnT2)
         Me.Controls.Add(Me.BtnT1)
         Me.Name = "UCUnion"
-        Me.Size = New System.Drawing.Size(516, 258)
+        Me.Size = New System.Drawing.Size(516, 240)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents BtnBuscar As Windows.Forms.Button
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents PictureBox2 As Windows.Forms.PictureBox

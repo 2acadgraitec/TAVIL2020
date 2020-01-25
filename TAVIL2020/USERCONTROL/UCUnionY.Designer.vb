@@ -22,7 +22,6 @@ Partial Class UCUnionY
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -44,16 +43,6 @@ Partial Class UCUnionY
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'BtnBuscar
-        '
-        Me.BtnBuscar.Enabled = False
-        Me.BtnBuscar.Location = New System.Drawing.Point(3, 223)
-        Me.BtnBuscar.Name = "BtnBuscar"
-        Me.BtnBuscar.Size = New System.Drawing.Size(180, 32)
-        Me.BtnBuscar.TabIndex = 72
-        Me.BtnBuscar.Text = "Buscar UNION/UNITS"
-        Me.BtnBuscar.UseVisualStyleBackColor = True
-        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -69,7 +58,7 @@ Partial Class UCUnionY
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(8, 94)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(46, 16)
+        Me.Label1.Size = New System.Drawing.Size(43, 15)
         Me.Label1.TabIndex = 70
         Me.Label1.Text = "INCLI.:"
         '
@@ -215,7 +204,6 @@ Partial Class UCUnionY
         Me.Controls.Add(Me.LbAngleR)
         Me.Controls.Add(Me.LbIncR)
         Me.Controls.Add(Me.BtnT2R)
-        Me.Controls.Add(Me.BtnBuscar)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.PictureBox2)
@@ -227,7 +215,7 @@ Partial Class UCUnionY
         Me.Controls.Add(Me.BtnT2L)
         Me.Controls.Add(Me.BtnT1)
         Me.Name = "UCUnionY"
-        Me.Size = New System.Drawing.Size(516, 258)
+        Me.Size = New System.Drawing.Size(516, 240)
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -235,8 +223,6 @@ Partial Class UCUnionY
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents BtnBuscar As Windows.Forms.Button
     Friend WithEvents Label2 As Windows.Forms.Label
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents PictureBox2 As Windows.Forms.PictureBox

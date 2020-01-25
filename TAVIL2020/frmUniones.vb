@@ -95,6 +95,7 @@ Public Class frmUniones
             UUniY.Visible = True
             PUnion.Controls.Add(UUniY)
         End If
+        PUnion.Enabled = True
         PUnion.ResumeLayout()
     End Sub
 
@@ -123,16 +124,21 @@ Public Class frmUniones
     Private Sub tvUniones_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles tvUniones.AfterSelect
         clsA.Seleccion_Quitar()
         UltimoBloqueT1 = Nothing
+        UltimoBloqueT1L = Nothing
+        UltimoBloqueT1R = Nothing
         UltimoBloqueT2 = Nothing
+        UltimoBloqueT2L = Nothing
+        UltimoBloqueT2R = Nothing
         UltimoBloqueUnion = Nothing
+        ActualFilaExcel = Nothing
         UClsUnion = Nothing
+        ' Poner los controles con el Enabled por defecto.
+        PonEstadoControlesInicial()
         If tvUniones.SelectedNode Is Nothing Then
-            PonEstadoControlesInicial()
-            PonUserControl("U")
             Exit Sub
         End If
-        BtnEditarUnion.Enabled = True
-        BtnBorrarUnion.Enabled = True
+        'BtnEditarUnion.Enabled = True
+        'BtnBorrarUnion.Enabled = True
         Me.Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag.ToString)
         ' Mostrar los datos en sus controles.
         PonDatosUnion(tvUniones.SelectedNode.Tag.ToString)
@@ -230,6 +236,7 @@ Public Class frmUniones
         UltimoBloqueT2R = Nothing
         UltimoBloqueT2R = Nothing
         UltimoBloqueUnion = Nothing
+        ActualFilaExcel = Nothing
         UClsUnion = Nothing
         '
         GUnion.Enabled = True
@@ -415,7 +422,11 @@ Public Class frmUniones
         End If
         '
         UltimoBloqueT1 = Nothing
+        UltimoBloqueT1L = Nothing
+        UltimoBloqueT1R = Nothing
         UltimoBloqueT2 = Nothing
+        UltimoBloqueT2L = Nothing
+        UltimoBloqueT2R = Nothing
         UltimoBloqueUnion = Nothing
         UClsUnion = Nothing
         ActualFilaExcel = Nothing
@@ -424,11 +435,15 @@ Public Class frmUniones
         tvUniones_Rellena()
     End Sub
 #Region "FUNCIONES"
-    Public Sub PonEstadoControlesInicial()
-        ' Estado inicila de GUniones (Con todos los controles de selección y edición)
+    ''' <summary>
+    ''' Poner estado de los controles Enable True/False
+    ''' </summary>
+    ''' <param name="accion">"" (Nada), "C" (Crear), "E" (Editar)</param>
+    Public Sub PonEstadoControlesInicial(Optional accion As String = "")
+        ' Estado inicial de GUniones (Con todos los controles de selección y edición)
         tvUniones.SelectedNode = Nothing
-        GUnion.Enabled = False
         PUnion.Enabled = False
+        GUnion.Enabled = False
         BtnCrearUnion.Enabled = True
         BtnEditarUnion.Enabled = False
         BtnBorrarUnion.Enabled = False
@@ -436,6 +451,10 @@ Public Class frmUniones
         BtnInsertarUnion.Enabled = False : BtnInsertarUnion.BackColor = btnOn
         BorraDatos()
         PonUserControl("U")
+        If tvUniones.SelectedNode IsNot Nothing Then
+            BtnEditarUnion.Enabled = True
+            BtnBorrarUnion.Enabled = True
+        End If
     End Sub
     Public Sub PonToolTipControles()
         oTT = New ToolTip()
@@ -569,9 +588,9 @@ Public Class frmUniones
     '    End If
     'End Sub
     Public Sub tvUniones_Rellena(Optional tipo As modTavil.EFiltro = EFiltro.TODOS)
-        PonEstadoControlesInicial()
         ' Rellenar tvGrupos con los grupos que haya ([nombre grupo]) Sacado de XData elementos (regAPPCliente, XData = "GRUPO")
         tvUniones.Nodes.Clear()
+        PonEstadoControlesInicial()
         tvUniones.BeginUpdate()
         Dim arrTodos As List(Of TreeNode) = modTavil.tvUniones_DameListTreeNodes
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
@@ -666,8 +685,8 @@ Public Class frmUniones
         UUni.LbAngle.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         UUni.LbLado.SelectedIndex = -1
         ' UCUnionX
-        UUniX.LbIncR.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
         UUniX.LbIncL.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
+        UUniX.LbIncR.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
         UUniX.LbAngle.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         UUniX.LbInc.SelectedIndex = -1
         ' UCUNIONY
