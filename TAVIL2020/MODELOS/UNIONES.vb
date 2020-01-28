@@ -245,7 +245,8 @@ Public Class UNION
             Me.T1INFEEDR, Me.T1INCLINATIONR,
             Me.T2OUTFEED, Me.T2INCLINATION, Me.ANGLE,
             Me.T2OUTFEEDL, Me.T2INCLINATIONL, Me.ANGLEL,
-            Me.T2OUTFEEDR, Me.T2INCLINATIONR, Me.ANGLER)
+            Me.T2OUTFEEDR, Me.T2INCLINATIONR, Me.ANGLER,
+            Me.LADO)
         '
         If Me.UNION = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNION = ExcelFilaUnion.UNION
         If Me.UNITS = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNITS = ExcelFilaUnion.UNITS
@@ -321,7 +322,8 @@ Public Class UNION
             Me.T1INFEEDR, Me.T1INCLINATIONR,
             Me.T2OUTFEED, Me.T2INCLINATION, Me.ANGLE,
             Me.T2OUTFEEDL, Me.T2INCLINATIONL, Me.ANGLEL,
-            Me.T2OUTFEEDR, Me.T2INCLINATIONR, Me.ANGLER)
+            Me.T2OUTFEEDR, Me.T2INCLINATIONR, Me.ANGLER,
+            Me.LADO)
         '
         If Me.UNION = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNION = ExcelFilaUnion.UNION
         If Me.UNITS = "" AndAlso ExcelFilaUnion IsNot Nothing Then Me.UNITS = ExcelFilaUnion.UNITS

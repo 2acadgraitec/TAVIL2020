@@ -29,6 +29,7 @@ Partial Class frmUniones
         Me.cbZoom = New System.Windows.Forms.CheckBox()
         Me.BtnInsertarUnion = New System.Windows.Forms.Button()
         Me.GUnion = New System.Windows.Forms.GroupBox()
+        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.DgvUnion = New System.Windows.Forms.DataGridView()
         Me.UNION = New System.Windows.Forms.DataGridViewComboBoxColumn()
         Me.UNITS = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -46,7 +47,6 @@ Partial Class frmUniones
         Me.BtnReportTodo = New System.Windows.Forms.Button()
         Me.BtnReportTotal = New System.Windows.Forms.Button()
         Me.PUnion = New System.Windows.Forms.Panel()
-        Me.BtnBuscar = New System.Windows.Forms.Button()
         Me.GUnion.SuspendLayout()
         CType(Me.DgvUnion, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -121,6 +121,16 @@ Partial Class frmUniones
         Me.GUnion.Size = New System.Drawing.Size(518, 132)
         Me.GUnion.TabIndex = 20
         Me.GUnion.TabStop = False
+        '
+        'BtnBuscar
+        '
+        Me.BtnBuscar.Enabled = False
+        Me.BtnBuscar.Location = New System.Drawing.Point(304, 14)
+        Me.BtnBuscar.Name = "BtnBuscar"
+        Me.BtnBuscar.Size = New System.Drawing.Size(208, 25)
+        Me.BtnBuscar.TabIndex = 73
+        Me.BtnBuscar.Text = "Buscar UNION/UNITS"
+        Me.BtnBuscar.UseVisualStyleBackColor = True
         '
         'DgvUnion
         '
@@ -296,16 +306,6 @@ Partial Class frmUniones
         Me.PUnion.Name = "PUnion"
         Me.PUnion.Size = New System.Drawing.Size(516, 258)
         Me.PUnion.TabIndex = 31
-        '
-        'BtnBuscar
-        '
-        Me.BtnBuscar.Enabled = False
-        Me.BtnBuscar.Location = New System.Drawing.Point(304, 14)
-        Me.BtnBuscar.Name = "BtnBuscar"
-        Me.BtnBuscar.Size = New System.Drawing.Size(208, 25)
-        Me.BtnBuscar.TabIndex = 73
-        Me.BtnBuscar.Text = "Buscar UNION/UNITS"
-        Me.BtnBuscar.UseVisualStyleBackColor = True
         '
         'frmUniones
         '

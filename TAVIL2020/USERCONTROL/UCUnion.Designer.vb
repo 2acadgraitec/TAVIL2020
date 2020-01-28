@@ -134,21 +134,23 @@ Partial Class UCUnion
         '
         'BtnT2
         '
+        Me.BtnT2.BackColor = System.Drawing.SystemColors.Control
         Me.BtnT2.Location = New System.Drawing.Point(251, 84)
         Me.BtnT2.Name = "BtnT2"
         Me.BtnT2.Size = New System.Drawing.Size(35, 35)
         Me.BtnT2.TabIndex = 61
         Me.BtnT2.Text = "T2"
-        Me.BtnT2.UseVisualStyleBackColor = True
+        Me.BtnT2.UseVisualStyleBackColor = False
         '
         'BtnT1
         '
+        Me.BtnT1.BackColor = System.Drawing.SystemColors.Control
         Me.BtnT1.Location = New System.Drawing.Point(71, 84)
         Me.BtnT1.Name = "BtnT1"
         Me.BtnT1.Size = New System.Drawing.Size(35, 35)
         Me.BtnT1.TabIndex = 60
         Me.BtnT1.Text = "T1"
-        Me.BtnT1.UseVisualStyleBackColor = True
+        Me.BtnT1.UseVisualStyleBackColor = False
         '
         'UCUnion
         '

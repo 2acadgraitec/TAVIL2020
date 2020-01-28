@@ -50,7 +50,8 @@ Public Class UNIONESFilas
                                    inCR As String, inIncR As String,
                                    outC As String, outInc As String, angle As String,
                                    outCL As String, outIncL As String, angleL As String,
-                                   outCR As String, outIncR As String, angleR As String) As UNIONESFila
+                                   outCR As String, outIncR As String, angleR As String,
+                                   lado As String) As UNIONESFila
         Dim resultado As UNIONESFila = Nothing
         Dim inCFin As String = ""
         Dim inCFinL As String = ""
@@ -169,7 +170,8 @@ Public Class UNIONESFilas
                         x.ANGLE_L.Trim = angleL.Trim AndAlso
                         x.OUTFEED_CONVEYOR_R.Trim.StartsWith(outCFinR.Trim) AndAlso
                         x.OUTFEED_INCLINATION_R.Trim = outIncR.Trim AndAlso
-                        x.ANGLE_R.Trim = angleR.Trim
+                        x.ANGLE_R.Trim = angleR.Trim AndAlso
+                        x.LADO = lado
                    Select x
         '
         If fila.Count > 0 Then

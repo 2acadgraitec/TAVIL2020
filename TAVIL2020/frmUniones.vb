@@ -16,18 +16,64 @@ Public Class frmUniones
     Public Shared UltimoBloqueT2 As AcadBlockReference = Nothing
     Public Shared UltimoBloqueT2L As AcadBlockReference = Nothing
     Public Shared UltimoBloqueT2R As AcadBlockReference = Nothing
-    Public Shared UClsUnion As UNION = Nothing
+    Public Shared UltimaUnion As UNION = Nothing
     Public Shared ActualFilaExcel As UNIONESFila = Nothing
     Private HighlightedPictureBox As PictureBox = Nothing
     Private oTT As ToolTip = Nothing
     Private capaUnionesVisible As Boolean = True
-    Private EsUnionNueva As Boolean = False
-    Public Shared UUni As UCUnion = Nothing
-    Public Shared UUniX As UCUnionX = Nothing
-    Public Shared UUniY As UCUnionY = Nothing
+    Public Shared EsUnionNueva As Boolean = False
+    Public Shared WithEvents UUni As UCUnion = Nothing
+    Public Shared WithEvents UUniX As UCUnionX = Nothing
+    Public Shared WithEvents UUniY As UCUnionY = Nothing
     Public WithEvents CMenu As ContextMenuStrip = Nothing
+    '
+    Public Shared LADO As String = ""
+    'Public Shared HOJA As String = "UNIONES"
+    Public Shared T1HANDLE As String = ""
+    'Public Shared T1INFEED As String = ""
+    Public Shared T1INCLINATION As String = ""
+    Public Shared T1HANDLEL As String = ""
+    'Public Shared T1INFEEDL As String = ""
+    Public Shared T1INCLINATIONL As String = ""
+    Public Shared T1HANDLER As String = ""
+    'Public Shared T1INFEEDR As String = ""
+    Public Shared T1INCLINATIONR As String = ""
+
+    'Public Shared UNION As String = ""
+    'Public Shared UNITS As String = ""
+    Public Shared T2HANDLE As String = ""
+    'Public Shared T2OUTFEED As String = ""
+    Public Shared T2INCLINATION As String = ""
+    Public Shared ANGLE As String = ""
+    Public Shared T2HANDLEL As String = ""
+    Public Shared T2OUTFEEDL As String = ""
+    Public Shared T2INCLINATIONL As String = ""
+    Public Shared ANGLEL As String = ""
+    Public Shared T2HANDLER As String = ""
+    'Public Shared T2OUTFEEDR As String = ""
+    Public Shared T2INCLINATIONR As String = ""
+    Public Shared ANGLER As String = ""
+
+    Private Sub frmUniones_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        Eventos.SYSMONVAR()
+        If cbCapa.Enabled = True Then
+            Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
+            If queCapa IsNot Nothing Then
+                queCapa.LayerOn = capaUnionesVisible
+                queCapa.Freeze = Not (cbCapa.Checked)
+            End If
+        End If
+        frmUn = Nothing
+    End Sub
 
     Private Sub frmUniones_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        AddHandler UCUnion.TodoSeleccionado, AddressOf UUni_TodoSeleccionado
+        AddHandler UCUnionX.TodoSeleccionado, AddressOf UUni_TodoSeleccionado
+        AddHandler UCUnionY.TodoSeleccionado, AddressOf UUni_TodoSeleccionado
+        AddHandler UCUnion.HayCambioDatos, AddressOf UUni_HayCambios
+        AddHandler UCUnionX.HayCambioDatos, AddressOf UUni_HayCambios
+        AddHandler UCUnionY.HayCambioDatos, AddressOf UUni_HayCambios
+        '
         Eventos.SYSMONVAR(True)
         Me.Text = "UNIONES - v" & appVersion
         ' Cargar recursos
@@ -37,7 +83,7 @@ Public Class frmUniones
             'clsA.ClonaBloqueDesdeDWG(IO.Path.Combine(IO.Path.GetDirectoryName(BloqueRecursos), "UNION.dwg"), "UNION")
             clsA.Clona_UnBloqueDesdeDWG(BloqueRecursos, "UNION")
         End Using
-        PonUserControl("U")
+        UserControl_Crear()
         'PonToolTipControles()
         Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
         If queCapa IsNot Nothing Then
@@ -64,52 +110,32 @@ Public Class frmUniones
         CMenu.Items.Add(TItem2)
         BtnCrearUnion.ContextMenuStrip = CMenu
     End Sub
-
-    Public Sub PonUserControl(tipo As String)
-        PUnion.Controls.Clear()
-        UUni = New UCUnion
-        UUniX = New UCUnionX
-        UUniY = New UCUnionY
-        PUnion.SuspendLayout()
+    Public Sub UserControl_Crear()
+        BtnEditarUnion.Enabled = False
+        BtnBorrarUnion.Enabled = False
         PUnion.Enabled = False
-        ' tipo = U, Y, X
-        If tipo.ToUpper = "U" Then
-            UUni.Dock = DockStyle.Fill
-            'UUni.Enabled = False
-            UUni.Visible = True
-            UUniX.Visible = False
-            UUniY.Visible = False
-            PUnion.Controls.Add(UUni)
-        ElseIf tipo.ToUpper = "X" Then
-            UUniX.Dock = DockStyle.Fill
-            'UUniX.Enabled = False
-            UUni.Visible = False
-            UUniX.Visible = True
-            UUniY.Visible = False
-            PUnion.Controls.Add(UUniX)
-        ElseIf tipo.ToUpper = "Y" Then
-            UUniY.Dock = DockStyle.Fill
-            'UUniY.Enabled = False
-            UUni.Visible = False
-            UUniX.Visible = False
-            UUniY.Visible = True
-            PUnion.Controls.Add(UUniY)
-        End If
-        PUnion.Enabled = True
-        PUnion.ResumeLayout()
+        GUnion.Enabled = False
+        PUnion.Controls.Clear()
+        '
+        UUni = New UCUnion
+        UUni.Dock = DockStyle.Fill
+        UUni.Visible = False
+        '
+        UUniX = New UCUnionX
+        UUniX.Dock = DockStyle.Fill
+        UUniX.Visible = False
+        '
+        UUniY = New UCUnionY
+        UUniY.Dock = DockStyle.Fill
+        UUniY.Visible = False
+        '
+        PUnion.Controls.Add(UUni)
+        PUnion.Controls.Add(UUniX)
+        PUnion.Controls.Add(UUniY)
+        PUnion.Enabled = False
+        GUnion.Enabled = False
     End Sub
 
-    Private Sub frmUniones_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-        Eventos.SYSMONVAR()
-        If cbCapa.Enabled = True Then
-            Dim queCapa As AcadLayer = clsA.CapaDame(CapaUniones)
-            If queCapa IsNot Nothing Then
-                queCapa.LayerOn = capaUnionesVisible
-                queCapa.Freeze = Not (cbCapa.Checked)
-            End If
-        End If
-        frmUn = Nothing
-    End Sub
 
     Private Sub btnCerrar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCerrar.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -122,7 +148,15 @@ Public Class frmUniones
     End Sub
     '
     Private Sub tvUniones_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles tvUniones.AfterSelect
-        clsA.Seleccion_Quitar()
+        Objetos_Vacia()
+        ' Poner los controles con el Enabled por defecto.
+        If tvUniones.SelectedNode Is Nothing Then Exit Sub
+        '
+        Me.Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag.ToString)
+        ' Mostrar los datos en sus controles.
+        PonDatosUnion(tvUniones.SelectedNode.Tag.ToString)
+    End Sub
+    Public Sub Objetos_Vacia()
         UltimoBloqueT1 = Nothing
         UltimoBloqueT1L = Nothing
         UltimoBloqueT1R = Nothing
@@ -131,21 +165,19 @@ Public Class frmUniones
         UltimoBloqueT2R = Nothing
         UltimoBloqueUnion = Nothing
         ActualFilaExcel = Nothing
-        UClsUnion = Nothing
-        ' Poner los controles con el Enabled por defecto.
-        PonEstadoControlesInicial()
-        If tvUniones.SelectedNode Is Nothing Then
-            Exit Sub
-        End If
-        'BtnEditarUnion.Enabled = True
-        'BtnBorrarUnion.Enabled = True
-        Me.Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag.ToString)
-        ' Mostrar los datos en sus controles.
-        PonDatosUnion(tvUniones.SelectedNode.Tag.ToString)
+        UltimaUnion = Nothing
+        ' Vaciar los UserControl
+        BorraDatos()
+        '
+        PUnion.Enabled = False
+        GUnion.Enabled = False
+        BtnCrearUnion.Enabled = True
+        BtnEditarUnion.Enabled = False
+        BtnBorrarUnion.Enabled = False
+        BtnSeleccionar.Enabled = True
     End Sub
 
     Private Sub PonDatosUnion(Optional handle As String = "")
-        BorraDatos()
         If tvUniones.SelectedNode Is Nothing Then Exit Sub
         If handle = "" Then handle = tvUniones.SelectedNode.Tag.ToString
         If handle = "" Then Exit Sub
@@ -160,33 +192,37 @@ Public Class frmUniones
                                                  Where x.UnionHANDLE = handle
                                                  Select x
         If lUniHANLE.Count > 0 Then
-            UClsUnion = lUniHANLE.First
+            UltimaUnion = lUniHANLE.First
         Else
             Exit Sub
         End If
         '
 #Region "User Controls UCUnion, UCUnionY y UCUnionX"
         ' T1
-        If UClsUnion.T1HANDLE <> "" Then UltimoBloqueT1 = UClsUnion.T1Block  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
-        If UClsUnion.T1HANDLEL <> "" Then UltimoBloqueT1L = UClsUnion.T1BlockL  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
-        If UClsUnion.T1HANDLER <> "" Then UltimoBloqueT1R = UClsUnion.T1BlockR  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
-        If UClsUnion.T1INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUni.LbIncT1, UClsUnion.T1INCLINATION)
-        If UClsUnion.T1INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUniY.LbInc, UClsUnion.T1INCLINATION)
-        If UClsUnion.T1INCLINATIONL <> "" Then ListBox_SeleccionaPorTexto(UUniX.LbIncL, UClsUnion.T1INCLINATIONL)
-        If UClsUnion.T1INCLINATIONR <> "" Then ListBox_SeleccionaPorTexto(UUniX.LbIncR, UClsUnion.T1INCLINATIONR)
+        If UltimaUnion.T1HANDLE <> "" Then UltimoBloqueT1 = UltimaUnion.T1Block  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
+        If UltimaUnion.T1HANDLEL <> "" Then UltimoBloqueT1L = UltimaUnion.T1BlockL  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
+        If UltimaUnion.T1HANDLER <> "" Then UltimoBloqueT1R = UltimaUnion.T1BlockR  '  Eventos.COMDoc().HandleToObject(UClsUnion.T1HANDLE)
+        If UltimaUnion.T1INCLINATION <> "" Then
+            ListBox_SeleccionaPorTexto(UUni.LbIncT1, UltimaUnion.T1INCLINATION)
+            ListBox_SeleccionaPorTexto(UUniY.LbIncT1, UltimaUnion.T1INCLINATION)
+        End If
+        If UltimaUnion.T1INCLINATIONL <> "" Then ListBox_SeleccionaPorTexto(UUniX.LbIncT1L, UltimaUnion.T1INCLINATIONL)
+        If UltimaUnion.T1INCLINATIONR <> "" Then ListBox_SeleccionaPorTexto(UUniX.LbIncT1R, UltimaUnion.T1INCLINATIONR)
         ' T2
-        If UClsUnion.T2HANDLE <> "" Then UltimoBloqueT2 = UClsUnion.T2Block
-        If UClsUnion.T2HANDLEL <> "" Then UltimoBloqueT2L = UClsUnion.T2BlockL
-        If UClsUnion.T2HANDLER <> "" Then UltimoBloqueT2R = UClsUnion.T2BlockR
-        If UClsUnion.T2INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUni.LbIncT2, UClsUnion.T2INCLINATION)
-        If UClsUnion.T2INCLINATIONL <> "" Then ListBox_SeleccionaPorTexto(UUniY.LbIncL, UClsUnion.T2INCLINATIONL)
-        If UClsUnion.T2INCLINATIONR <> "" Then ListBox_SeleccionaPorTexto(UUniY.LbIncR, UClsUnion.T2INCLINATIONR)
-        If UClsUnion.T2INCLINATION <> "" Then ListBox_SeleccionaPorTexto(UUniX.LbInc, UClsUnion.T2INCLINATION)
+        If UltimaUnion.T2HANDLE <> "" Then UltimoBloqueT2 = UltimaUnion.T2Block
+        If UltimaUnion.T2HANDLEL <> "" Then UltimoBloqueT2L = UltimaUnion.T2BlockL
+        If UltimaUnion.T2HANDLER <> "" Then UltimoBloqueT2R = UltimaUnion.T2BlockR
+        If UltimaUnion.T2INCLINATION <> "" Then
+            ListBox_SeleccionaPorTexto(UUni.LbIncT2, UltimaUnion.T2INCLINATION)
+            ListBox_SeleccionaPorTexto(UUniX.LbIncT2, UltimaUnion.T2INCLINATION)
+        End If
+        If UltimaUnion.T2INCLINATIONL <> "" Then ListBox_SeleccionaPorTexto(UUniY.LbIncT2L, UltimaUnion.T2INCLINATIONL)
+        If UltimaUnion.T2INCLINATIONR <> "" Then ListBox_SeleccionaPorTexto(UUniY.LbIncT2R, UltimaUnion.T2INCLINATIONR)
         ' Angle
-        If UClsUnion.ANGLE = "0" OrElse UClsUnion.ANGLE = "" Then
+        If UltimaUnion.ANGLE = "0" OrElse UltimaUnion.ANGLE = "" Then
             UUni.LbAngle.SelectedIndex = 0
             UUniX.LbAngle.SelectedIndex = 0
-        ElseIf UClsUnion.ANGLE = "90" Then
+        ElseIf UltimaUnion.ANGLE = "90" Then
             UUni.LbAngle.SelectedIndex = 1
             UUniX.LbAngle.SelectedIndex = 1
         Else
@@ -194,40 +230,56 @@ Public Class frmUniones
             UUniX.LbAngle.SelectedIndex = -1
         End If
         ' AngleL
-        If UClsUnion.ANGLEL = "0" OrElse UClsUnion.ANGLEL = "" Then
+        If UltimaUnion.ANGLEL = "0" OrElse UltimaUnion.ANGLEL = "" Then
             UUniY.LbAngleL.SelectedIndex = 0
-        ElseIf UClsUnion.ANGLEL = "90" Then
+        ElseIf UltimaUnion.ANGLEL = "90" Then
             UUniY.LbAngleL.SelectedIndex = 1
         Else
             UUniY.LbAngleL.SelectedIndex = -1
         End If
         ' AngleR.
-        If UClsUnion.ANGLER = "0" OrElse UClsUnion.ANGLER = "" Then
+        If UltimaUnion.ANGLER = "0" OrElse UltimaUnion.ANGLER = "" Then
             UUniY.LbAngleR.SelectedIndex = 0
-        ElseIf UClsUnion.ANGLER = "90" Then
+        ElseIf UltimaUnion.ANGLER = "90" Then
             UUniY.LbAngleR.SelectedIndex = 1
         Else
             UUniY.LbAngleR.SelectedIndex = -1
         End If
         ' LADO
-        ListBox_SeleccionaPorTexto(UUni.LbLado, UClsUnion.LADO)
+        ListBox_SeleccionaPorTexto(UUni.LbLado, UltimaUnion.LADO)
 #End Region
         '
         DgvUnion.Rows.Clear()
-        If UClsUnion.ExcelFilaUnion IsNot Nothing AndAlso
-            UClsUnion.ExcelFilaUnion.RowsL IsNot Nothing _
-            AndAlso UClsUnion.ExcelFilaUnion.RowsL.Count > 0 AndAlso
-            UClsUnion.ExcelFilaUnion.RowsL.ContainsKey(UClsUnion.ExcelFilaUnion.LADO) Then
-            DgvUnion.Rows.AddRange(UClsUnion.ExcelFilaUnion.RowsL(UClsUnion.ExcelFilaUnion.LADO).ToArray)
+        If UltimaUnion.ExcelFilaUnion IsNot Nothing AndAlso
+            UltimaUnion.ExcelFilaUnion.RowsL IsNot Nothing _
+            AndAlso UltimaUnion.ExcelFilaUnion.RowsL.Count > 0 AndAlso
+            UltimaUnion.ExcelFilaUnion.RowsL.ContainsKey(UltimaUnion.ExcelFilaUnion.LADO) Then
+            DgvUnion.Rows.AddRange(UltimaUnion.ExcelFilaUnion.RowsL(UltimaUnion.ExcelFilaUnion.LADO).ToArray)
         End If
+        '
+        If UltimaUnion.HOJA = "UNIONES" Then
+            UUni.Visible = True
+            UUniX.Visible = False
+            UUniY.Visible = False
+        ElseIf UltimaUnion.HOJA = "UNIONES_X" Then
+            UUni.Visible = False
+            UUniX.Visible = True
+            UUniY.Visible = False
+        ElseIf UltimaUnion.HOJA = "UNIONES_Y" Then
+            UUni.Visible = False
+            UUniX.Visible = False
+            UUniY.Visible = True
+        End If
+        BtnEditarUnion.Enabled = True
+        BtnBorrarUnion.Enabled = True
     End Sub
     Private Sub tvUniones_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles tvUniones.MouseDoubleClick
         Uniones_SeleccionarObjetos(tvUniones.SelectedNode.Tag, conZoom:=True)
     End Sub
     Private Sub BtnCrearUnion_Click(sender As Object, e As EventArgs) Handles BtnCrearUnion.Click
         clsA.Seleccion_Quitar()
-        EsUnionNueva = True
         BorraDatos()
+        EsUnionNueva = True
         BtnCrearUnion.ContextMenuStrip.Show(MousePosition)
         UltimoBloqueT1 = Nothing
         UltimoBloqueT1L = Nothing
@@ -237,35 +289,51 @@ Public Class frmUniones
         UltimoBloqueT2R = Nothing
         UltimoBloqueUnion = Nothing
         ActualFilaExcel = Nothing
-        UClsUnion = Nothing
+        UltimaUnion = Nothing
         '
-        GUnion.Enabled = True
         PUnion.Enabled = True
-        BtnInsertarUnion.Visible = True
-        BtnInsertarUnion.Enabled = False
+        GUnion.Enabled = True
+        DgvUnion.Enabled = False
+        BtnBuscar.Enabled = False
+        BtnCancelar.Visible = True
         BtnAceptar.Visible = False
-        BtnAceptar.Enabled = False
-        BtnCrearUnion.Enabled = False
-        BtnSeleccionar.Enabled = False
+        BtnInsertarUnion.Visible = False
     End Sub
 
     Private Sub CMenu_ItemClicked(sender As Object, e As ToolStripItemClickedEventArgs) Handles CMenu.ItemClicked
-        PonUserControl(e.ClickedItem.Tag.ToString.ToUpper)
-        'MsgBox(e.ClickedItem.Text)
+        Dim tipo As String = e.ClickedItem.Tag.ToString.ToUpper
+        If tipo.ToUpper = "U" Then
+            UUni.Visible = True
+            UUniX.Visible = False
+            UUniY.Visible = False
+        ElseIf tipo.ToUpper = "X" Then
+            UUni.Visible = False
+            UUniX.Visible = True
+            UUniY.Visible = False
+        ElseIf tipo.ToUpper = "Y" Then
+            UUni.Visible = False
+            UUniX.Visible = False
+            UUniY.Visible = True
+        End If
+        '
+        BtnCrearUnion.Enabled = False
+        BtnEditarUnion.Enabled = False
+        BtnSeleccionar.Enabled = False
+        BtnSeleccionar.Enabled = False
     End Sub
 
     Private Sub BtnEditarUnion_Click(sender As Object, e As EventArgs) Handles BtnEditarUnion.Click
         If tvUniones.SelectedNode Is Nothing Then Exit Sub
         '
+        'clsA.Seleccion_Quitar()
         EsUnionNueva = False
-        GUnion.Enabled = True
         PUnion.Enabled = True
+        GUnion.Enabled = True
+        DgvUnion.Enabled = False
+        BtnBuscar.Enabled = False
+        BtnCancelar.Visible = True
+        BtnAceptar.Visible = False
         BtnInsertarUnion.Visible = False
-        BtnInsertarUnion.Enabled = False
-        BtnAceptar.Visible = True
-        BtnAceptar.Enabled = True
-        Datos_1PonUnion()
-        Datos_2CompruebaDatos()
     End Sub
     Private Sub BtnBorrarUnion_Click(sender As Object, e As EventArgs) Handles BtnBorrarUnion.Click
         clsA.Seleccion_Quitar()
@@ -297,7 +365,7 @@ Public Class frmUniones
             queCapa.LayerOn = cbCapa.Checked
             queCapa.Freeze = Not (cbCapa.Checked)
             Eventos.COMDoc().Regen(AcRegenType.acActiveViewport)
-            PonEstadoControlesInicial()
+            'PonEstadoControlesInicial()
             tvUniones.Enabled = cbCapa.Checked
             BtnCrearUnion.Enabled = cbCapa.Checked
             BtnSeleccionar.Enabled = cbCapa.Checked
@@ -325,61 +393,73 @@ Public Class frmUniones
         Me.Visible = True
     End Sub
 
-    Private Sub BtnT1_Click(sender As Object, e As EventArgs)
-        Me.Visible = False
-        clsA.ActivaAppAPI()
-        UltimoBloqueT1 = clsA.Bloque_SeleccionaDame
-        'If UltimoBloqueT1 IsNot Nothing AndAlso UltimoBloqueUnion IsNot Nothing Then
-        '    Datos_1PonUnion()
-        'End If
-        Me.Visible = True
-        LbT1_SelectedIndexChanged(Nothing, Nothing)
-    End Sub
-    Private Sub BtnT2_Click(sender As Object, e As EventArgs)
-        Me.Visible = False
-        clsA.ActivaAppAPI()
-        UltimoBloqueT2 = clsA.Bloque_SeleccionaDame
-        'If UltimoBloqueT2 IsNot Nothing AndAlso UltimoBloqueUnion IsNot Nothing Then
-        '    Datos_1PonUnion()
-        'End If
-        Me.Visible = True
-        LbT1_SelectedIndexChanged(Nothing, Nothing)
-    End Sub
-
-
-    Private Sub LbT1_SelectedIndexChanged(sender As Object, e As EventArgs)
-        If GUnion.Enabled = False Then Exit Sub
+    Private Sub BtnBuscar_Click(sender As Object, e As EventArgs) Handles BtnBuscar.Click
+        ' Buscar la fila de Excel con esos valores
+        DgvUnion.Rows.Clear()
+        DgvUnion.Tag = Nothing
         '
-        If UltimoBloqueT1 IsNot Nothing AndAlso
-            UltimoBloqueT2 IsNot Nothing AndAlso
-            UUni.LbIncT1.SelectedIndex >= 0 AndAlso
-            UUni.LbIncT2.SelectedIndex >= 0 AndAlso
-            UUni.LbAngle.SelectedIndex >= 0 Then
-            Datos_1PonUnion()   ' Rellenar datos union y ejecutar las 2 comprobaciones siguientes.
-        Else
-            DgvUnion.Rows.Clear()
-            Datos_2CompruebaDatos()
+        Dim inC, inCL, inCR, outC, outCL, outCR As String
+        inC = If(UltimoBloqueT1 IsNot Nothing, UltimoBloqueT1.EffectiveName.Substring(0, 8), "")
+        inCL = If(UltimoBloqueT1L IsNot Nothing = True, UltimoBloqueT1L.EffectiveName.Substring(0, 8), "")
+        inCR = If(UltimoBloqueT1R IsNot Nothing = True, UltimoBloqueT1R.EffectiveName.Substring(0, 8), "")
+        outC = If(UltimoBloqueT2 IsNot Nothing = True, UltimoBloqueT2.EffectiveName.Substring(0, 8), "")
+        outCL = If(UltimoBloqueT2L IsNot Nothing = True, UltimoBloqueT2L.EffectiveName.Substring(0, 8), "")
+        outCR = If(UltimoBloqueT2R IsNot Nothing = True, UltimoBloqueT2R.EffectiveName.Substring(0, 8), "")
+        If UUni.Visible = True Then
+            'T1INCLINATION = ""
+            T1INCLINATIONL = ""
+            T1INCLINATIONR = ""
+            'T2INCLINATION = "" : ANGLE = ""
+            T2INCLINATIONL = "" : ANGLEL = ""
+            T2INCLINATIONR = "" : ANGLER = ""
+        ElseIf UUniX.Visible = True Then
+            T1INCLINATION = ""
+            'T1INCLINATIONL = ""
+            'T1INCLINATIONR = ""
+            'T2INCLINATION = "" : ANGLE = ""
+            T2INCLINATIONL = "" : ANGLEL = ""
+            T2INCLINATIONR = "" : ANGLER = ""
+        ElseIf UUniY.Visible = True Then
+            'T1INCLINATION = ""
+            T1INCLINATIONL = ""
+            T1INCLINATIONR = ""
+            T2INCLINATION = "" : ANGLE = ""
+            'T2INCLINATIONL = "" : ANGLEL = ""
+            'T2INCLINATIONR = "" : ANGLER = ""
         End If
-    End Sub
-    Private Sub BtnInsertarUnion_Click(sender As Object, e As EventArgs) Handles BtnInsertarUnion.Click
-        clsA.ActivaAppAPI()
-        If UltimoBloqueUnion Is Nothing Then
-            clsA.Bloque_Inserta(, NombreBloqueUNION)
-            If clsA.oBlult IsNot Nothing Then
-                UltimoBloqueUnion = Eventos.COMDoc.HandleToObject(clsA.oBlult.Handle)
-                BtnAceptar_Click(Nothing, Nothing)
+        ActualFilaExcel = cU.Fila_BuscaDame(inC, T1INCLINATION,
+                inCL, T1INCLINATIONL,
+                inCR, T1INCLINATIONR,
+                outC, T2INCLINATION, ANGLE,
+                outCL, T2INCLINATIONL, ANGLEL,
+                outCR, T2INCLINATIONR, ANGLER,
+                LADO)
+
+        If ActualFilaExcel IsNot Nothing Then
+            DgvUnion.Tag = ActualFilaExcel
+            DgvUnion.Rows.AddRange(ActualFilaExcel.RowsL(ActualFilaExcel.LADO).ToArray)
+        End If
+
+
+        ' Activar Aceptar (Si estamos editando) o Insertar (Si en nuevo)
+        If DgvUnion.Rows.Count > 0 Then
+            If EsUnionNueva Then
+                ' Nueva union
+                BtnAceptar.Visible = False
+                BtnInsertarUnion.Visible = True
+            Else
+                ' Editando union
+                BtnAceptar.Visible = True
+                BtnInsertarUnion.Visible = False
             End If
+            DgvUnion.Enabled = True
         End If
     End Sub
 
     Private Sub BtnCancelar_Click(sender As Object, e As EventArgs) Handles BtnCancelar.Click
-        UltimoBloqueT1 = Nothing
-        UltimoBloqueT2 = Nothing
-        UltimoBloqueUnion = Nothing
-        UClsUnion = Nothing
+        UserControl_Crear()
         tvUniones.SelectedNode = Nothing
         tvUniones_AfterSelect(Nothing, Nothing)
-        BorraDatos()
     End Sub
     Public Sub BtnAceptar_Click(sender As Object, e As EventArgs) Handles BtnAceptar.Click
         ' Coger UNION y UNITS del DataGrigView
@@ -392,47 +472,60 @@ Public Class frmUniones
         Next
         If DatosUnion.Count = 0 Then Exit Sub
         '
-        If UClsUnion IsNot Nothing Then
-            UClsUnion.ExcelFilaUnion = ActualFilaExcel
-            UClsUnion.T1HANDLE = UltimoBloqueT1.Handle
-            UClsUnion.T1INCLINATION = UUni.LbIncT1.Text
-            UClsUnion.T1INFEED = ActualFilaExcel.INFEED_CONVEYOR
-            UClsUnion.T2HANDLE = UltimoBloqueT2.Handle
-            UClsUnion.T2INCLINATION = UUni.LbIncT2.Text
-            UClsUnion.T2OUTFEED = ActualFilaExcel.OUTFEED_CONVEYOR
-            UClsUnion.UNION = String.Join(";", DatosUnion.ToArray)
-            UClsUnion.UNITS = String.Join(";", DatosUnits.ToArray)
-            UClsUnion.ANGLE = UUni.LbAngle.Text
-            UClsUnion.UNIONFin_Pon(Me.DgvUnion)   ' Escribir finalmente los atributos UNION y UNITS en el bloque.
-            UClsUnion.LADO = UUni.LbLado.Text
+        If UltimaUnion IsNot Nothing Then
+            UltimaUnion.ExcelFilaUnion = ActualFilaExcel
+            UltimaUnion.LADO = LADO
+            UltimaUnion.T1HANDLE = T1HANDLE
+            UltimaUnion.T1INFEED = ActualFilaExcel.INFEED_CONVEYOR
+            UltimaUnion.T1INCLINATION = T1INCLINATION
+            UltimaUnion.T1HANDLEL = T1HANDLEL
+            UltimaUnion.T1INFEEDL = ActualFilaExcel.INFEED_CONVEYOR_L
+            UltimaUnion.T1INCLINATIONL = T1INCLINATIONL
+            UltimaUnion.T1HANDLER = T1HANDLER
+            UltimaUnion.T1INFEEDR = ActualFilaExcel.INFEED_CONVEYOR_R
+            UltimaUnion.T1INCLINATIONR = T1INCLINATIONR
+            '
+            UltimaUnion.UNION = String.Join(";", DatosUnion.ToArray)
+            UltimaUnion.UNITS = String.Join(";", DatosUnits.ToArray)
+            '
+            UltimaUnion.T2HANDLE = T2HANDLE
+            UltimaUnion.T2OUTFEED = ActualFilaExcel.OUTFEED_CONVEYOR
+            UltimaUnion.T2INCLINATION = T2INCLINATION
+            UltimaUnion.T2HANDLEL = T2HANDLEL
+            UltimaUnion.T2OUTFEEDL = ActualFilaExcel.OUTFEED_CONVEYOR_L
+            UltimaUnion.T2INCLINATIONL = T2INCLINATIONL
+            UltimaUnion.T2HANDLER = T2HANDLER
+            UltimaUnion.T2OUTFEEDR = ActualFilaExcel.OUTFEED_CONVEYOR_R
+            UltimaUnion.T2INCLINATIONR = T2INCLINATIONR
+            UltimaUnion.ANGLE = ANGLE
+            UltimaUnion.ANGLEL = ANGLEL
+            UltimaUnion.ANGLER = ANGLER
+            UltimaUnion.UNIONFin_Pon(Me.DgvUnion)   ' Escribir finalmente los atributos UNION y UNITS en el bloque.
         Else
-            UClsUnion = New UNION(
-                UltimoBloqueUnion.Handle,
-                String.Join(";", DatosUnion.ToArray),
-                String.Join(";", DatosUnits.ToArray),
-                UltimoBloqueT1.Handle,
-                ActualFilaExcel.INFEED_CONVEYOR,
-                UUni.LbIncT1.Text,
-                UltimoBloqueT2.Handle,
-                ActualFilaExcel.OUTFEED_CONVEYOR,
-                UUni.LbIncT2.Text,
-                UUni.LbAngle.Text,
-                UUni.LbLado.Text)
-            UClsUnion.UNIONFin_Pon(Me.DgvUnion)
+            UltimaUnion = New UNION(UltimoBloqueUnion.Handle, String.Join(";", DatosUnion.ToArray), String.Join(";", DatosUnits.ToArray),
+                T1HANDLE, ActualFilaExcel.INFEED_CONVEYOR, T1INCLINATION,
+                T1HANDLEL, ActualFilaExcel.INFEED_CONVEYOR_L, T1INCLINATIONL,
+                T1HANDLER, ActualFilaExcel.INFEED_CONVEYOR_R, T1INCLINATIONR,
+                T2HANDLE, ActualFilaExcel.OUTFEED_CONVEYOR, T2INCLINATION, ANGLE,
+                T2HANDLEL, ActualFilaExcel.OUTFEED_CONVEYOR_L, T2INCLINATION, ANGLEL,
+                T2HANDLER, ActualFilaExcel.OUTFEED_CONVEYOR_R, T2INCLINATIONR, ANGLER,
+                LADO)
+            UltimaUnion.UNIONFin_Pon(Me.DgvUnion)
         End If
         '
-        UltimoBloqueT1 = Nothing
-        UltimoBloqueT1L = Nothing
-        UltimoBloqueT1R = Nothing
-        UltimoBloqueT2 = Nothing
-        UltimoBloqueT2L = Nothing
-        UltimoBloqueT2R = Nothing
-        UltimoBloqueUnion = Nothing
-        UClsUnion = Nothing
-        ActualFilaExcel = Nothing
         tvUniones.SelectedNode = Nothing
         tvUniones_AfterSelect(Nothing, Nothing)
         tvUniones_Rellena()
+    End Sub
+
+    Private Sub BtnInsertarUnion_Click(sender As Object, e As EventArgs) Handles BtnInsertarUnion.Click
+        UltimaUnion = Nothing
+        clsA.ActivaAppAPI()
+        clsA.Bloque_Inserta(, NombreBloqueUNION)
+        If clsA.oBlult IsNot Nothing Then
+            UltimoBloqueUnion = Eventos.COMDoc.HandleToObject(clsA.oBlult.Handle)
+            BtnAceptar_Click(Nothing, Nothing)
+        End If
     End Sub
 #Region "FUNCIONES"
     ''' <summary>
@@ -440,21 +533,32 @@ Public Class frmUniones
     ''' </summary>
     ''' <param name="accion">"" (Nada), "C" (Crear), "E" (Editar)</param>
     Public Sub PonEstadoControlesInicial(Optional accion As String = "")
-        ' Estado inicial de GUniones (Con todos los controles de selección y edición)
-        tvUniones.SelectedNode = Nothing
-        PUnion.Enabled = False
-        GUnion.Enabled = False
-        BtnCrearUnion.Enabled = True
-        BtnEditarUnion.Enabled = False
-        BtnBorrarUnion.Enabled = False
-        BtnSeleccionar.Enabled = True
-        BtnInsertarUnion.Enabled = False : BtnInsertarUnion.BackColor = btnOn
-        BorraDatos()
-        PonUserControl("U")
-        If tvUniones.SelectedNode IsNot Nothing Then
-            BtnEditarUnion.Enabled = True
-            BtnBorrarUnion.Enabled = True
-        End If
+        'clsA.Seleccion_Quitar()
+        '' Objectos
+        'UltimoBloqueT1 = Nothing
+        'UltimoBloqueT1L = Nothing
+        'UltimoBloqueT1R = Nothing
+        'UltimoBloqueT2 = Nothing
+        'UltimoBloqueT2L = Nothing
+        'UltimoBloqueT2R = Nothing
+        'UltimoBloqueUnion = Nothing
+        'ActualFilaExcel = Nothing
+        'UltimaUnion = Nothing
+        '' Controles
+        'BtnCrearUnion.Enabled = True
+        'BtnEditarUnion.Enabled = False
+        'BtnBorrarUnion.Enabled = False
+        'BtnSeleccionar.Enabled = True
+        'BtnInsertarUnion.Enabled = False : BtnInsertarUnion.BackColor = btnOn
+        'PUnion.Enabled = False
+        'GUnion.Enabled = False
+        ''BorraDatos()
+        'PonUserControl()
+        ''
+        ''If tvUniones.SelectedNode IsNot Nothing Then
+        ''    BtnEditarUnion.Enabled = True
+        ''    BtnBorrarUnion.Enabled = True
+        ''End If
     End Sub
     Public Sub PonToolTipControles()
         oTT = New ToolTip()
@@ -590,7 +694,7 @@ Public Class frmUniones
     Public Sub tvUniones_Rellena(Optional tipo As modTavil.EFiltro = EFiltro.TODOS)
         ' Rellenar tvGrupos con los grupos que haya ([nombre grupo]) Sacado de XData elementos (regAPPCliente, XData = "GRUPO")
         tvUniones.Nodes.Clear()
-        PonEstadoControlesInicial()
+        'PonEstadoControlesInicial()
         tvUniones.BeginUpdate()
         Dim arrTodos As List(Of TreeNode) = modTavil.tvUniones_DameListTreeNodes
         If arrTodos Is Nothing OrElse arrTodos.Count = 0 Then
@@ -685,14 +789,14 @@ Public Class frmUniones
         UUni.LbAngle.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         UUni.LbLado.SelectedIndex = -1
         ' UCUnionX
-        UUniX.LbIncL.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
-        UUniX.LbIncR.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
+        UUniX.LbIncT1L.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
+        UUniX.LbIncT1R.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
         UUniX.LbAngle.SelectedIndex = -1 ': Me.LbRotation.Refresh()
-        UUniX.LbInc.SelectedIndex = -1
+        UUniX.LbIncT2.SelectedIndex = -1
         ' UCUNIONY
-        UUniY.LbInc.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
-        UUniY.LbIncL.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
-        UUniY.LbIncR.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
+        UUniY.LbIncT1.SelectedIndex = -1 ': Me.LbInclinationT1.Refresh()
+        UUniY.LbIncT2L.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
+        UUniY.LbIncT2R.SelectedIndex = -1 ': Me.LbInclinationT2.Refresh()
         UUniY.LbAngleL.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         UUniY.LbAngleR.SelectedIndex = -1 ': Me.LbRotation.Refresh()
         'GUnion.Enabled = True
@@ -709,10 +813,23 @@ Public Class frmUniones
         UNIONES.Report_UNIONES_TOTALES()
     End Sub
 
-    Private Sub CMenu_LayoutCompleted(sender As Object, e As EventArgs) Handles CMenu.LayoutCompleted
-
+    Private Sub UUni_TodoSeleccionado(correcto As Boolean)
+        If PUnion.Enabled = False Then Exit Sub
+        If correcto = True Then
+            GUnion.Enabled = True
+            DgvUnion.Enabled = False
+            BtnBuscar.Enabled = True
+            BtnCancelar.Visible = BtnCancelar.Enabled = True
+            BtnAceptar.Visible = False
+            BtnInsertarUnion.Visible = False
+        Else
+            GUnion.Enabled = False
+        End If
     End Sub
-
+    Private Sub UUni_HayCambios()
+        If PUnion.Enabled = False Then Exit Sub
+        DgvUnion.Rows.Clear()
+    End Sub
 #End Region
 End Class
 '

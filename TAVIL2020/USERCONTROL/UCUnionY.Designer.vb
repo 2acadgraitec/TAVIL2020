@@ -28,15 +28,15 @@ Partial Class UCUnionY
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.LblRotation = New System.Windows.Forms.Label()
         Me.LbAngleL = New System.Windows.Forms.ListBox()
-        Me.LbIncL = New System.Windows.Forms.ListBox()
-        Me.LbInc = New System.Windows.Forms.ListBox()
+        Me.LbIncT2L = New System.Windows.Forms.ListBox()
+        Me.LbIncT1 = New System.Windows.Forms.ListBox()
         Me.BtnT2L = New System.Windows.Forms.Button()
         Me.BtnT1 = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LbAngleR = New System.Windows.Forms.ListBox()
-        Me.LbIncR = New System.Windows.Forms.ListBox()
+        Me.LbIncT2R = New System.Windows.Forms.ListBox()
         Me.BtnT2R = New System.Windows.Forms.Button()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,25 +100,25 @@ Partial Class UCUnionY
         Me.LbAngleL.Size = New System.Drawing.Size(66, 36)
         Me.LbAngleL.TabIndex = 64
         '
-        'LbIncL
+        'LbIncT2L
         '
-        Me.LbIncL.FormattingEnabled = True
-        Me.LbIncL.ItemHeight = 16
-        Me.LbIncL.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbIncL.Location = New System.Drawing.Point(445, 154)
-        Me.LbIncL.Name = "LbIncL"
-        Me.LbIncL.Size = New System.Drawing.Size(66, 52)
-        Me.LbIncL.TabIndex = 63
+        Me.LbIncT2L.FormattingEnabled = True
+        Me.LbIncT2L.ItemHeight = 16
+        Me.LbIncT2L.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbIncT2L.Location = New System.Drawing.Point(445, 154)
+        Me.LbIncT2L.Name = "LbIncT2L"
+        Me.LbIncT2L.Size = New System.Drawing.Size(66, 52)
+        Me.LbIncT2L.TabIndex = 63
         '
-        'LbInc
+        'LbIncT1
         '
-        Me.LbInc.FormattingEnabled = True
-        Me.LbInc.ItemHeight = 16
-        Me.LbInc.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbInc.Location = New System.Drawing.Point(11, 113)
-        Me.LbInc.Name = "LbInc"
-        Me.LbInc.Size = New System.Drawing.Size(66, 52)
-        Me.LbInc.TabIndex = 62
+        Me.LbIncT1.FormattingEnabled = True
+        Me.LbIncT1.ItemHeight = 16
+        Me.LbIncT1.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbIncT1.Location = New System.Drawing.Point(11, 113)
+        Me.LbIncT1.Name = "LbIncT1"
+        Me.LbIncT1.Size = New System.Drawing.Size(66, 52)
+        Me.LbIncT1.TabIndex = 62
         '
         'BtnT2L
         '
@@ -175,15 +175,15 @@ Partial Class UCUnionY
         Me.LbAngleR.Size = New System.Drawing.Size(66, 36)
         Me.LbAngleR.TabIndex = 75
         '
-        'LbIncR
+        'LbIncT2R
         '
-        Me.LbIncR.FormattingEnabled = True
-        Me.LbIncR.ItemHeight = 16
-        Me.LbIncR.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
-        Me.LbIncR.Location = New System.Drawing.Point(445, 27)
-        Me.LbIncR.Name = "LbIncR"
-        Me.LbIncR.Size = New System.Drawing.Size(66, 52)
-        Me.LbIncR.TabIndex = 74
+        Me.LbIncT2R.FormattingEnabled = True
+        Me.LbIncT2R.ItemHeight = 16
+        Me.LbIncT2R.Items.AddRange(New Object() {"FLAT", "DOWN", "UP"})
+        Me.LbIncT2R.Location = New System.Drawing.Point(445, 27)
+        Me.LbIncT2R.Name = "LbIncT2R"
+        Me.LbIncT2R.Size = New System.Drawing.Size(66, 52)
+        Me.LbIncT2R.TabIndex = 74
         '
         'BtnT2R
         '
@@ -202,7 +202,7 @@ Partial Class UCUnionY
         Me.Controls.Add(Me.PictureBox3)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.LbAngleR)
-        Me.Controls.Add(Me.LbIncR)
+        Me.Controls.Add(Me.LbIncT2R)
         Me.Controls.Add(Me.BtnT2R)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
@@ -210,8 +210,8 @@ Partial Class UCUnionY
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.LblRotation)
         Me.Controls.Add(Me.LbAngleL)
-        Me.Controls.Add(Me.LbIncL)
-        Me.Controls.Add(Me.LbInc)
+        Me.Controls.Add(Me.LbIncT2L)
+        Me.Controls.Add(Me.LbIncT1)
         Me.Controls.Add(Me.BtnT2L)
         Me.Controls.Add(Me.BtnT1)
         Me.Name = "UCUnionY"
@@ -229,14 +229,14 @@ Partial Class UCUnionY
     Friend WithEvents PictureBox1 As Windows.Forms.PictureBox
     Friend WithEvents LblRotation As Windows.Forms.Label
     Friend WithEvents LbAngleL As Windows.Forms.ListBox
-    Friend WithEvents LbIncL As Windows.Forms.ListBox
-    Friend WithEvents LbInc As Windows.Forms.ListBox
+    Friend WithEvents LbIncT2L As Windows.Forms.ListBox
+    Friend WithEvents LbIncT1 As Windows.Forms.ListBox
     Friend WithEvents BtnT2L As Windows.Forms.Button
     Friend WithEvents BtnT1 As Windows.Forms.Button
     Friend WithEvents Label3 As Windows.Forms.Label
     Friend WithEvents PictureBox3 As Windows.Forms.PictureBox
     Friend WithEvents Label4 As Windows.Forms.Label
     Friend WithEvents LbAngleR As Windows.Forms.ListBox
-    Friend WithEvents LbIncR As Windows.Forms.ListBox
+    Friend WithEvents LbIncT2R As Windows.Forms.ListBox
     Friend WithEvents BtnT2R As Windows.Forms.Button
 End Class
