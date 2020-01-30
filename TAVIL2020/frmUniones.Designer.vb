@@ -285,6 +285,7 @@ Partial Class frmUniones
         Me.BtnReportTodo.TabIndex = 29
         Me.BtnReportTodo.Text = "TODO"
         Me.BtnReportTodo.UseVisualStyleBackColor = True
+        Me.BtnReportTodo.Visible = False
         '
         'BtnReportTotal
         '
@@ -295,6 +296,7 @@ Partial Class frmUniones
         Me.BtnReportTotal.TabIndex = 30
         Me.BtnReportTotal.Text = "TOTAL"
         Me.BtnReportTotal.UseVisualStyleBackColor = True
+        Me.BtnReportTotal.Visible = False
         '
         'PUnion
         '

@@ -133,7 +133,7 @@ Namespace A2acad
                 ElseIf queNombre = regAPPA Then
                     resultado = xdatos(0)
                 ElseIf todo.Contains(queNombre) Then
-                    Dim valoresdatos() As String = IIf(todo.Contains(";"), todo.Split(";"c), todo.Split("|"c))      '' cada elemento nombre=valor
+                    Dim valoresdatos() As String = todo.Split("|"c)      '' cada elemento nombre=valor
                     For x As Integer = 0 To UBound(valoresdatos)
                         Dim nombre As String = valoresdatos(x).Split("="c)(0)
                         Dim valor As String = valoresdatos(x).Split("="c)(1)

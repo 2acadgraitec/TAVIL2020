@@ -234,8 +234,76 @@ Public Class UNION
         ' ¿Que HOJA?
         If Me.T2HANDLEL <> "" AndAlso Me.T2HANDLER <> "" AndAlso Me.T2OUTFEEDL <> "" AndAlso Me.T2OUTFEEDR <> "" Then
             Me.HOJA = "UNIONES_Y"
+            'Me.T1HANDLE = T1Handle
+            'Me.T1INFEED = T1Infeed
+            'Me.T1INCLINATION = T1Inclination
+            Me.T1HANDLEL = ""
+            Me.T1INFEEDL = ""
+            Me.T1INCLINATIONL = ""
+            Me.T1HANDLER = ""
+            Me.T1INFEEDR = ""
+            Me.T1INCLINATIONR = ""
+            Me.T2HANDLE = ""
+            Me.T2OUTFEED = ""
+            Me.T2INCLINATION = ""
+            Me.ANGLE = ""
+            Me.T2HANDLEL = T2HandleL
+            Me.T2OUTFEEDL = T2OutfeedL
+            Me.T2INCLINATIONL = T2InclinationL
+            Me.ANGLEL = angleL
+            Me.T2HANDLER = T2HandleR
+            Me.T2OUTFEEDR = T2OutfeedR
+            Me.T2INCLINATIONR = T2InclinationR
+            Me.ANGLER = angleR
+            Me.LADO = ""
         ElseIf Me.T1HANDLEL <> "" AndAlso Me.T1HANDLER <> "" AndAlso Me.T1INFEEDL <> "" AndAlso Me.T1INFEEDR <> "" Then
             Me.HOJA = "UNIONES_X"
+            Me.T1HANDLE = ""
+            Me.T1INFEED = ""
+            Me.T1INCLINATION = ""
+            'Me.T1HANDLEL = T1HandleL
+            'Me.T1INFEEDL = T1InfeedL
+            'Me.T1INCLINATIONL = T1InclinationL
+            'Me.T1HANDLER = T1HandleR
+            'Me.T1INFEEDR = T1InfeedR
+            'Me.T1INCLINATIONR = T1InclinationR
+            'Me.T2HANDLE = T2Handle
+            'Me.T2OUTFEED = T2Outfeed
+            'Me.T2INCLINATION = T2Inclination
+            'Me.ANGLE = angle
+            Me.T2HANDLEL = ""
+            Me.T2OUTFEEDL = ""
+            Me.T2INCLINATIONL = ""
+            Me.ANGLEL = ""
+            Me.T2HANDLER = ""
+            Me.T2OUTFEEDR = ""
+            Me.T2INCLINATIONR = ""
+            Me.ANGLER = ""
+            Me.LADO = ""
+        Else
+            Me.HOJA = "UNIONES"
+            'Me.T1HANDLE = T1Handle
+            'Me.T1INFEED = T1Infeed
+            'Me.T1INCLINATION = T1Inclination
+            Me.T1HANDLEL = ""
+            Me.T1INFEEDL = ""
+            Me.T1INCLINATIONL = ""
+            Me.T1HANDLER = ""
+            Me.T1INFEEDR = ""
+            Me.T1INCLINATIONR = ""
+            'Me.T2HANDLE = T2Handle
+            'Me.T2OUTFEED = T2Outfeed
+            'Me.T2INCLINATION = T2Inclination
+            'Me.ANGLE = angle
+            Me.T2HANDLEL = ""
+            Me.T2OUTFEEDL = ""
+            Me.T2INCLINATIONL = ""
+            Me.ANGLEL = ""
+            Me.T2HANDLER = ""
+            Me.T2OUTFEEDR = ""
+            Me.T2INCLINATIONR = ""
+            Me.ANGLER = ""
+            'Me.LADO = lado
         End If
         '
         ' Rellenar ExcelFilaUnion
@@ -315,6 +383,80 @@ Public Class UNION
         Me.ANGLER = angleR
         Me.LADO = lado
         '
+        ' ¿Que HOJA?
+        If Me.T2HANDLEL <> "" AndAlso Me.T2HANDLER <> "" AndAlso Me.T2OUTFEEDL <> "" AndAlso Me.T2OUTFEEDR <> "" Then
+            Me.HOJA = "UNIONES_Y"
+            'Me.T1HANDLE = T1Handle
+            'Me.T1INFEED = T1Infeed
+            'Me.T1INCLINATION = T1Inclination
+            Me.T1HANDLEL = ""
+            Me.T1INFEEDL = ""
+            Me.T1INCLINATIONL = ""
+            Me.T1HANDLER = ""
+            Me.T1INFEEDR = ""
+            Me.T1INCLINATIONR = ""
+            Me.T2HANDLE = ""
+            Me.T2OUTFEED = ""
+            Me.T2INCLINATION = ""
+            Me.ANGLE = ""
+            Me.T2HANDLEL = T2HandleL
+            Me.T2OUTFEEDL = T2OutfeedL
+            Me.T2INCLINATIONL = T2InclinationL
+            Me.ANGLEL = angleL
+            Me.T2HANDLER = T2HandleR
+            Me.T2OUTFEEDR = T2OutfeedR
+            Me.T2INCLINATIONR = T2InclinationR
+            Me.ANGLER = angleR
+            Me.LADO = ""
+        ElseIf Me.T1HANDLEL <> "" AndAlso Me.T1HANDLER <> "" AndAlso Me.T1INFEEDL <> "" AndAlso Me.T1INFEEDR <> "" Then
+            Me.HOJA = "UNIONES_X"
+            Me.T1HANDLE = ""
+            Me.T1INFEED = ""
+            Me.T1INCLINATION = ""
+            'Me.T1HANDLEL = T1HandleL
+            'Me.T1INFEEDL = T1InfeedL
+            'Me.T1INCLINATIONL = T1InclinationL
+            'Me.T1HANDLER = T1HandleR
+            'Me.T1INFEEDR = T1InfeedR
+            'Me.T1INCLINATIONR = T1InclinationR
+            'Me.T2HANDLE = T2Handle
+            'Me.T2OUTFEED = T2Outfeed
+            'Me.T2INCLINATION = T2Inclination
+            'Me.ANGLE = angle
+            Me.T2HANDLEL = ""
+            Me.T2OUTFEEDL = ""
+            Me.T2INCLINATIONL = ""
+            Me.ANGLEL = ""
+            Me.T2HANDLER = ""
+            Me.T2OUTFEEDR = ""
+            Me.T2INCLINATIONR = ""
+            Me.ANGLER = ""
+            Me.LADO = ""
+        Else
+            Me.HOJA = "UNIONES"
+            'Me.T1HANDLE = T1Handle
+            'Me.T1INFEED = T1Infeed
+            'Me.T1INCLINATION = T1Inclination
+            Me.T1HANDLEL = ""
+            Me.T1INFEEDL = ""
+            Me.T1INCLINATIONL = ""
+            Me.T1HANDLER = ""
+            Me.T1INFEEDR = ""
+            Me.T1INCLINATIONR = ""
+            'Me.T2HANDLE = T2Handle
+            'Me.T2OUTFEED = T2Outfeed
+            'Me.T2INCLINATION = T2Inclination
+            'Me.ANGLE = angle
+            Me.T2HANDLEL = ""
+            Me.T2OUTFEEDL = ""
+            Me.T2INCLINATIONL = ""
+            Me.ANGLEL = ""
+            Me.T2HANDLER = ""
+            Me.T2OUTFEEDR = ""
+            Me.T2INCLINATIONR = ""
+            Me.ANGLER = ""
+            'Me.LADO = lado
+        End If
         ' Rellenar ExcelFilaUnion
         ExcelFilaUnion = cU.Fila_BuscaDame(
             Me.T1INFEED, Me.T1INCLINATION,

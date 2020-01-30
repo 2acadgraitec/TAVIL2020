@@ -39,21 +39,11 @@ Public Module modTavil
             If queFiltro.ToString = EFiltro.TODOS.ToString Then
                 lUni.Add(oNode)
                 LClsUnion.Add(New UNION(oBl.Handle))
-            ElseIf queFiltro.ToString = EFiltro.XXX.ToString Then
-                'Dim t1 As String = clsA.XLeeDato(oBl.Handle, "T1HANDLE")
-                'Dim t2 As String = clsA.XLeeDato(oBl.Handle, "T2HANDLE")
-                'If t1 <> "" AndAlso t2 <> "" Then
-                '    Continue For
-                'Else
-                '    lUni.Add(oNode)
-                'End If
-                Dim Uni As String = clsA.XLeeDato(oBl.Handle, "UNION")
-                If Uni = "" OrElse Uni = "XXX" Then
-                    lUni.Add(oNode)
-                    LClsUnion.Add(New UNION(oBl.Handle))
-                Else
-                    Continue For
-                End If
+            ElseIf queFiltro.ToString = EFiltro.XXX.ToString AndAlso (union = "" OrElse union = "XXX") Then
+                lUni.Add(oNode)
+                LClsUnion.Add(New UNION(oBl.Handle))
+            Else
+                Continue For
             End If
             oBl = Nothing
             oNode = Nothing

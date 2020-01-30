@@ -513,6 +513,7 @@ Public Class frmUniones
             UltimaUnion.UNIONFin_Pon(Me.DgvUnion)
         End If
         '
+        UserControl_Crear()
         tvUniones.SelectedNode = Nothing
         tvUniones_AfterSelect(Nothing, Nothing)
         tvUniones_Rellena()
